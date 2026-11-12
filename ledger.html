@@ -167,6 +167,7 @@ select.dd,.entry select{appearance:none;-webkit-appearance:none;padding-right:24
 .card i{display:block;font-style:normal;font-size:11.5px;opacity:.85}
 .taxbar{background:#FFF1D0;border:1px solid var(--tab-gold);border-left:6px solid var(--gold);border-radius:4px;padding:10px 12px;font-size:14px}
 .taxbar b{color:var(--hot)}
+.taxbar .mailnote{font-size:15px;color:var(--ink)}.taxbar .mailnote b{color:#C0262D}
 .taxbar span{display:block;color:var(--ink-2);font-size:13px;margin-top:2px}
 table.sum{border-collapse:collapse;width:100%;font-size:13.5px}
 .sum th{background:var(--ink);color:#EDE6D6;font-weight:500;padding:6px 8px;text-align:right}
@@ -309,7 +310,7 @@ footer .ft-i b{color:#EDE6D6}
               <table class="sum" aria-label="收支狀況"><thead><tr><th>① 收支狀況</th><th>本月</th><th>上月</th><th>較上月</th></tr></thead><tbody id="sum"></tbody></table>
             </div>
             <div class="charts"><div class="chart"><h4>本月收入來源　前 5 名</h4><div id="c-in"></div></div><div class="chart out"><h4>本月支出去向　前 5 名</h4><div id="c-out"></div></div></div>
-            <p class="note">報稅提醒以所選月份 1 日為基準計算倒數；正式申報與稅額由事務所處理。</p>
+            <p class="note">寄單據倒數依今天日期計算；申報與稅額由建碩處理。</p>
           </div>
         </div>
       </div>
@@ -335,8 +336,8 @@ footer .ft-i b{color:#EDE6D6}
         </dl></div>
         <div class="mcard"><h3>③ 報稅提醒（v9 新增）</h3><dl>
           <div><dt>在基本資料設定選「營業稅身分 ▼」</dt><dd>系統就知道要提醒哪些申報，並依「報稅提前提醒（天）」提早通知。</dd></div>
-          <div><dt>內建報稅行事曆</dt><dd>營業稅：單月 15 日前申報前兩個月；扣繳憑單：1 月底；營所稅結算、執行業務所得：5 月底；營所稅暫繳：9 月底。遇假日順延。</dd></div>
-          <div><dt>提醒你要準備什麼</dt><dd>例如營業稅申報前，提醒你把上兩個月的銷項、進項發票、收據與折讓單交給記帳事務所。</dd></div>
+          <div><dt>1 月、5 月一起寄</dt><dd>1 月那次連同全年薪資、租金、勞務費資料一起寄（建碩申報扣繳憑單）；5 月那次連同營所稅結算資料一起寄（建碩辦理營所稅結算申報）。</dd></div>
+          <div><dt>寄單據倒數</dt><dd>營業稅申報月的 1 日要寄出上兩個月的發票、收據，4 日前寄達建碩。寄出日前 4 天開始倒數提醒，例如 10/28 起倒數，11/1 寄出 9–10 月發票、收據。</dd></div>
         </dl></div>
         <div class="mcard"><h3>④ 每月與每年</h3><dl>
           <div><dt>薪資異動登記</dt><dd>只有獎金、加班費、所得稅扣繳、其他扣款、本月不發才需要登記；月薪、津貼、勞健保會自動算。</dd></div>
@@ -370,7 +371,7 @@ footer .ft-i b{color:#EDE6D6}
       <li><span>地址：</span>新竹市北區和平路 89 號</li>
       <li><span>電話：</span><b style="user-select:all;font-family:inherit;letter-spacing:0">03-526-0000</b></li>
       <li><span>LINE：</span>@256ojohr</li>
-      <li><span>服務時間：</span>週一至週五 [09:00–18:00]</li>
+      <li><span>服務時間：</span>每日 09:00–18:00</li>
     </ul>
   </div>
 </footer>
@@ -522,13 +523,35 @@ footer .ft-i b{color:#EDE6D6}
     const base = new Date(2026, month - 1, 1), advDays = Math.max(1, +$('adv').value || 20), isVat = $('vat').selectedIndex === 0;
     const due = TAX.filter(x => x.d >= base && (isVat || !/營業稅/.test(x.t))).sort((a, b) => a.d - b.d);
     const near = due.filter(x => (x.d - base) / 864e5 <= advDays);
-    $('tax').innerHTML = near.length ? near.slice(0, 2).map(x => `◆ <b>報稅提醒</b>　${x.d.getMonth() + 1}/${x.d.getDate()} ${x.t}　倒數 ${Math.round((x.d - base) / 864e5)} 天（遇假日順延）<span>請準備：${x.p}，交給記帳事務所</span>`).join('<br>')
-      : `◆ <b>報稅提醒</b>　近期沒有需要申報的項目<span>下一個：${due[0] ? `${due[0].d.getMonth() + 1}/${due[0].d.getDate()} ${due[0].t}` : '－'}</span>`;
+    const mn = mailNote();
+    $('tax').innerHTML = isVat ? `<div class="mailnote">${mn}</div>`
+      : `<div class="mailnote">${mn}</div><span>免用發票（小規模）：營業稅由國稅局每季核定，建碩會通知您繳款。</span>`;
     const group = (list, extra) => { const g = {}; list.forEach(r => g[r.c] = (g[r.c] || 0) + r.a); if (extra) g['薪資'] = extra; return Object.entries(g).sort((a, b) => b[1] - a[1]).slice(0, 5); };
     const bars = (el, arr) => { const max = Math.max(1, ...arr.map(x => x[1])); el.innerHTML = arr.length ? arr.map(([c, v]) => `<div class="bar"><span>${c}</span><span class="t"><i style="width:0" data-w="${(v / max * 100).toFixed(1)}%"></i></span><span class="v">${fmt(v)}</span></div>`).join('') : '<p class="empty">這個月還沒有資料</p>'; requestAnimationFrame(() => el.querySelectorAll('i').forEach(i => i.style.width = i.dataset.w)); };
     bars($('c-in'), group(cur.filter(r => r.k === '收入'))); bars($('c-out'), group(cur.filter(r => r.k === '支出'), pay));
   };
   ['vat', 'adv'].forEach(id => $(id).addEventListener('change', renderBoss));
+  /* 寄單據倒數：營業稅在單數月 15 日前申報前兩個月；單據要在申報月 4 日前寄達建碩，所以 1 日寄出，提前 4 天開始倒數 */
+  const mailNote = () => {
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()), DAY = 864e5;
+    for (let k = 0; k < 4; k++) {
+      let y = today.getFullYear(), M = today.getMonth() + 1 + k; while (M > 12) { M -= 12; y++; }
+      if (M % 2 === 0) continue;
+      const send = new Date(y, M - 1, 1), arrive = new Date(y, M - 1, 4), start = new Date(send - 4 * DAY);
+      if (today > arrive) continue;
+      const p1 = M === 1 ? 11 : M - 2, p2 = M === 1 ? 12 : M - 1, per = `${p1}–${p2} 月發票、收據` + (M === 1 ? '＋全年薪資、租金、勞務費資料' : M === 5 ? '＋營所稅結算資料' : '');
+      const sd = `${M}/1`, ad = `${M}/4`, left = Math.round((send - today) / DAY);
+      if (today < start) return `📮 下次寄單據：<b>${sd} 寄出</b> ${per}（${ad} 前寄達建碩，${start.getMonth() + 1}/${start.getDate()} 起倒數提醒）`;
+      if (left === 4) return `📮 還有 <b>4 天</b>要寄出 ${per}（${sd} 寄出，${ad} 前寄達建碩）`;
+      if (left === 3 || left === 2) return `📮 還有 <b>${left} 天</b>要寄出 ${per}`;
+      if (left === 1) return `📮 還有 <b>1 天</b>，明天就要寄出 ${per}`;
+      if (left === 0) return `🔴 <b>今天請務必寄出</b> ${per}`;
+      return `⚠️ 已過寄出日，請<b>盡快寄出</b> ${per}，${ad} 前要寄達建碩`;
+    }
+    return '';
+  };
+
   const renderAll = () => { renderRows(); renderStaff(); renderBoss(); };
 
   let playing = false;

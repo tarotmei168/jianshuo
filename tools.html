@@ -284,6 +284,7 @@ footer .ft-i b{color:#EDE6D6}
 .qz-opts button{font:inherit;font-size:18px;font-weight:700;text-align:left;background:#fff;color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:16px 18px;min-height:64px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .qz-opts button:hover,.qz-opts button[aria-pressed="true"]{border-color:var(--gold);background:#FFF6DE}
 .qz-opts button::after{content:"→";color:var(--gold)}
+.qz-cta{display:flex;flex-direction:column;gap:2px;margin-top:18px;text-decoration:none;background:var(--ink);color:#F4EEDF;border-radius:10px;padding:16px 20px;box-shadow:inset 0 0 0 2px var(--gold-bright)}.qz-cta b{font-size:20px}.qz-cta span{color:var(--gold-bright);font-weight:700}.qz-cta:hover{background:#16305A}
 .qz-nav{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 .qz-res{display:grid;gap:14px;margin-top:10px}
 .qz-big{background:var(--ink);color:#F4EEDF;border-radius:10px;padding:20px 22px}
@@ -525,7 +526,7 @@ b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;fo
       <li><span>地址：</span>新竹市北區和平路 89 號</li>
       <li><span>電話：</span><b style="user-select:all;font-family:inherit;letter-spacing:0">03-526-0000</b></li>
       <li><span>LINE：</span>@256ojohr</li>
-      <li><span>服務時間：</span>週一至週五 [09:00–18:00]</li>
+      <li><span>服務時間：</span>每日 09:00–18:00</li>
     </ul>
   </div>
 </footer>
@@ -776,7 +777,7 @@ b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;fo
     const tax = co ? '公司要繳營利事業所得稅；負責人怎麼領薪水、分股利，是公司最大的節稅題目，建議跟會計師一起規劃。' : `行號每年 5 月一樣要結算申報，但不用繳營所稅，盈餘併入負責人的綜合所得稅（${LW('G0340003', 71, '所得稅法第 71 條')}）。`;
     const warn = ans.lic === 'yes' || ans.lic === 'unk' ? '<li class="warn">先別急著登記：特許行業要先確認主管機關許可，還有能不能用行號經營。LINE 告訴我們你要做什麼生意，我們幫你查。</li>' : '';
     $('qz-step').textContent = '結果';
-    $('qz-body').innerHTML = `<div class="qz-res"><div class="qz-big"><small>依你的回答，建議先考慮</small><b>${name}</b><p>${tax}</p></div><ul class="qz-why">${warn}${why.map(t => `<li>${t}</li>`).join('')}</ul><div class="qz-nav"><button type="button" class="ivb main" data-nav="list">看${co ? '有限公司' : '行號'}的準備清單和規費 ↓</button><button type="button" class="ivb" data-nav="back">◀ 上一題</button><button type="button" class="ivb" data-nav="reset">重新開始</button></div><p class="note2">結果只是初步方向，實際要看你的行業、客人和資金安排，由會計師依你的狀況確認。</p></div>`;
+    $('qz-body').innerHTML = `<div class="qz-res"><div class="qz-big"><small>依你的回答，建議先考慮</small><b>${name}</b><p>${tax}</p></div><ul class="qz-why">${warn}${why.map(t => `<li>${t}</li>`).join('')}</ul><div class="qz-nav"><button type="button" class="ivb main" data-nav="list">看${co ? '有限公司' : '行號'}的準備清單和規費 ↓</button><button type="button" class="ivb" data-nav="back">◀ 上一題</button><button type="button" class="ivb" data-nav="reset">重新開始</button></div><p class="note2">結果只是初步方向，實際要看你的行業、客人和資金安排，由會計師依你的狀況確認。</p><a class="qz-cta" href="consult.html?need=開公司&amp;org=${encodeURIComponent(name)}&amp;from=${encodeURIComponent('開公司小幫手')}"><b>想請建碩幫你開${name}？</b><span>留個手機或 LINE，我們聯絡你 →</span></a></div>`;
     $('qz-body').dataset.co = co ? 'co' : 'biz';
   };
   $('qz-body').addEventListener('click', e => {
