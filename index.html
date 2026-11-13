@@ -6,700 +6,830 @@
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>建碩會計師事務所</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&family=Inter:wght@500;600&family=Space+Grotesk:wght@500;700&display=swap">
 <style>
-/* Layout concept: TITAN 式白色大留白＋超大黑體標題；深藍影像帶裡流動金線與上升的金色像素（呼應古錢 QR）；捲動時內容浮現、卡片橫向滑過。刻意只做淺色一種樣貌。 */
-:root{
-  color-scheme: light;
-  --paper:#FBFAF7;      /* 微暖白 */
-  --paper-2:#F3F0E8;    /* 區塊底 */
-  --ink:#0F2340;        /* 深藍主字 */
-  --ink-2:#4A5568;      /* 次要文字（藍灰） */
-  --gold:#A87A1E;       /* 金（文字用，夠深） */
-  --gold-bright:#D4AA4F;/* 金（深底上用） */
-  --gold-soft:#EADCB8;
-  --line:#E3DED3;
-  --night:#0B1A30;      /* 影像帶深藍 */
-  --line-green:#06C755; --line-ink:#0B2416;
-  --f-display:"Noto Sans TC", system-ui, sans-serif;
-  --f-serif:"Noto Serif TC", "Songti TC", serif;
-  --f-latin:"Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
-  --f-body:"Noto Sans TC", system-ui, -apple-system, sans-serif;
-  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
-  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
-}
+:root{--navy:#0B1F3A;--navy2:#132C52;--ink:#1A2230;--muted:#5A6576;--line:#DDE3EB;--soft:#F3F5F8;--bg:#FFFFFF;--gold:#B8924A;--gold2:#D9BC7E;--line-g:#06C755;color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1280px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
-.band{padding-block:clamp(72px,10vw,128px)}
-.eyebrow{font-family:var(--f-body);font-size:16px;letter-spacing:.14em;font-weight:700;color:var(--gold);display:flex;gap:10px;align-items:center}
-.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-h1,h2,h3{text-wrap:balance;margin:0}
-h2{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,4.2vw,52px);line-height:1.2;letter-spacing:.01em}
-.lede{color:var(--ink-2);font-size:clamp(16px,1.4vw,18px);max-width:36em}
+body{background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.en{font-family:Inter,"Noto Sans TC",sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:12.5px;font-weight:600}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:700;letter-spacing:.02em}
 
-/* ---------- nav ---------- */
-/* ---------- 頁首：固定在最上方、實心底、字放大 ---------- */
-header.top{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 8px 20px -16px rgba(15,35,64,.55);padding-top:env(safe-area-inset-top,0px)}
-header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:6px 20px;padding-block:10px;flex-wrap:wrap}
-.brand{text-decoration:none;color:var(--ink);font-family:var(--f-serif);font-weight:900;font-size:clamp(25px,3.2vw,34px);letter-spacing:.06em;line-height:1.2;white-space:nowrap}
-.brand em{font-style:normal;color:var(--gold)}
-nav.main{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
-nav.main a{font-size:18px;font-weight:700;text-decoration:none;color:var(--ink);padding:9px 13px;border-radius:999px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
-nav.main a:hover{background:var(--paper-2)}
-nav.main a[aria-current]{background:var(--gold);color:#fff}
-/* LINE 諮詢：全站同一個樣子（綠色膠囊＋對話框圖示） */
-.lbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#06C755;color:#0B2416;font-weight:700;font-size:19px;text-decoration:none;padding:14px 26px;border-radius:999px;min-height:56px;box-shadow:0 10px 24px rgba(11,26,48,.22);white-space:nowrap}
-.lbtn svg{width:22px;height:22px;flex:0 0 auto}
-.lbtn:hover{filter:brightness(1.06)}
-nav.main a.lbtn{background:#06C755;color:#0B2416;font-size:18px;padding:9px 20px;min-height:48px;box-shadow:none;margin-left:6px}
-.fab{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25}
-@media (max-width:1060px){nav.main a{font-size:17px;padding:8px 10px}}
-@media (max-width:820px){
-  header.top .wrap{flex-direction:column;align-items:flex-start}
-  nav.main{width:100%;gap:2px 0;margin-left:-10px}
-  nav.main a{font-size:17px;padding:6px 10px;min-height:40px}
-  nav.main a.lbtn{display:none}
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#fff}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(22px,2.4vw,28px);color:#0F2340;letter-spacing:.06em;line-height:1.2;white-space:nowrap}
+.brand em{font-style:normal;color:#A87A1E}
+nav.main{display:flex;align-items:stretch;gap:6px;align-self:stretch}
+nav.main>.it{position:static;display:flex;align-items:center}
+nav.main>.it>a{display:flex;align-items:center;gap:6px;padding:10px 14px;font:inherit;font-size:16px;font-weight:700;color:var(--ink);background:none;border:0;cursor:pointer}
+nav.main>.it>a:hover,nav.main>.it:hover>a{color:#A87A1E}
+.car{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+nav.main>.it>a.btn{background:#0F2340;color:#fff;padding:10px 22px;align-self:center}
+nav.main>.it>a.btn:hover{background:#1C3A66;color:#fff}
+.dd{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--line);border-bottom:2px solid var(--navy);box-shadow:0 14px 28px -18px rgba(11,31,58,.35);display:flex;justify-content:flex-end;flex-wrap:wrap;gap:2px;padding:8px max(20px,calc((100vw - 1120px)/2));opacity:0;visibility:hidden;transform:translateY(-4px);transition:.18s}
+.it:hover .dd,.it:focus-within .dd{opacity:1;visibility:visible;transform:none}
+.dd a{display:flex;gap:8px;padding:9px 16px;font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap}
+.dd a:hover{background:var(--soft);color:var(--navy2)}
+.dd a i{font-style:normal;font-family:Inter,sans-serif;font-size:12px;color:var(--gold);padding-top:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;font-weight:500;font-size:15px;letter-spacing:.06em;border:1px solid transparent;transition:.18s;white-space:nowrap}
+.btn.navy{background:var(--navy);color:#fff}.btn.navy:hover{background:var(--navy2)}
+.btn.gold{background:var(--gold);color:#fff}.btn.gold:hover{background:#A57F3B}
+.btn.ghost{border-color:rgba(255,255,255,.55);color:#fff}.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn.line{background:var(--line-g);color:#fff}
+
+/* hero：大樓滿版，鏡頭往上推到樓頂 */
+.hero{position:relative;background:#0B1F3A;color:#fff;overflow:hidden}
+.hero .ph{position:absolute;inset:0}.ph picture{display:block;width:100%;height:100%}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 62%;animation:rise 7s cubic-bezier(.22,.7,.2,1) both}
+@keyframes rise{from{object-position:50% 100%;transform:scale(1.08)}to{object-position:50% 62%;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.hero .ph img{animation:none}}
+.hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,22,41,.82) 0%,rgba(8,22,41,.55) 38%,rgba(8,22,41,.08) 72%,rgba(8,22,41,0) 100%),linear-gradient(0deg,rgba(8,22,41,.35),rgba(8,22,41,0) 30%)}
+.hero .in{position:relative;z-index:2;min-height:min(720px,86vh);display:flex;align-items:center}
+.hero .tx{padding:96px 0;display:flex;flex-direction:column;gap:26px;max-width:640px}
+.hero .en{color:var(--gold2);display:flex;align-items:center;gap:14px}
+.hero .en::before{content:"";width:44px;height:1px;background:var(--gold2)}
+.hero h1{text-shadow:0 2px 18px rgba(0,0,0,.3)}
+.hero .g{background:linear-gradient(180deg,#F6E2A8 0%,#D9BC7E 50%,#B8924A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 10px rgba(0,0,0,.3))}
+.hero .nm{margin:0;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(22px,5.4vw,34px);letter-spacing:.08em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.hero h1.slg{font-weight:900;font-size:clamp(52px,14vw,112px);line-height:1.08;letter-spacing:.02em;margin:0}
+.hero h1.slg .l{display:block;white-space:nowrap}
+.hero p{margin:0;font-size:17px;color:#DCE4EF;max-width:34em}
+.hero .acts{display:flex;gap:14px;flex-wrap:wrap}
+
+/* stages */
+.stages{border-bottom:1px solid var(--line)}
+.stages ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr)}
+.stages li{padding:26px 18px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.stages li:last-child{border-right:1px solid var(--line)}
+.stages li a{display:flex;flex-direction:column;gap:2px}
+.stages .n{font-family:Inter,sans-serif;font-size:12px;color:var(--gold);letter-spacing:.14em}
+.stages b{font-size:17px;color:var(--navy)}
+.stages span{font-size:13.5px;color:var(--muted);line-height:1.5}
+.stages li:hover b{color:var(--navy2);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* section heads */
+section.blk{padding:104px 0}
+.sh{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:end;margin-bottom:64px}
+.sh .en{color:var(--gold);display:block;margin-bottom:14px}
+.sh h2{font-size:clamp(28px,3.2vw,40px);color:var(--navy);line-height:1.35}
+.sh p{margin:0;color:var(--muted);font-size:16.5px}
+
+/* service rows */
+.svc{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.svc:last-of-type{border-bottom:1px solid var(--line)}
+.svc .pic{position:relative;min-height:400px;overflow:hidden;background:var(--soft)}
+.svc .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.svc .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,0) 55%,rgba(11,31,58,.35))}
+.svc .pic .tag{position:absolute;left:24px;bottom:20px;z-index:2;color:#fff;font-family:Inter,sans-serif;font-size:12px;letter-spacing:.2em}
+.svc .bd{padding:56px 56px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.svc:nth-of-type(even) .pic{order:2}
+.svc .st{display:flex;align-items:baseline;gap:14px;color:var(--gold)}
+.svc .st .no{font-family:Inter,sans-serif;font-size:40px;font-weight:500;line-height:1;color:var(--gold)}
+.svc .st .lb{font-size:14px;letter-spacing:.18em;color:var(--muted)}
+.svc h3{font-size:clamp(23px,2.3vw,29px);color:var(--navy);line-height:1.35}
+.svc h3 small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-top:4px}
+.svc .one{margin:0;font-size:16.5px;color:var(--ink)}
+.svc ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;border-top:1px solid var(--line)}
+.svc li{padding:11px 0 11px 18px;border-bottom:1px solid var(--line);font-size:15px;position:relative;color:var(--ink)}
+.svc li::before{content:"";position:absolute;left:0;top:21px;width:7px;height:1.5px;background:var(--gold)}
+.svc .note{margin:0;font-size:13.5px;color:var(--muted)}
+.more{display:inline-flex;align-items:center;gap:10px;color:var(--navy);font-weight:500;font-size:15px;letter-spacing:.06em;border-bottom:1px solid var(--navy);padding-bottom:3px;align-self:flex-start}
+.more::after{content:"→";transition:.18s}.more:hover::after{transform:translateX(4px)}
+
+/* tools */
+.tools{background:var(--soft)}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tc{background:#fff;border:1px solid var(--line);padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:.18s;position:relative}
+.tc:hover{border-color:var(--navy);transform:translateY(-3px);box-shadow:0 16px 34px rgba(11,31,58,.08)}
+.tc .no{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.16em;color:var(--gold)}
+.tc h3{font-size:20px;color:var(--navy)}
+.tc p{margin:0;font-size:15px;color:var(--muted);flex:1}
+.tc .go{font-size:14px;color:var(--navy);font-weight:500}
+.tc.big{grid-column:span 2;grid-row:span 1;background:var(--navy);color:#fff;border-color:var(--navy);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.tc.big h3{color:#fff;font-size:24px}
+.tc.big p{color:#C9D3E2;font-size:15.5px}
+.tc.big .qr{background:#fff;padding:10px;width:150px}
+.tc.big .tx{display:flex;flex-direction:column;gap:12px}
+.tc.big .id{font-size:14px;color:var(--gold2);font-family:Inter,sans-serif;letter-spacing:.06em}
+.tools .first{grid-column:span 2}
+
+/* about */
+.about{position:relative;color:#fff;background:var(--navy)}
+.about .bgp{position:absolute;inset:0;background:url(img/bldg.jpg) center/cover;opacity:.18}
+.about .in{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.about .en{color:var(--gold2)}
+.about h2{font-size:clamp(28px,3.2vw,40px);margin:14px 0 22px;line-height:1.35}
+.about p{color:#C9D3E2;margin:0 0 14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.2)}
+.stats div{padding:28px 0 26px;border-bottom:1px solid rgba(255,255,255,.2)}
+.stats div:nth-child(odd){padding-right:20px;border-right:1px solid rgba(255,255,255,.2)}
+.stats div:nth-child(even){padding-left:28px}
+.stats b{display:block;font-family:Inter,sans-serif;font-size:44px;font-weight:500;color:var(--gold2);line-height:1.1}
+.stats span{font-size:14.5px;color:#C9D3E2}
+
+/* contact */
+.ct .box{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center;border:1px solid var(--line);padding:56px}
+.ct h2{font-size:clamp(26px,3vw,36px);color:var(--navy);margin:12px 0 14px}
+.ct .en{color:var(--gold)}
+.ct p{margin:0;color:var(--muted)}
+.ct dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 22px;font-size:15.5px}
+.ct dt{color:var(--muted)}.ct dd{margin:0;color:var(--ink);font-weight:500}
+.ct .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.ct .cinfo{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.ct .qrbox{margin:0;text-align:center;font-size:13.5px;color:var(--muted)}
+.ct .qrbox img{width:140px;border:1px solid var(--line);padding:8px;background:#fff;margin:0 auto 8px}
+
+footer{background:#081629;color:#9FAec4;font-size:14px}
+footer .in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:36px}
+footer b{color:#fff;letter-spacing:.06em}
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--line-g);color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;font-size:14.5px;box-shadow:0 10px 24px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px}
+
+/* responsive */
+@media (max-width:1080px){
+  .tgrid{grid-template-columns:1fr 1fr}.tools .first{grid-column:span 2}.tc.big{grid-column:span 2}
+  .stages ol{grid-template-columns:repeat(3,1fr)}.stages li{border-bottom:1px solid var(--line)}
+  .svc .bd{padding:44px 36px}.svc ul{grid-template-columns:1fr}
 }
-main>section:last-child{padding-bottom:calc(clamp(52px,7vw,92px) + 80px)}
-footer{padding-bottom:80px}
-section[id]{scroll-margin-top:calc(var(--hdr,96px) + 8px)}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:880px){
+  .hd{flex-direction:column;align-items:flex-start;height:auto;padding-block:10px;gap:4px}
+  nav.main{align-self:auto;width:100%;margin-left:-14px;flex-wrap:wrap;gap:0}
+  nav.main>.it>a{font-size:15px;padding:8px 10px}
+  .dd,.car{display:none!important}
+  nav.main>.it>a.btn{padding:7px 14px;margin-left:4px}
+  .hero .in{min-height:min(640px,88vh);align-items:flex-end}
+  .hero .tx{padding:120px 0 56px}
+  .hero .ph::after{background:linear-gradient(0deg,rgba(8,22,41,.9) 0%,rgba(8,22,41,.6) 45%,rgba(8,22,41,.05) 80%)}
+  .sh{grid-template-columns:1fr;gap:16px;margin-bottom:40px}
+  section.blk{padding:72px 0}
+  .svc{grid-template-columns:1fr}.svc .pic{min-height:240px}.svc:nth-of-type(even) .pic{order:0}
+  .svc .bd{padding:32px 0 44px}
+  .svc{border-top:0}.svc .pic{margin:0 calc(-1 * max(20px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+  .about .in{grid-template-columns:1fr;gap:36px}
+  .ct .box{grid-template-columns:1fr;padding:32px 24px;gap:28px}
+}
+@media (max-width:560px){
+  .tgrid{grid-template-columns:1fr}.tools .first,.tc.big{grid-column:auto}
+  .tc.big{grid-template-columns:1fr}.tc.big .qr{width:132px}
+  .stages ol{grid-template-columns:1fr 1fr}
+  .brand{font-size:17px}
+  .hero .acts .btn{flex:1}
+}
 
-
-/* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden}
-.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero .wrap{position:relative;z-index:1;padding-block:clamp(48px,7vw,100px) clamp(56px,7vw,96px)}
-.hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(52px,10.5vw,132px);line-height:1.04;letter-spacing:.02em;margin-top:22px}
-.hero h1 .l{display:block}
-.hero h1 em{font-style:normal;color:var(--gold)}
-.hero p.sub{margin-top:28px;font-size:clamp(17px,1.7vw,21px);max-width:30em;color:var(--ink)}
-
-/* hero 兩欄：左文字、右示意圖（平衡寬螢幕） */
-/* 首頁各段落與大標同一條左線 */
-main section .wrap,section.band .wrap,section.stats .wrap,section.night .wrap,section.hz .wrap,section.cta-band .wrap,footer .wrap{max-width:1760px;padding-left:max(16px,7vw,env(safe-area-inset-left,0px));padding-right:max(16px,5vw,env(safe-area-inset-right,0px))}
-.hero .wrap.hero-grid{max-width:1760px;padding-left:max(16px,7vw,env(safe-area-inset-left,0px));padding-right:max(16px,5vw,env(safe-area-inset-right,0px))}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:clamp(28px,4vw,72px);align-items:center}
-.hero-txt{min-width:0}
-.hero h1{font-size:clamp(52px,7.6vw,118px)}
-@media (max-width:960px){.hero-grid{grid-template-columns:1fr}.hv{max-width:560px;margin-inline:auto !important}}
-.hv{position:relative;margin:0;padding:0 0 40px 0;min-width:0}
-.lap{position:relative}
-.scr{background:#fff;border:10px solid #1B2433;border-bottom-width:14px;border-radius:14px 14px 4px 4px;padding:12px;box-shadow:0 40px 70px -40px rgba(15,35,64,.55);display:grid;gap:10px;aspect-ratio:16/10.4;align-content:start;overflow:hidden}
-.base{height:14px;margin:0 -6%;background:linear-gradient(#CBD3DE,#9AA6B6);border-radius:0 0 18px 18px}
-.sbar{display:flex;justify-content:space-between;gap:8px;background:var(--ink);color:#EDE6D6;border-radius:4px;padding:6px 10px;font-size:clamp(10px,1vw,13px);flex-wrap:wrap}
-.sbar span{color:#C9C0AE}
-.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.kpis div{background:var(--ink);color:#EDE6D6;border-radius:4px;padding:6px 8px;min-width:0}
-.kpis div.g{background:#FFF6DE;color:var(--ink);border:1px solid var(--gold-soft)}
-.kpis small{display:block;font-size:clamp(9px,.8vw,11px);color:var(--gold-bright)}
-.kpis div.g small{color:var(--gold)}
-.kpis b{font-family:var(--f-latin);font-size:clamp(14px,1.5vw,20px)}
-.mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.mc{border:1px solid var(--line);border-radius:4px;padding:6px 8px;min-width:0}
-.mc small{display:block;font-size:clamp(9px,.8vw,11px);font-weight:700;margin-bottom:4px}
-.mc p{display:grid;grid-template-columns:4.5em 1fr;gap:6px;align-items:center;margin:3px 0;font-size:clamp(9px,.8vw,11px);color:var(--ink-2)}
-.mc i{display:block;height:8px;background:#2E5C9A;width:var(--w);border-radius:2px}
-.mc.o i{background:#B8862B}
-.halert{background:#FFF1D0;border-left:4px solid var(--gold);font-size:clamp(9px,.85vw,12px);padding:5px 8px;border-radius:3px;color:var(--hot,#9A4A3A);font-weight:700}
-.ph-d{justify-self:center;font-size:11px;color:#fff;background:rgba(15,35,64,.28);border-radius:999px;padding:1px 8px}
-.phone{position:absolute;right:-2%;bottom:0;width:38%;min-width:170px;background:#fff;border:8px solid #1B2433;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(15,35,64,.6)}
-.ph-h{background:#06C755;color:#fff;font-weight:700;font-size:clamp(11px,1vw,13px);padding:10px 12px}
-.ph-b{background:#8CABD8;padding:12px 10px 16px;display:grid;gap:8px;min-height:150px;align-content:start}
-.bub{background:#fff;color:var(--ink);font-size:clamp(11px,.95vw,13px);line-height:1.5;padding:8px 10px;border-radius:4px 14px 14px 14px;max-width:92%}
+/* ===== 貴氣層：藍金層次（11/13 v2） ===== */
+:root{--night:#0B1A30;--night2:#16305A;--goldb:#D4AA4F;--goldd:#A87A1E;--paper:#FBFAF7;--paper2:#F3F0E8;--sand:#E3DED3;--due:#B3261E;
+--gg:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);--ng:linear-gradient(160deg,#1C3A66 0%,#0F2340 45%,#0B1A30 100%)}
+body{background:var(--paper)}
+.sh h2{font-size:clamp(32px,4.2vw,54px);font-weight:900;line-height:1.22;color:#0F2340}
+.sh h2 em{font-style:normal;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sh .en{color:var(--goldd);font-size:14px}
+.sh p{font-size:18px;color:#4A5568}
+.ic{width:56px;height:56px;border-radius:50%;background:var(--ng);color:var(--goldb);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px rgba(212,170,79,.55),0 8px 18px -8px rgba(11,26,48,.5);flex:0 0 auto}
+.ic svg{width:26px;height:26px}
+b.due,.due{color:var(--due);font-weight:800}
+/* stats band */
+.kband{background:var(--ng);border-top:3px solid var(--goldb);position:relative}
+.kband::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,170,79,.7),transparent)}
+.kgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.kp{padding:38px 24px;border-left:1px solid rgba(212,170,79,.28)}
+.kp:first-child{border-left:0;padding-left:0}
+.kn{font-family:"Space Grotesk",Inter,sans-serif;font-weight:700;font-size:clamp(56px,6.6vw,96px);line-height:1;font-variant-numeric:tabular-nums;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.kn sup{font-size:.36em;margin-left:6px;vertical-align:top;position:relative;top:.3em}
+.kk{margin-top:12px;color:#E6DCC6;font-size:16.5px;font-weight:500}
+.stages{background:#fff}
+.stages b{font-size:19px;font-weight:900;color:#0F2340}
+.stages .n{font-family:"Space Grotesk",sans-serif;font-size:15px;font-weight:700;color:var(--goldd)}
+/* services cards */
+#services{background:var(--paper)}
+.svc{background:#fff;border:1px solid var(--sand)!important;border-top:4px solid var(--goldb)!important;border-radius:8px;overflow:hidden;margin-bottom:34px;box-shadow:0 24px 50px -36px rgba(15,35,64,.45)}
+.svc .pic::after{background:linear-gradient(180deg,rgba(11,26,48,0) 50%,rgba(11,26,48,.55))}
+.svc .pic .tag{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:14px;color:var(--goldb)}
+.svc .st{align-items:center;gap:16px}
+.svc .st .no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:64px;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.svc .st .lb{font-size:16px;font-weight:700;letter-spacing:.24em;color:#0F2340;border:1px solid var(--goldb);border-radius:999px;padding:3px 14px}
+.svc h3{font-size:clamp(26px,2.7vw,36px);font-weight:900;color:#0F2340}
+.svc h3 small{font-size:16px;color:var(--goldd);font-weight:700}
+.svc .one{font-size:18.5px;font-weight:500}
+.svc ul{border-top:0;gap:10px 14px}
+.svc li{border:1px solid var(--sand);border-left:4px solid var(--goldb);border-radius:4px;background:var(--paper);padding:10px 14px;font-size:16px;font-weight:500}
+.svc li::before{display:none}
+.svc .due-note{margin:0;font-size:15.5px;background:#FFF6DE;border-left:4px solid var(--goldb);padding:10px 14px;border-radius:4px}
+.svc .note{font-size:14.5px}
+.more{color:var(--goldd);border-bottom:2px solid var(--goldb);font-weight:700;font-size:17px}
+/* tools */
+.tools{background:var(--paper2)}
+.tg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.tcard{background:#fff;border:1px solid var(--sand);border-top:4px solid var(--goldb);border-radius:8px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;position:relative;min-width:0;box-shadow:0 20px 40px -34px rgba(15,35,64,.5)}
+.tcard .no{position:absolute;right:24px;top:20px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:40px;line-height:1;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9}
+.tcard h3{font-size:23px;font-weight:900;color:#0F2340;line-height:1.35}
+.tcard p{margin:0;color:#4A5568;font-size:16.5px}
+.tcard p b{color:#0F2340}
+.tcard .go{color:var(--goldd);font-weight:700;font-size:17px;margin-top:auto}
+.tcard .go::after{content:" →"}
+.chip{align-self:flex-start;font-size:13px;border:1px solid var(--sand);border-radius:999px;padding:4px 12px;color:#4A5568;background:var(--paper)}
+.tline{grid-column:span 2;background:var(--ng);border-color:#0F2340;color:#EDE6D6;display:grid;grid-template-columns:minmax(0,1.15fr) auto auto;gap:24px;align-items:center}
+.tline .tl-tx{display:flex;flex-direction:column;gap:12px;min-width:0}
+.tline h3{color:#fff;font-size:28px}
+.tline p{color:#D8CFBC}
+.tline .due{color:#FF8A7A}
+.tline .no{opacity:1}
+.tl-acts{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:6px}
+.lid{color:#C9C0AE;font-size:15px}.lid b{color:#fff;user-select:all}
+.lbtn{display:inline-flex;align-items:center;gap:10px;background:#06C755;color:#0B2416;font-weight:700;font-size:18px;padding:12px 24px;border-radius:999px;min-height:52px;box-shadow:0 10px 24px rgba(0,0,0,.25);white-space:nowrap}
+.lbtn svg{width:22px;height:22px}
+.tl-qr{margin:0;background:#FFFBEF;border-radius:10px;padding:10px;width:150px;text-align:center;color:#0F2340;font-size:12.5px;box-shadow:0 0 0 3px rgba(212,170,79,.6)}
+.tl-qr img{width:100%;margin-bottom:4px}
+.phone{width:230px;background:#fff;border:8px solid #1B2433;border-radius:28px;overflow:hidden;box-shadow:0 26px 50px -20px rgba(0,0,0,.6)}
+.ph-h{background:#06C755;color:#fff;font-weight:700;font-size:14px;padding:10px 12px}
+.ph-b{background:#8CABD8;padding:12px 10px 16px;display:grid;gap:8px}
+.ph-d{justify-self:center;font-size:11px;color:#fff;background:rgba(15,35,64,.3);border-radius:999px;padding:1px 8px}
+.bub{background:#fff;color:#0F2340;font-size:13px;line-height:1.5;padding:8px 10px;border-radius:4px 14px 14px 14px;max-width:94%}
+.bub .due{color:#E5251E}
+.bub.btnb{justify-self:start;font-weight:700;color:#06C755;text-align:center;border-radius:10px}
 .bub.me{justify-self:end;background:#B7F0A0;border-radius:14px 4px 14px 14px}
-@media (prefers-reduced-motion:no-preference){
-  .mc i{animation:grow 1.4s .4s cubic-bezier(.2,.7,.2,1) both}
-  @keyframes grow{from{width:0}}
-  .bub{animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
-  .ph-d{animation:pop .4s ease both .6s}.bub{animation-delay:1.2s}.bub.me{animation-delay:3s}
-  @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.9)}}
-}
-.hero .acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
-.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:17px;padding:15px 26px;border-radius:999px;min-height:48px}
-.btn.line{background:var(--line-green);color:var(--line-ink)}
-.btn.ghost{border:1.5px solid var(--ink);color:var(--ink)}
-.btn svg{width:20px;height:20px}
-.btn.how{background:var(--ink);color:#F4EEDF;border:2px solid var(--gold-bright);font-size:22px;padding:12px 30px;min-height:56px;box-shadow:0 14px 30px -12px rgba(15,35,64,.55),inset 0 0 0 3px var(--ink),inset 0 0 0 4px rgba(212,170,79,.45)}
-.btn.how .how-mk{display:inline-flex;width:34px;height:34px;border-radius:50%;background:#FFF6DE;color:var(--gold);font-family:var(--f-serif);font-weight:900;align-items:center;justify-content:center;font-size:18px}
-.btn.how:hover{background:#16305A}
-.acts .lbtn{font-size:22px;padding:14px 30px}
-.btn.how .mascot{width:50px;height:50px;color:var(--gold-bright);margin:-10px 0 -10px -8px;flex:0 0 auto}
-.mascot .m-bd{transform-box:view-box;transform-origin:50% 90%}
-@media (prefers-reduced-motion:no-preference){
-.mascot .m-bd{animation:mHop .45s cubic-bezier(.3,.7,.4,1) infinite alternate}
-.mascot .m-mt{animation:mBlink .45s steps(2) infinite}
-@keyframes mHop{from{transform:translateY(3%) rotate(-5deg) scale(1,.97)}to{transform:translateY(-6%) rotate(5deg) scale(1,1.02)}}
-@keyframes mBlink{50%{opacity:.2}}
-}
-
-/* ---------- stats ---------- */
-.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--paper) 55%,transparent)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
-.stat{padding:28px 20px;border-left:1px solid var(--line);min-width:0}
-.stat:first-child{border-left:0;padding-left:0}
-.stat .n{font-family:var(--f-latin);font-weight:700;font-size:clamp(40px,5vw,64px);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
-.stat .n sup{font-size:.42em;color:var(--gold);margin-left:4px;vertical-align:top;position:relative;top:.35em}
-.stat .k{margin-top:10px;color:var(--ink-2);font-size:15px}
-@media (max-width:820px){.stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:0;padding-left:0}.stat{border-top:1px solid var(--line)}.stat:nth-child(-n+2){border-top:0}}
-
-/* ---------- night band ---------- */
-.night{position:relative;background:var(--night);color:#EDE6D6;overflow:hidden}
-.night canvas{position:absolute;inset:0;width:100%;height:100%}
-.night .wrap{position:relative;z-index:1}
-.night .quote{font-family:var(--f-serif);font-weight:900;font-size:clamp(28px,4.4vw,56px);line-height:1.35;max-width:18em}
-.night .quote em{font-style:normal;color:var(--gold-bright)}
-.night p{color:#D3CBB9;max-width:36em;margin-top:22px;font-size:18px}
-.night p em{font-style:normal;color:var(--gold-bright);font-weight:700}
-.night .eyebrow{color:var(--gold-bright)}
-
-/* ---------- 陪跑 horizontal ---------- */
-.hz{position:relative;background:color-mix(in srgb,var(--paper-2) 70%,transparent)}
-.hz-head{display:flex;justify-content:space-between;gap:24px;align-items:end;flex-wrap:wrap;margin-bottom:40px}
-.hz-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-@media (max-width:1000px){.hz-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.hz-track{grid-template-columns:1fr}}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.card .ic{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--gold-bright);display:flex;align-items:center;justify-content:center}
-.card .ic svg{width:22px;height:22px}
-.card h3{font-family:var(--f-display);font-weight:900;font-size:22px;line-height:1.35}
-.card p{color:var(--ink-2);margin:0}
-.tag{align-self:flex-start;margin-top:auto;font-family:var(--f-latin);font-size:12px;letter-spacing:.04em;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--ink-2);text-decoration:none}
-a.tag:hover{border-color:var(--gold);color:var(--gold)}
-.hz-sticky{padding-block:clamp(64px,8vw,110px)}
-
-/* ---------- 老闆看帳 ---------- */
+@media (prefers-reduced-motion:no-preference){.bub,.ph-d{animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}.ph-d{animation-delay:.3s}.bub{animation-delay:.9s}.bub.btnb{animation-delay:1.8s}.bub.me{animation-delay:2.7s}@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.9)}}}
+/* ledger */
+.ledger-b{background:#fff}
 .ledger{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,5vw,72px);align-items:center}
-@media (max-width:900px){.ledger{grid-template-columns:1fr}}
-.ledger h2 em{font-style:normal;color:var(--gold)}
-.feat{display:grid;gap:18px;margin-top:32px}
+.ledger .en{color:var(--goldd);font-family:Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:14px;font-weight:600}
+.lh{font-size:clamp(32px,4.2vw,54px);font-weight:900;line-height:1.22;color:#0F2340;margin-top:14px}
+.lh em{font-style:normal;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ld{font-size:18px;color:#4A5568}
+.feat{display:grid;gap:18px;margin-top:26px}
 .feat div{display:grid;grid-template-columns:20px 1fr;gap:12px}
-.feat div::before{content:"";width:8px;height:8px;margin-top:10px;background:var(--gold)}
-.feat b{display:block;font-size:17px}
-.feat span{color:var(--ink-2)}
-.board{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 30px 60px -30px rgba(15,35,64,.35);overflow:hidden}
-.board-h{background:var(--ink);color:#EDE6D6;padding:14px 20px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px}
+.feat div::before{content:"";width:10px;height:10px;margin-top:9px;background:var(--goldb)}
+.feat p{margin:0}.feat b{display:block;font-size:18px;color:#0F2340}.feat span{color:#4A5568}
+.board{margin:0;background:#fff;border:1px solid var(--sand);border-top:4px solid var(--goldb);border-radius:8px;box-shadow:0 30px 60px -30px rgba(15,35,64,.35);overflow:hidden}
+.board-h{background:var(--ng);color:#EDE6D6;padding:14px 20px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px}
 .board-h b{font-size:16px}
 .board-b{padding:20px;display:grid;gap:16px}
 .alerts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.alert{border-radius:6px;padding:12px;background:var(--ink);color:#EDE6D6;min-width:0}
+.alert{border-radius:6px;padding:12px;background:#0F2340;color:#EDE6D6;min-width:0}
 .alert.hot{background:#8C3B2E;color:#FFF1E6}
-.alert small{display:block;font-size:12px;opacity:.8}
-.alert strong{display:block;font-size:17px;margin-top:2px}
-.alert i{display:block;font-style:normal;font-size:11.5px;opacity:.85;margin-top:2px}
-@media (max-width:520px){.alerts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.alert small{display:block;font-size:12px;opacity:.8}.alert strong{display:block;font-size:17px;margin-top:2px}.alert i{display:block;font-style:normal;font-size:11.5px;opacity:.85;margin-top:2px}
 .charts{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px;align-items:center}
 .bars{display:grid;gap:8px}
-.bar{display:grid;grid-template-columns:72px 1fr 64px;gap:8px;align-items:center;font-size:13px;color:var(--ink-2)}
-.bar .t{height:12px;background:var(--paper-2);border-radius:2px;overflow:hidden}
-.bar .t i{display:block;height:100%;background:var(--ink);width:var(--w);transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
-.bar.g .t i{background:var(--gold)}
-.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.bar{display:grid;grid-template-columns:72px 1fr 64px;gap:8px;align-items:center;font-size:13px;color:#4A5568}
+.bar .t{height:12px;background:var(--paper2);border-radius:2px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:#0F2340;width:var(--w);transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.bar.g .t i{background:var(--goldb)}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:#0F2340}
 .donut{width:150px;height:150px}
-.board-f{font-size:12.5px;color:var(--ink-2);text-align:center;padding:0 20px 16px}
-@media (max-width:520px){.charts{grid-template-columns:1fr}.donut{margin:0 auto}}
-
-/* ---------- steps ---------- */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:48px;counter-reset:s}
-@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}}
-.step{border-top:1px solid var(--ink);padding-top:18px;min-width:0}
-.step .num{font-family:var(--f-latin);font-weight:700;font-size:56px;line-height:1;color:var(--gold)}
-.step h3{font-size:20px;font-weight:900;margin-top:10px}
-.step p{color:var(--ink-2);margin:6px 0 0}
+.board-f{font-size:12.5px;color:#4A5568;text-align:center;padding:0 20px 16px}
+/* start */
+.start-b{background:var(--paper)}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.step{border-top:2px solid #0F2340;padding-top:18px;min-width:0}
+.step .num{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:64px;line-height:1;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step h3{font-size:22px;font-weight:900;margin-top:10px;color:#0F2340}
+.step p{color:#4A5568;margin:6px 0 0}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:56px}
-@media (max-width:900px){.facts{grid-template-columns:1fr}}
-.fact{background:var(--paper-2);border-radius:6px;padding:24px;min-width:0}
-.fact h3{font-size:18px;font-weight:900}
-.fact ul{margin:10px 0 0;padding-left:20px;color:var(--ink-2)}
-.fact p{margin:10px 0 0;color:var(--ink-2)}
-.fact small{display:block;margin-top:10px;font-size:12.5px;color:var(--ink-2)}
-.fact a{color:var(--gold)}
-.offs-h{margin-top:40px}.offs-h h3{margin:0;font-size:22px}.offs-h p{margin:6px 0 0;color:var(--ink-2)}
+.fact{background:#fff;border:1px solid var(--sand);border-top:4px solid #0F2340;border-radius:8px;padding:24px;min-width:0}
+.fact h3{font-size:19px;font-weight:900;color:#0F2340}
+.fact ul{margin:10px 0 0;padding-left:20px;color:#4A5568}.fact p{margin:10px 0 0;color:#4A5568}
+.fact small{display:block;margin-top:10px;font-size:12.5px;color:#4A5568}.fact a{color:var(--goldd)}
+.offs-h{margin-top:40px}.offs-h h3{margin:0;font-size:23px;font-weight:900;color:#0F2340}.offs-h p{margin:6px 0 0;color:#4A5568}
 .offs{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
-.offs a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-top:4px solid var(--ink);border-radius:6px;padding:16px 18px;height:100%}
-.offs a:hover{border-top-color:var(--gold)}
-.offs span{color:var(--ink-2);font-size:15px}
-.why{margin-top:28px;border:1px solid var(--gold-soft);border-radius:6px;padding:24px 26px;background:#fff}
-.why h3{font-size:18px;font-weight:900}
-.why p{margin:8px 0 0;color:var(--ink-2)}
-.why a{color:var(--gold);font-weight:500}
+.offs a{display:flex;flex-direction:column;gap:2px;color:#0F2340;background:#fff;border:1px solid var(--sand);border-top:4px solid #0F2340;border-radius:6px;padding:16px 18px;height:100%}
+.offs a:hover{border-top-color:var(--goldb)}
+.offs span{color:#4A5568;font-size:15px}
+.why{margin-top:28px;border:2px solid var(--goldb);border-radius:8px;padding:24px 26px;background:#fff}
+.why h3{font-size:19px;font-weight:900;color:#0F2340}.why p{margin:8px 0 0;color:#4A5568}.why a{color:var(--goldd);font-weight:500}
+/* about */
+.about-b{background:#fff}
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.p{background:#fff;border:1px solid #EADCB8;border-top:4px solid var(--goldb);border-radius:8px;padding:26px 26px 22px;box-shadow:0 20px 40px -34px rgba(15,35,64,.5)}
+.p h3{font-size:23px;font-weight:900;color:#0F2340}.p h3 small{font-size:15px;font-weight:500;color:#4A5568;margin-left:8px}
+.p .t{color:var(--goldd);font-weight:700;margin-top:4px}.p p{color:#4A5568;margin:8px 0 0}
+.crew{margin-top:40px;display:flex;gap:28px;align-items:center;background:var(--ng);color:#F4EEDF;border-radius:10px;padding:26px 30px;border:1px solid rgba(212,170,79,.5)}
+.crew-n{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(56px,6vw,84px);line-height:1;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;flex:0 0 auto}
+.crew-n sup{font-size:.36em;margin-left:4px}
+.crew b{font-size:clamp(20px,2.3vw,26px)}.crew p{margin:6px 0 0;color:#CFC6B3}
+/* cta */
+.cta{position:relative;overflow:hidden;background:var(--ng);color:#EDE6D6;padding-block:clamp(80px,10vw,128px)}
+.cta canvas{position:absolute;inset:0;width:100%;height:100%}
+.cta .wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center}
+.cta .en{color:var(--goldb);font-family:Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;font-size:14px;font-weight:600}
+.cta h2{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(34px,5vw,62px);color:#F4EEDF;margin-top:14px}
+.cta h2 em{font-style:normal;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta .ask{color:#F4EEDF;font-size:clamp(22px,3vw,30px);font-weight:900;margin:18px 0 0}
+.cta p{color:#C9C0AE;font-size:17px;max-width:36em;margin:14px 0 0}
+.cta .qr{margin:32px 0 0;background:#FFFBEF;border-radius:12px;padding:14px;width:230px;box-shadow:0 0 0 3px rgba(212,170,79,.65),0 24px 50px -20px rgba(0,0,0,.6)}
+.cta .qr img{width:100%}.cta .qr figcaption{color:#0F2340;font-size:13px;margin-top:6px}
+.cta-acts{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;align-items:center;margin-top:28px}
+.btn.goldb{background:var(--gg);color:#0F2340;font-weight:900;font-size:18px;padding:14px 30px;border-radius:999px;min-height:52px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+footer{background:#081426;color:#A9A08E;border-top:1px solid rgba(212,170,79,.3)}
+footer .in{align-items:center}
+footer .fn{color:#EDE6D6;font-family:"Noto Serif TC",serif;letter-spacing:.1em}
+.ft-i{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 28px}
+.ft-i span{color:#C9C0AE}.ft-i b{color:#EDE6D6}
+.fab{font-size:16px;padding:13px 20px}
+@media (max-width:1080px){.tg{grid-template-columns:1fr 1fr}.tline{grid-column:span 2;grid-template-columns:1fr auto}.tl-qr{display:none}.team{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.ledger{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.facts{grid-template-columns:1fr}.kgrid{grid-template-columns:1fr 1fr}.kp:nth-child(3){border-left:0;padding-left:0}.kp{border-top:1px solid rgba(212,170,79,.28)}.kp:nth-child(-n+2){border-top:0}}
+@media (max-width:640px){.tg{grid-template-columns:1fr}.tline{grid-column:auto;grid-template-columns:1fr}.tl-ph{justify-self:center}.tl-qr{display:block;justify-self:center}.team{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.crew{flex-direction:column;align-items:flex-start}.alerts{grid-template-columns:1fr 1fr}.charts{grid-template-columns:1fr}.donut{margin:0 auto}.svc .st .no{font-size:48px}.kp{padding:26px 12px}}
 
-/* ---------- team ---------- */
-.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 40px;margin-top:48px}
-@media (max-width:1100px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:820px){.team{grid-template-columns:1fr}}
-.p{display:block;background:#fff;border:1px solid var(--gold-soft);border-top:4px solid var(--gold);border-radius:8px;padding:26px 26px 22px}
-.crew{margin-top:48px;display:flex;gap:24px;align-items:center;background:var(--ink);color:#F4EEDF;border-radius:10px;padding:24px 28px;border:1px solid rgba(212,170,79,.4)}
-.crew-n{font-family:var(--f-latin);font-weight:700;font-size:clamp(44px,5vw,64px);line-height:1;color:var(--gold-bright);flex:0 0 auto}
-.crew-n sup{font-size:.4em;margin-left:4px;color:#F4EEDF}
-.crew b{font-size:clamp(19px,2.2vw,24px)}
-.crew p{margin:6px 0 0;color:#CFC6B3}
-@media (max-width:640px){.crew{flex-direction:column;align-items:flex-start}}
-.p .ph{width:96px;height:120px;background:var(--paper-2);border:1px dashed var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-2)}
-.p h3{font-size:22px;font-weight:900}
-.p h3 small{font-size:15px;font-weight:500;color:var(--ink-2);margin-left:8px}
-.p .t{color:var(--gold);font-weight:500;margin-top:2px}
-.p p{color:var(--ink-2);margin:8px 0 0}
+.sh{grid-template-columns:1.35fr 1fr}
+.lh{font-size:clamp(30px,3.5vw,48px)}
+.feat span b{display:inline;font-size:inherit}
+.hero .acts{gap:16px;margin-top:8px}
+.hero .acts .btn{font-size:19px;font-weight:700;padding:16px 34px;border-radius:999px;min-height:58px}
+.hero .acts .btn.gold{background:var(--gg);color:#0F2340;box-shadow:0 14px 30px -12px rgba(0,0,0,.55)}
+.hero .acts .btn.ghost{border:2px solid rgba(212,170,79,.8);color:#fff;background:rgba(11,26,48,.35)}
+@media (max-width:900px){.sh{grid-template-columns:1fr}}
+html{scroll-behavior:smooth}section[id],article[id]{scroll-margin-top:96px}@media (max-width:880px){section[id],article[id]{scroll-margin-top:112px}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand .bi{width:clamp(34px,3vw,42px);height:clamp(34px,3vw,42px);flex:0 0 auto}
+.ic.sm{width:40px;height:40px;margin-bottom:8px}.ic.sm svg{width:19px;height:19px}
+.stages li a{gap:3px}
 
-/* ---------- cta ---------- */
-.cta-band{background:var(--night);color:#EDE6D6;position:relative;overflow:hidden}
-.cta-band canvas{position:absolute;inset:0;width:100%;height:100%}
-.cta-band .wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center}
-.cta-band .qr{margin-top:32px;width:240px}
-.cta-acts{display:flex;flex-wrap:wrap;gap:14px 20px;justify-content:center;align-items:center;margin-top:28px}
-.cta-band h2{font-family:var(--f-serif);color:#F4EEDF}
-.cta-band h2 em{font-style:normal;color:var(--gold-bright)}
-.cta-band p{color:#C9C0AE;margin-top:16px;font-size:17px;max-width:36em}
-.cta-band p.ask{color:#F4EEDF;font-size:clamp(22px,3vw,30px);font-weight:900;margin-top:22px}
-.qr{background:#FFFBEF;border-radius:10px;padding:14px;width:220px;max-width:100%}
-.qr img{display:block;width:100%;height:auto}
-.qr small{display:block;text-align:center;color:var(--ink);font-size:13px;margin-top:6px}
-footer{background:var(--night);color:#A9A08E;font-size:14px;border-top:1px solid rgba(212,170,79,.25)}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px}
-footer b{color:#EDE6D6;font-family:var(--f-serif);letter-spacing:.1em}
+/* Canva 風格：深藍方塊金線圖示 */
+.ic{border-radius:3px!important;width:52px!important;height:52px!important;background:#0F2340!important;box-shadow:none!important;color:#D4AA4F!important}
+.ic svg{width:24px!important;height:24px!important}
+.brand .bx{width:clamp(34px,3vw,40px);height:clamp(34px,3vw,40px);border:1.5px solid #C9A04A;display:inline-flex;align-items:center;justify-content:center;color:#B8924A;flex:0 0 auto}
+.brand .bx svg{width:62%;height:62%}
+.ovs{background:var(--paper2);padding-block:clamp(72px,9vw,112px)}
+.ovg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ov{background:#fff;border:1px solid var(--sand);border-radius:4px;padding:34px 32px 30px;display:flex;flex-direction:column;gap:14px;transition:.2s;min-width:0}
+.ov:hover{border-color:#C9A04A;transform:translateY(-4px);box-shadow:0 24px 44px -30px rgba(15,35,64,.5)}
+.ovl{font-family:Inter,"Space Grotesk",sans-serif;font-size:14px;font-weight:600;letter-spacing:.16em;color:#B8924A;margin-top:8px}
+.ov h3{font-size:clamp(25px,2.4vw,31px);font-weight:900;color:#0F2340;line-height:1.3}
+.ov p{margin:0;font-size:18px;line-height:1.85;color:#4A5568;flex:1}
+.ovm{color:#A87A1E;font-weight:700;font-size:16px}.ovm::after{content:" →"}
+@media (max-width:1000px){.ovg{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.ovg{grid-template-columns:1fr}}
 
-/* global motion layer */
-#bgfx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-main,footer{position:relative;z-index:1}
-.fxsw{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;display:flex;align-items:center;gap:4px;background:var(--ink);color:#E9E4D8;border-radius:999px;padding:5px;font-size:13px;box-shadow:0 10px 24px rgba(11,26,48,.25);flex-wrap:wrap;max-width:calc(100vw - 150px)}
-.fxsw span{padding:0 8px 0 10px;opacity:.8}
-.fxsw button{font:inherit;color:inherit;background:transparent;border:0;border-radius:999px;padding:7px 11px;cursor:pointer;min-height:32px}
-.fxsw button[aria-pressed="true"]{background:var(--gold-bright);color:var(--ink);font-weight:700}
-.more{color:var(--gold);font-weight:700;text-decoration:none}
-.more:hover{text-decoration:underline}
+.svc .st .lb{font-size:clamp(30px,3vw,40px);font-weight:900;letter-spacing:.14em;line-height:1;padding:0;border:0;border-radius:0;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;box-shadow:none}
+.svc .pic .tag{font-family:"Noto Sans TC",sans-serif;font-size:18px;font-weight:900;letter-spacing:.3em}
+.ovl{display:flex;align-items:center;gap:12px}
+.ovl b{font-family:"Noto Sans TC",sans-serif;font-size:22px;font-weight:900;letter-spacing:.14em;padding:0;border:0;border-radius:0;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* floating LINE */
+/* 銀杏金線：動態層次 */
+:root{--ng:linear-gradient(160deg,#1D5262 0%,#173E5E 34%,#0F2340 68%,#0B1A30 100%)}
+.deco{position:absolute;pointer-events:none;z-index:0;max-width:none;transform-origin:50% 72%}
+@media (prefers-reduced-motion:no-preference){.deco{animation:sway 9s ease-in-out infinite alternate}@keyframes sway{from{transform:rotate(var(--r0,-4deg))}to{transform:rotate(var(--r1,4deg))}}}
+.kband,.ovs,.tline,.cta,.crew{position:relative;overflow:hidden}
+.kband>.wrap,.ovs>.wrap,.tline>:not(.deco),.cta>.wrap,.crew>:not(.deco){position:relative;z-index:1}
+.ov{position:relative;z-index:1}
+@media (max-width:640px){.deco{opacity:.35!important;transform:scale(.7)}}
+.sh p.one-dragon{font-size:clamp(19px,1.8vw,23px);line-height:1.8;color:#0F2340;font-weight:500;border-left:4px solid #D4AA4F;padding-left:20px}
+.one-dragon b{font-weight:900}
+.one-dragon em{font-style:normal;font-weight:900;font-size:1em;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+canvas.silk{position:absolute!important;inset:0;z-index:0!important;width:100%;height:100%;pointer-events:none;z-index:0}
+.kband>.wrap,.tline>:not(canvas),.crew>:not(canvas),.cta>.wrap{position:relative;z-index:1}
 
-/* reveal: visible at rest; motion only adds a lift */
-@media (prefers-reduced-motion:no-preference){
-  .rv{transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .9s}
-  .rv.pre{transform:translateY(28px);opacity:.35}
+.ov p{font-size:17.5px;line-height:1.7;flex:0 0 auto}
+.ov{gap:12px}
+.ovh{display:flex;align-items:center;gap:16px}.ovh .ovl{margin-top:0;flex-wrap:wrap;gap:4px 10px}.ov{gap:14px}
+@media (max-width:640px){.ovg{grid-template-columns:1fr 1fr;gap:10px}.ov{padding:18px 14px 16px;gap:8px}
+.ovh{gap:8px}.ovh .ic{width:38px!important;height:38px!important}.ovh .ic svg{width:19px!important;height:19px!important}
+.ovl{font-size:0;letter-spacing:0}.ovl b{font-size:18px}
+.ov h3{font-size:19px}.ov p{font-size:13.5px;line-height:1.55}.ovm{font-size:13.5px}}
+
+/* 數字帶疊在大樓照片上 */
+.hero .in{padding-bottom:var(--kb,190px)}
+@media (min-width:881px){.hero .in{min-height:max(560px,calc(100vh - 72px))}.hero .tx{padding:40px 0}}
+.kband{margin-top:calc(-1 * var(--kb,190px));z-index:2;background:linear-gradient(180deg,rgba(8,22,41,0) 0%,rgba(8,22,41,.55) 38%,rgba(10,24,44,.82) 100%)!important;border-top:0!important}
+.kband::after{display:none}
+.kp{border-left-color:rgba(212,170,79,.35)}
+.kk{color:#F1E9D6;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.hero .ph::after{background:linear-gradient(90deg,rgba(8,22,41,.78) 0%,rgba(8,22,41,.45) 36%,rgba(8,22,41,.05) 70%,rgba(8,22,41,0) 100%)!important}
+@media (max-width:880px){.hero .ph::after{background:linear-gradient(0deg,rgba(8,22,41,.85) 0%,rgba(8,22,41,.55) 50%,rgba(8,22,41,.05) 85%)!important}}
+
+/* 手機：大選單＋底部固定按鈕 */
+.mt,.mnav,.mcta{display:none}
+@media (max-width:880px){
+  .hd{flex-direction:row!important;align-items:center!important;justify-content:space-between}
+  nav.main{display:none!important}
+  .mt{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:#fff;padding:0 12px;cursor:pointer}
+  .mt span{display:block;height:2px;background:#0F2340;border-radius:2px}
+  .mnav:not([hidden]){display:block;position:fixed;inset:0;z-index:120;overflow:auto;background:var(--ng);color:#F4EEDF;padding:max(12px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+  .mn-top{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;border-bottom:1px solid rgba(212,170,79,.35)}
+  .mn-top .brand{color:#F4EEDF;font-size:21px}.mn-top .brand em{color:#D4AA4F}.mn-top .bx{border-color:#D4AA4F;color:#D4AA4F}
+  .mn-x{width:48px;height:48px;border:1px solid rgba(212,170,79,.6);border-radius:6px;background:transparent;color:#F4EEDF;font-size:22px;cursor:pointer}
+  .mn-about{display:block;margin-top:14px;font-size:20px;font-weight:700;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .mn-h{margin:20px 0 8px;font-size:14px;font-weight:700;letter-spacing:.2em;color:#D4AA4F}
+  .mn-g{display:grid;gap:8px}
+  .mn-g a{display:flex;align-items:center;gap:14px;min-height:58px;padding:8px 14px;border:1px solid rgba(212,170,79,.35);border-radius:6px;background:rgba(255,255,255,.04);font-size:20px;font-weight:700;color:#F4EEDF}
+  .mn-g a:active{background:rgba(212,170,79,.18)}
+  .mi{width:38px;height:38px;flex:0 0 auto;border-radius:3px;background:#0F2340;color:#D4AA4F;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(212,170,79,.5)}
+  .mi svg{width:20px;height:20px}
+  .mn-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+  .mcta{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:90;padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);border-top:1px solid #E3DED3;box-shadow:0 -10px 24px -16px rgba(15,35,64,.5)}
+  .c-gold,.c-line{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:999px;font-size:18px;font-weight:900;letter-spacing:.04em}
+  .c-gold{background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);color:#0F2340}
+  .c-line{background:#06C755;color:#0B2416}.c-line svg{width:21px;height:21px}
+  .fab{display:none!important}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
 }
 
-footer .ft-i{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 28px}
-footer .ft-i span{color:#C9C0AE}
-footer .ft-i b{color:#EDE6D6}
-b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;font-weight:800;margin:0!important}
+/* 統一：預約諮詢＝土金色膠囊；所有按鈕膠囊形；LINE＝綠色膠囊＋圖示 */
+.btn{border-radius:999px!important}
+a.btn.bk,nav.main>.it>a.btn.bk,.hero .acts .btn.bk{background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%)!important;color:#0F2340!important;font-weight:900;letter-spacing:.06em;border:0;box-shadow:0 10px 22px -12px rgba(120,80,20,.7)}
+a.btn.bk:hover{filter:brightness(1.05)}
+nav.main>.it>a.btn.bk{padding:10px 24px}
+.cta-acts .btn.bk{font-size:18px;padding:14px 32px;min-height:52px}
+.hero .acts .btn.bk{font-size:19px;padding:16px 34px;min-height:58px}
+.fab.lbtn{position:fixed;font-size:17px;padding:12px 22px;min-height:52px}
+
+/* 電腦版：大型下拉選單（蓋住頁面、一次看完不用捲） */
+.dd-t{display:flex;align-items:center;gap:6px;padding:10px 14px;font:inherit;font-size:16px;font-weight:700;color:var(--ink);background:none;border:0;cursor:pointer}
+.dd-it:hover .dd-t,.dd-it.open .dd-t{color:#A87A1E}
+.dd-it .dd{position:absolute;left:0;right:0;top:100%;display:block!important;padding:0!important;background:var(--ng)!important;border:0!important;border-top:2px solid #D4AA4F!important;box-shadow:0 30px 60px -20px rgba(8,22,41,.7)!important;max-height:calc(100vh - 72px);overflow:auto;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s}
+.dd-it:hover .dd,.dd-it:focus-within .dd,.dd-it.open .dd{opacity:1;visibility:visible;transform:none}
+.dd-in{max-width:1160px;margin:0 auto;padding:clamp(24px,4vh,44px) max(20px,env(safe-area-inset-right,0px)) clamp(26px,4.5vh,48px) max(20px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
+.dd-h{display:flex;flex-direction:column;gap:10px;color:#F4EEDF}
+.dd-h .en{color:#D4AA4F;font-family:Inter,sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.dd-h b{font-size:34px;font-weight:900;line-height:1.2}
+.dd-h a{color:#D4AA4F!important;font-weight:700;font-size:16px;padding:0!important;background:none!important}
+.dd-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dd-g a{display:flex!important;align-items:center;gap:16px;padding:16px 18px!important;border:1px solid rgba(212,170,79,.35);border-radius:6px;background:rgba(255,255,255,.04)!important;color:#F4EEDF!important;min-height:76px;transition:.18s}
+.dd-g a:hover{border-color:#E8C978;background:rgba(212,170,79,.14)!important}
+.dd-g .mi{width:46px;height:46px;flex:0 0 auto;border-radius:3px;background:#0F2340;color:#D4AA4F;display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(212,170,79,.55)}
+.dd-g .mi svg{width:23px;height:23px}
+.dt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dt b{font-size:21px;font-weight:900;color:#F4EEDF;line-height:1.3}
+.dt small{font-size:14.5px;color:#CFC6B3}
+@media (max-height:720px){.dd-g a{min-height:62px;padding:10px 14px!important}.dt b{font-size:18px}.dd-h b{font-size:28px}}
+/* 手機大選單：兩欄，一個畫面看完 */
+@media (max-width:880px){
+  .mn-g{grid-template-columns:1fr 1fr;gap:8px}
+  .mn-g a{min-height:56px;font-size:16px;padding:8px 10px;gap:10px;line-height:1.3}
+  .mi{width:32px!important;height:32px!important}.mi svg{width:17px!important;height:17px!important}
+  .mn-h{margin:14px 0 6px}.mn-about{margin-top:8px;padding:10px 4px;font-size:18px}.mn-cta{margin-top:16px}
+}
 
 
-/* hero 示意圖：固定比例舞台，任何縮放比例都長一樣；LINE 手機是主角，筆電在後面「半遮面」 */
-.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-@media (max-width:960px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.hv{max-width:none;margin-inline:0 !important}}
-@media (max-width:720px){.hero-grid{grid-template-columns:1fr}.hv{margin-top:28px !important;max-width:520px;margin-inline:auto !important}}
-.hero-txt{container-type:inline-size}
-.hero h1{font-size:min(118px,17.6cqw)}
-.hero h1 .l{white-space:nowrap}
-/* 兩顆按鈕永遠橫排；欄位窄時等比例變小 */
-.hero .acts{flex-wrap:nowrap;align-items:stretch}.hero .acts>a{white-space:nowrap;border-radius:999px;min-height:56px}
-@container (max-width:470px){.acts .lbtn,.btn.how{font-size:17px;padding:11px 18px;min-height:50px;gap:8px}.btn.how .mascot{width:38px;height:38px;margin:-8px 0 -8px -4px}.acts .lbtn svg{width:19px;height:19px}}
-@container (max-width:360px){.acts .lbtn,.btn.how{font-size:15px;padding:10px 14px}.btn.how .mascot{width:32px;height:32px}}
-.hv{padding:0;width:100%;height:var(--hvh,560px)}
-.hv-stage{position:absolute;left:0;top:0;width:640px;height:560px;transform-origin:0 0}
-.hv .lap{position:absolute;left:0;top:120px;width:500px;filter:saturate(.92)}
-.hv .scr{border-width:11px 11px 15px;padding:13px;gap:11px}
-.hv .sbar{font-size:13px}
-.hv .kpis small,.hv .mc small,.hv .mc p{font-size:11px}
-.hv .kpis b{font-size:20px}
-.hv .halert{font-size:12px}
-.hv .base{height:15px}
-.hv .phone{left:250px;right:auto;top:0;bottom:auto;width:360px;min-width:0;border-width:12px;border-radius:42px;box-shadow:-30px 40px 70px -30px rgba(15,35,64,.55)}
-.hv .ph-h{font-size:21px;padding:18px 20px}
-.hv .ph-b{min-height:400px;padding:22px 16px;gap:16px}
-.hv .ph-d{font-size:15px;padding:3px 12px}
-.hv .bub{font-size:23px;line-height:1.55;padding:16px 18px;max-width:95%}
-.phone b.due{color:#E5251E!important}
+/* 下拉選單：白色、直向清單（11/13 13:36） */
+.dd-it{position:relative!important}
+.dd-it .dd{left:50%!important;right:auto!important;width:420px;transform:translate(-50%,-6px)!important;height:auto!important;max-height:none!important;overflow:visible!important;background:#fff!important;border:1px solid #E3DED3!important;border-top:3px solid #D4AA4F!important;border-radius:0 0 8px 8px;box-shadow:0 24px 48px -20px rgba(15,35,64,.35)!important}
+.dd-it:hover .dd,.dd-it:focus-within .dd,.dd-it.open .dd{transform:translate(-50%,0)!important}
+.dd-in{display:block!important;max-width:none!important;padding:10px!important;height:auto!important}
+.dd-h{display:none!important}
+.dd-g{display:flex!important;flex-direction:column;gap:2px!important;height:auto!important}
+.dd-g a{border:0!important;border-radius:6px!important;background:#fff!important;color:#0F2340!important;padding:12px 14px!important;min-height:0!important;gap:14px!important}
+.dd-g a:hover{background:#F3F0E8!important}
+.dd-g .mi{width:40px!important;height:40px!important;box-shadow:none!important}.dd-g .mi svg{width:20px!important;height:20px!important}
+.dt b{font-size:18px!important;color:#0F2340!important}.dt small{font-size:14px!important;color:#6B7280!important}
+/* 深藍回到原本的深藍（不帶藍綠） */
+:root{--ng:linear-gradient(160deg,#1C3A66 0%,#0F2340 45%,#0B1A30 100%)}
+/* 手機大選單改白色 */
+@media (max-width:880px){
+  .mnav:not([hidden]){background:#FBFAF7!important;color:#0F2340!important}
+  .mn-top{border-bottom-color:#E3DED3!important}.mn-top .brand{color:#0F2340!important}.mn-top .brand em{color:#A87A1E!important}
+  .mn-x{color:#0F2340!important;border-color:#E3DED3!important}
+  .mn-about{border-bottom-color:#E3DED3!important;color:#0F2340}
+  .mn-h{color:#A87A1E!important}
+  .mn-g a{background:#fff!important;border-color:#E3DED3!important;color:#0F2340!important}
+  .mi{box-shadow:none!important}
+}
 
-.hz-track .card.wide{grid-column:1/-1}
+/* 點選單跳轉：色塊頂端剛好貼齊頁首；區塊上方留白縮小 */
+section[id]{scroll-margin-top:var(--hh,73px)!important}
+article[id]{scroll-margin-top:calc(var(--hh,73px) + 24px)!important}
+section.blk{padding:72px 0}
+.sh{margin-bottom:44px}
+.about-b{padding:52px 0 56px!important;min-height:calc(100vh - var(--hh,73px));min-height:calc(100svh - var(--hh,73px));display:flex;flex-direction:column;justify-content:center}
+.about-b>.wrap{width:100%}
+.about-b .sh{margin-bottom:30px}
+.about-b .sh h2{font-size:clamp(28px,3.4vw,44px)}
+@media (max-width:880px){section.blk{padding:56px 0}}
+.about-b .crew{margin:0 0 26px}
+@media (max-width:640px){.about-b .crew{padding:16px 18px;gap:8px}.about-b .crew-n{font-size:48px}.about-b .crew b{font-size:17px}.about-b .crew p{font-size:13.5px}}
 </style>
 
-<canvas id="bgfx" aria-hidden="true"></canvas>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="建碩會計師事務所 首頁"><em>建碩</em>會計師事務所</a>
+<header>
+  <div class="wrap hd">
+    <a class="brand" href="#top" aria-label="建碩會計師事務所 首頁"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></a>
+    <button type="button" class="mt" id="mt" aria-label="開啟選單" aria-controls="mnav" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="main" aria-label="主選單">
-      <a href="#team">關於我們</a>
-      <a href="#run">建碩陪跑</a>
-      <a href="#start">營業登記</a>
-      <a href="tools.html">試算工具</a>
-      <a href="ledger.html">老闆看帳 Excel</a>
-      <a href="forms.html">表單下載</a>
+      <div class="it"><a href="#about">關於建碩</a></div>
+      <div class="it dd-it"><button type="button" class="dd-t" aria-expanded="false">服務項目<i class="car"></i></button>
+        <div class="dd"><div class="dd-in"><div class="dd-h"><span class="en">Our Services</span><b>服務項目</b><a href="#services">查看全部服務 →</a></div><div class="dd-g"><a href="#s1"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span><span class="dt"><b>工商登記</b><small>公司・行號設立及變更登記</small></span></a><a href="#s2"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="dt"><b>記帳及稅務申報</b><small>記帳、營業稅及營所稅申報</small></span></a><a href="#s3"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span><span class="dt"><b>審計簽證</b><small>財務報表及營所稅查核簽證</small></span></a><a href="#s4"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><span class="dt"><b>稅務協談</b><small>稅務查核協談及行政救濟</small></span></a><a href="#s5"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span><span class="dt"><b>顧問諮詢</b><small>企業評價、股權規劃及 ESG</small></span></a><a href="#s6"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="dt"><b>財務規劃</b><small>遺贈稅、資產配置及海外移民</small></span></a></div></div></div></div>
+      <div class="it dd-it"><button type="button" class="dd-t" aria-expanded="false">智慧工具<i class="car"></i></button>
+        <div class="dd"><div class="dd-in"><div class="dd-h"><span class="en">Smart Tools</span><b>智慧工具</b><a href="#tools">查看全部工具 →</a></div><div class="dd-g"><a href="tools.html#qz"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="dt"><b>開公司小幫手・試算工具</b><small>評估組織型態、試算相關稅費</small></span></a><a href="#line"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span><span class="dt"><b>官方 LINE 單據提醒</b><small>申報期前主動通知寄送單據</small></span></a><a href="ledger.html"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span><span class="dt"><b>建碩記帳 Excel</b><small>會打字就會記帳的系統</small></span></a><a href="forms.html"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="dt"><b>表單下載</b><small>到職、薪資、離職常用表單</small></span></a><a href="tools.html#cal"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="dt"><b>法規條文及報稅行事曆</b><small>法規原文與各項申報期限</small></span></a></div></div></div></div>
+      <div class="it"><a class="btn bk" href="consult.html?from=專業版">預約諮詢</a></div>
     </nav>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden>
+  <div class="mn-top"><span class="brand"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span><button type="button" class="mn-x" id="mnX" aria-label="關閉選單">✕</button></div>
+  <a class="mn-about" href="#about">關於建碩</a>
+  <p class="mn-h">服務項目</p><nav class="mn-g"><a href="#s1"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span>工商登記</a><a href="#s2"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>記帳及稅務申報</a><a href="#s3"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span>審計簽證</a><a href="#s4"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span>稅務協談</a><a href="#s5"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span>顧問諮詢</a><a href="#s6"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>財務規劃</a></nav>
+  <p class="mn-h">智慧工具</p><nav class="mn-g"><a href="tools.html#qz"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>開公司小幫手・試算工具</a><a href="#line"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span>官方 LINE 單據提醒</a><a href="ledger.html"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span>建碩記帳 Excel</a><a href="forms.html"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>表單下載</a><a href="tools.html#cal"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>法規條文及報稅行事曆</a></nav>
+  <div class="mn-cta"><a class="c-gold" href="consult.html?from=專業版">預約諮詢</a><a class="c-line" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+</div>
+<div class="mcta"><a class="c-gold" href="consult.html?from=專業版">預約諮詢</a><a class="c-line" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+
 
 <main id="top">
-  <section class="hero" aria-labelledby="h1">
-    <canvas id="silk" aria-hidden="true"></canvas>
-    <div class="wrap hero-grid">
-      <div class="hero-txt">
-      <div class="eyebrow">記帳・稅務・營登・顧問</div>
-      <h1 id="h1"><span class="l"><em>建</em>業有伴。</span><span class="l"><em>碩</em>果可期。</span></h1>
-      <p class="sub">會計師＋記帳士專業團隊，從開公司第一天起，報稅季 LINE 提醒你；帳、稅、勞健保有問題，LINE 直接問。</p>
-      <div class="acts">
-        <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
-        <a class="btn how" href="#run"><svg class="mascot" viewBox="54 60 531 485" fill="currentColor" aria-hidden="true"><g class="m-bd"><path d="M260.0 527.6C247.8 519.4 220.6 469.6 195.5 409.6L188.5 392.7L174.5 387.9C110.7 365.6 100.2 361.4 90.4 354.5C77.4 345.2 72.4 331.8 78.3 321.8C84.6 311.0 98.4 309.2 124.4 315.9C133.1 318.2 140.4 319.9 140.6 319.7C140.8 319.5 139.5 317.7 137.8 315.6C115.7 288.8 107.2 245.7 116.1 206.5C128.5 152.7 172.5 111.1 230.0 98.9C243.8 96.0 269.6 95.7 284.0 98.3C345.8 109.7 391.2 162.3 394.6 226.8C395.2 236.6 393.6 253.0 391.5 259.5C391.1 260.7 392.2 260.0 394.3 257.6C397.0 254.5 397.9 252.6 398.3 248.5C399.3 238.2 407.8 226.9 415.4 225.5C419.1 224.8 426.5 225.2 429.0 226.3C430.2 226.8 434.3 218.5 448.5 187.3C458.4 165.4 467.3 146.7 468.2 145.8C470.6 143.4 473.5 143.5 476.0 146.0C477.6 147.6 479.4 148.0 484.8 148.0C492.6 148.0 497.4 149.9 504.0 155.5C510.6 161.0 514.3 162.3 523.5 162.3C529.6 162.2 533.8 161.4 541.3 159.0C550.5 156.1 551.3 156.0 553.6 157.5C557.0 159.7 556.7 162.8 551.6 175.0C545.6 189.0 542.3 200.8 539.9 216.5C538.8 223.7 537.7 230.5 537.5 231.7C536.6 235.6 529.3 237.5 515.0 237.5C500.2 237.5 494.1 235.7 485.3 228.8C471.0 217.6 465.9 215.9 454.1 218.5C447.5 220.1 446.8 220.4 445.0 223.9L443.1 227.6L446.7 228.9C451.7 230.8 457.6 237.2 459.6 243.2C462.3 251.3 461.3 264.7 457.4 273.0C453.5 281.2 446.4 289.1 439.1 293.3C435.5 295.5 432.0 298.7 429.1 302.6C413.7 323.3 395.0 343.7 379.5 357.0L371.0 364.4L371.0 373.4C371.0 390.3 378.4 415.1 382.9 413.6C383.8 413.3 387.2 412.1 390.5 410.9C409.8 404.0 428.6 416.9 426.7 435.8C425.4 448.3 415.0 461.6 403.0 466.1C380.9 474.4 339.5 463.6 315.4 443.3L310.3 439.0L302.4 441.7C298.1 443.1 294.4 444.3 294.3 444.4C294.2 444.5 293.2 451.7 292.1 460.5C285.4 511.6 278.9 530.1 267.6 529.9C265.1 529.9 262.2 529.0 260.0 527.6ZM269.6 513.2C273.4 504.2 277.2 484.7 281.0 455.1C282.2 446.1 283.5 437.9 284.0 437.0C284.8 435.5 309.6 426.0 312.7 426.0C313.4 426.0 317.0 428.7 320.7 432.1C337.3 446.9 362.7 457.0 384.0 457.2C395.8 457.3 401.9 455.0 408.1 448.3C416.3 439.4 417.4 431.1 411.1 424.9C407.6 421.3 406.8 421.0 401.9 421.0C398.5 421.0 394.3 422.0 390.5 423.5C383.5 426.4 378.4 426.7 375.1 424.4C366.0 418.0 358.2 390.3 359.1 367.5L359.5 358.9L364.0 354.8C390.0 331.3 402.2 318.3 418.2 296.9C424.8 288.1 427.0 285.9 431.1 283.9C445.5 277.2 454.2 256.1 447.3 244.9C445.5 242.1 441.5 239.0 439.6 239.0C439.4 239.0 439.0 241.3 438.8 244.1C438.2 249.7 435.9 253.5 431.2 256.5C426.3 259.6 427.3 266.4 433.4 271.7C438.0 275.7 436.0 282.0 430.0 282.0C428.4 282.0 425.8 280.9 424.0 279.4C422.3 277.9 420.8 276.9 420.7 277.1C420.5 277.3 417.9 282.9 414.9 289.5L409.3 301.5L405.5 301.5C402.3 301.5 401.3 301.0 400.1 298.9C398.8 296.5 399.2 295.3 407.3 277.4C414.8 260.8 415.7 258.3 414.4 256.9C412.7 255.0 412.6 249.8 414.2 248.2C414.9 247.5 417.5 247.0 420.0 247.0C426.5 247.0 429.1 243.3 425.7 238.8C421.0 232.7 412.2 238.8 410.1 249.5C409.4 252.8 408.7 256.5 408.5 257.7C407.8 260.9 399.8 270.1 388.8 280.5C383.6 285.5 377.0 292.9 374.2 297.1C360.8 317.2 329.0 342.8 322.1 339.1C316.5 336.0 317.2 331.1 323.8 327.3C352.2 311.1 372.0 286.0 380.3 255.5C383.8 242.4 383.4 218.4 379.3 203.0C372.8 178.5 363.5 162.2 345.6 144.4C319.5 118.3 289.9 106.7 252.8 108.3C165.5 111.8 104.1 196.0 130.2 276.0C142.2 313.0 173.6 340.0 213.9 347.9C221.2 349.4 222.7 350.0 223.9 352.2C225.1 354.3 225.2 355.3 224.2 357.4C222.7 360.7 217.5 360.9 205.0 358.1C190.9 354.9 178.8 349.8 165.9 341.5C160.0 337.7 156.5 336.5 133.5 330.5C102.8 322.5 99.0 322.0 92.8 324.8C85.7 327.9 85.9 334.0 93.5 341.5C101.0 349.1 105.9 351.2 163.9 371.6C181.8 377.9 196.9 383.5 197.5 384.0C198.1 384.5 199.2 386.6 199.9 388.7C212.0 422.5 245.2 489.1 260.0 509.0C264.3 514.8 265.7 516.2 267.7 516.9C267.9 517.0 268.7 515.3 269.6 513.2ZM236.5 329.9C201.7 324.2 171.8 296.5 158.4 257.6C155.7 249.8 155.4 244.8 157.4 242.8C158.1 242.0 169.9 239.0 183.6 236.1C223.5 227.7 287.3 211.3 317.2 201.9C335.3 196.2 337.3 196.0 339.7 199.6C342.0 203.1 342.8 227.4 341.0 240.2C335.6 280.2 312.9 312.1 280.9 324.9C267.8 330.2 250.0 332.2 236.5 329.9ZM265.3 317.4C300.8 309.4 325.2 277.4 330.1 232.5C331.2 221.8 330.7 211.0 329.0 211.0C328.5 211.0 324.6 212.1 320.3 213.4C289.8 223.0 177.5 251.0 169.5 251.0C167.4 251.0 175.5 269.1 182.3 279.2C202.5 309.6 234.4 324.3 265.3 317.4ZM526.0 225.5C526.4 225.2 527.1 222.4 527.4 219.3C528.6 209.6 533.0 191.0 536.6 181.1C539.8 172.0 539.8 171.8 537.7 172.4C536.5 172.8 531.2 173.4 526.0 173.7C512.1 174.5 505.8 172.4 493.4 162.5C490.2 160.0 488.8 159.5 484.1 159.5C473.6 159.5 474.5 158.6 463.7 182.5C458.3 194.3 453.7 204.6 453.5 205.3C453.1 206.2 455.4 206.5 462.7 206.5C474.1 206.6 479.6 208.6 489.0 216.6C498.4 224.5 506.6 227.2 518.4 226.4C522.2 226.2 525.6 225.8 526.0 225.5ZM159.5 215.7C158.0 214.5 157.8 213.3 158.2 206.8C159.1 192.9 168.0 179.1 179.9 173.3C187.6 169.5 201.0 169.3 208.2 172.8C216.9 177.1 226.0 188.6 226.0 195.3C226.0 198.6 222.8 201.2 219.3 200.8C217.1 200.6 215.9 199.5 213.9 195.7C208.3 185.3 199.3 179.9 190.8 181.9C178.9 184.7 171.5 194.2 169.5 209.5C169.1 212.2 168.3 215.1 167.8 215.8C166.4 217.4 161.9 217.3 159.5 215.7ZM256.4 189.6C253.2 184.6 258.6 169.4 266.3 161.6C274.3 153.6 279.8 151.5 292.0 151.5C301.1 151.5 303.1 151.8 306.8 153.8C313.6 157.4 319.6 163.6 323.0 170.3C326.7 177.8 326.9 181.4 323.5 183.6C319.2 186.4 316.4 184.8 313.2 177.7C302.5 154.2 272.1 158.8 267.5 184.6C266.1 192.0 259.9 194.8 256.4 189.6Z"/><g class="m-mt"><path d="M442.2 377.3C440.2 376.5 438.8 372.2 440.0 370.0C440.5 369.0 444.7 365.3 449.2 361.7C480.3 337.2 499.5 302.3 503.5 262.7C504.3 255.1 506.8 252.2 511.3 253.4C514.9 254.3 515.8 257.5 514.9 266.5C511.3 301.0 496.2 332.8 471.5 357.6C455.4 373.8 447.2 379.3 442.2 377.3ZM441.7 344.2C438.5 340.7 439.6 337.9 447.1 330.5C463.0 314.8 472.4 296.1 476.3 272.5C477.5 265.5 477.9 264.3 480.2 263.2C483.2 261.8 487.4 263.1 488.5 265.7C489.4 268.2 486.1 285.9 482.9 295.5C477.1 312.8 468.4 326.5 455.2 339.2C447.7 346.4 444.7 347.5 441.7 344.2Z"/></g></g></svg>建碩陪跑</a>
+<section class="hero">
+  <div class="ph"><picture><source media="(max-width:880px)" srcset="img/hero_m.jpg"><img src="img/hero.jpg" alt="從下往上拍攝、直衝天際的玻璃帷幕商業大樓"></picture></div>
+  <div class="wrap in">
+    <div class="tx">
+            <p class="nm"><span class="g">建碩</span>會計師事務所</p>
+      <h1 class="slg"><span class="l"><span class="g">建</span>業有伴</span><span class="l"><span class="g">碩</span>果可期</span></h1>
+      <p>會計師＋記帳士 15 年以上專業團隊，提供工商登記、稅務申報、審計、稅務協談、企業評價、ESG 企業相關顧問諮詢及財務規劃等一條龍服務。</p>
+      <div class="acts"><a class="btn bk" href="consult.html?from=專業版">預約諮詢</a><a class="btn ghost" href="#services">服務項目</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="kband" aria-label="建碩的經驗"><canvas class="silk" aria-hidden="true"></canvas>
+  <div class="wrap kgrid">
+    <div class="kp"><div class="kn"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="kk">會計師經驗・審計記帳全方位</div></div>
+    <div class="kp"><div class="kn"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="kk">記帳與公司登記實務</div></div>
+    <div class="kp"><div class="kn"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="kk">業界協助經營者管帳經驗</div></div>
+    <div class="kp"><div class="kn"><span class="count" data-to="10">10</span><sup>年+</sup></div><div class="kk">團隊成員皆有專業會計工作經歷</div></div>
+  </div>
+</section>
+
+<section class="ovs" aria-labelledby="ov-h">
+  <div class="wrap">
+    <div class="sh"><div><span class="en">Core Services</span><h2 id="ov-h">核心服務<br><em>從設立到財務規劃</em></h2></div><p>以會計師與記帳士的專業，依企業成長的各個階段，提供完整的財務、稅務等一條龍規劃服務。</p></div>
+    <div class="ovg">
+      <a class="ov" href="#s1"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span><span class="ovl"><b>設立</b>REGISTRATION</span></div><h3>工商登記</h3><p>公司・行號設立及變更登記</p><span class="ovm">了解服務內容</span></a>
+      <a class="ov" href="#s2"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></svg></span><span class="ovl"><b>營運</b>ACCOUNTING & TAX</span></div><h3>記帳及稅務申報</h3><p>記帳、營業稅及營所稅申報</p><span class="ovm">了解服務內容</span></a>
+      <a class="ov" href="#s3"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span><span class="ovl"><b>查核</b>AUDIT & ASSURANCE</span></div><h3>審計簽證</h3><p>財務報表及營所稅查核簽證</p><span class="ovm">了解服務內容</span></a>
+      <a class="ov" href="#s4"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><span class="ovl"><b>協談</b>TAX DISPUTE</span></div><h3>稅務協談</h3><p>稅務查核協談及行政救濟</p><span class="ovm">了解服務內容</span></a>
+      <a class="ov" href="#s5"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span><span class="ovl"><b>成長</b>ADVISORY</span></div><h3>顧問諮詢</h3><p>企業評價、股權規劃及 ESG</p><span class="ovm">了解服務內容</span></a>
+      <a class="ov" href="#s6"><div class="ovh"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="ovl"><b>規劃</b>FINANCIAL PLANNING</span></div><h3>財務規劃</h3><p>遺贈稅、資產配置及海外移民</p><span class="ovm">了解服務內容</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="services">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="en">Our Services</span><h2>從設立到財務規劃<br><em>六大專業服務</em></h2></div>
+      <p>依企業成長的各個階段，提供設立、營運、查核、協談、成長到財務規劃的完整專業服務。</p>
+    </div>
+
+    <article class="svc" id="s1">
+      <div class="pic"><img src="img/deal.jpg" alt="兩位商務人士在大樓前握手"><span class="tag">設立</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span><span class="lb">設立</span></div>
+        <h3>工商登記</h3>
+        <p class="one">辦理公司・行號設立及變更登記，協助企業完成合法設立程序。</p>
+        <ul><li>公司設立登記</li><li>行號設立登記</li><li>組織型態與營業項目評估</li><li>變更登記（地址、負責人、董監事、資本額）</li></ul>
+        <a class="more" href="consult.html?need=開公司／行號&from=專業版">預約諮詢</a>
       </div>
+    </article>
+
+    <article class="svc" id="s2">
+      <div class="pic"><img src="img/tax.jpg" alt="桌上的計算機與正在操作筆電的雙手"><span class="tag">營運</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></svg></span><span class="lb">營運</span></div>
+        <h3>記帳及稅務申報</h3>
+        <p class="one">依法辦理記帳與各項稅務申報，確保企業如期、正確申報。</p>
+        <p class="due-note">營業稅每兩個月申報一次；單據請於申報當月 <b class="due">4 日前寄達</b>事務所。</p>
+        <ul><li>記帳代理</li><li>營業稅申報</li><li>營利事業所得稅結算申報</li><li>各類所得扣繳申報</li><li>薪資計算</li><li>勞健保加退保</li></ul>
+        <a class="more" href="consult.html?need=記帳報稅&from=專業版">預約諮詢</a>
       </div>
-      <figure class="hv" aria-label="示意：老闆看帳 Excel 與 LINE 報稅提醒">
-        <div class="hv-stage">
-        <div class="lap">
-          <div class="scr">
-            <div class="sbar"><b>老闆看帳 Excel</b><span>金好賣網拍（虛構）・11 月</span></div>
-            <div class="kpis"><div><small>本月收入</small><b>460,600</b></div><div><small>本月支出</small><b>319,500</b></div><div class="g"><small>收支結餘</small><b>141,100</b></div></div>
-            <div class="mini">
-              <div class="mc"><small>收入來源</small>
-                <p><span>商品銷售</span><i style="--w:100%"></i></p><p><span>團購訂單</span><i style="--w:12%"></i></p><p><span>運費收入</span><i style="--w:4%"></i></p></div>
-              <div class="mc o"><small>支出去向</small>
-                <p><span>薪資</span><i style="--w:100%"></i></p><p><span>進貨成本</span><i style="--w:91%"></i></p><p><span>房租</span><i style="--w:17%"></i></p></div>
-            </div>
-            <div class="halert">📮 還有 1 天，明天就要寄出 11–12 月發票、收據</div>
+    </article>
+
+    <article class="svc" id="s3">
+      <div class="pic"><img src="img/audit.jpg" alt="會議中指著財務報表圖表討論的雙手"><span class="tag">查核</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-4"/></svg></span><span class="lb">查核</span></div>
+        <h3>審計簽證</h3>
+        <p class="one">依審計準則查核財務報表，提升財務資訊之可靠性。</p>
+        <ul><li>財務報表查核簽證</li><li>營利事業所得稅查核簽證申報</li></ul>
+        <a class="more" href="consult.html?need=審計簽證&from=專業版">預約諮詢</a>
+      </div>
+    </article>
+
+    <article class="svc" id="s4">
+      <div class="pic"><img src="img/chess.jpg" alt="正在移動西洋棋棋子的手"><span class="tag">協談</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><span class="lb">協談</span></div>
+        <h3>稅務協談<small>稅務爭議預防與解決</small></h3>
+        <p class="one">協助回應稅務機關查核，並辦理復查、訴願等行政救濟。</p>
+        <ul><li>申報前稅務風險評估</li><li>回覆稅務機關查核與約談</li><li>稅務協談</li><li>復查、訴願</li></ul>
+        <a class="more" href="consult.html?need=稅務協談&from=專業版">預約諮詢</a>
+      </div>
+    </article>
+
+    <article class="svc" id="s5">
+      <div class="pic"><img src="img/advisory.jpg" alt="手持財務分析報表進行說明"><span class="tag">成長</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span><span class="lb">成長</span></div>
+        <h3>顧問諮詢</h3>
+        <p class="one">提供企業價值評估、增資與股權規劃，以及溫室氣體盤查服務。</p>
+        <ul><li>企業評價</li><li>增資與股權架構規劃</li><li>溫室氣體盤查</li></ul>
+        <p class="note">由事務所與具多年相關經驗之財務顧問共同提供服務。</p>
+        <a class="more" href="consult.html?need=企業評價／ESG&from=專業版">預約諮詢</a>
+      </div>
+    </article>
+
+    <article class="svc" id="s6">
+      <div class="pic"><img src="img/legacy.jpg" alt="兩人一同檢視文件與數據"><span class="tag">規劃</span></div>
+      <div class="bd">
+        <div class="st"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="lb">規劃</span></div>
+        <h3>財務規劃</h3>
+        <p class="one">評估遺產及贈與稅負，規劃財產移轉、資產配置與海外移民。</p>
+        <ul><li>遺產稅與贈與稅申報</li><li>遺產及贈與稅規劃</li><li>資產配置規劃</li><li>海外移民規劃</li></ul>
+        <a class="more" href="consult.html?need=財務規劃&from=專業版">預約諮詢</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="blk tools" id="tools">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="en">Smart Tools</span><h2>智慧工具<br><em>輔助企業經營</em></h2></div>
+      <p>以數位工具輔助企業掌握組織選擇、申報期限、帳務與常用表單，減少往返確認的時間。</p>
+    </div>
+    <div class="tg">
+      <article class="tcard">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></svg></span><span class="no">01</span>
+        <h3>開公司小幫手・試算工具</h3>
+        <p>回答 6 題，評估開<b>公司</b>還是<b>行號</b>較適合；並可試算營業稅、勞健保、薪資扣繳等相關金額。</p>
+        <a class="go" href="tools.html#qz">開始試算</a>
+        <span class="chip">組織型態・營業稅・勞健保</span>
+      </article>
+      <article class="tcard tline" id="line"><canvas class="silk" aria-hidden="true"></canvas>
+        <div class="tl-tx">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span><span class="no">02</span>
+          <h3>官方 LINE 單據提醒</h3>
+          <p>加入建碩官方 LINE，申報期前主動通知寄送單據；單據請於申報當月 <b class="due">4 日前寄達</b>事務所，避免逾期申報。客戶按下【已寄出】後即停止提醒。</p>
+          <div class="tl-acts"><a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>加入官方 LINE</a><span class="lid">LINE ID：<b>@256ojohr</b></span></div>
+        </div>
+        <div class="tl-ph" aria-hidden="true">
+          <div class="phone"><div class="ph-h">建碩會計師事務所</div><div class="ph-b"><div class="ph-d">12/28</div><div class="bub">老闆好！下個月是報稅月 📮<br>請準備好 11–12 月的發票、收據，<b class="due">1/4 前寄達</b>事務所，謝謝您～</div><div class="bub btnb">【✅ 已寄出】</div><div class="bub me">收到，明天寄出！</div></div></div>
+        </div>
+        <figure class="tl-qr"><img src="qr.png" alt="建碩官方 LINE QR Code"><figcaption>掃描加入官方 LINE</figcaption></figure>
+      </article>
+      <article class="tcard">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span><span class="no">03</span>
+        <h3>建碩記帳 Excel</h3>
+        <p><b>只要會打字，就能記帳。</b>收支圖表自動產生；發薪、勞健保加退保、申報期限自動提醒。</p>
+        <a class="go" href="ledger.html">看互動示範</a>
+        <span class="chip">收支・應收帳款・提醒</span>
+      </article>
+      <article class="tcard">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="no">04</span>
+        <h3>表單下載</h3>
+        <p>從到職到離職，一條線走完：勞健保加退保、薪資、請假與離職等常用表單，附填寫教學。</p>
+        <a class="go" href="forms.html">前往下載</a>
+        <span class="chip">到職・薪資・離職</span>
+      </article>
+      <article class="tcard">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="no">05</span>
+        <h3>法規條文及報稅行事曆</h3>
+        <p>彙整全國法規資料庫原文連結與各項申報期限，依日期自動更新：<b class="due">紅色＝30 天內到期</b>，金色＝30 天以上。</p>
+        <a class="go" href="tools.html#cal">查看行事曆</a>
+        <span class="chip">營業稅・扣繳・營所稅</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="blk ledger-b" id="ledger">
+  <div class="wrap ledger">
+    <div>
+      <span class="en">Smart Tool 03</span>
+      <h2 class="lh">建碩記帳 Excel<br><em>只要會打字，就能記帳</em></h2>
+      <p class="ld">記帳報稅交給建碩；成為客戶即可使用「建碩記帳 Excel」，即時掌握收支、應收帳款與各項期限。</p>
+      <div class="feat">
+        <div><p><b>一筆錢，一列搞定</b><span>選收入或支出，分類與客戶自動跳出來選。</span></p></div>
+        <div><p><b>表格自己教你填</b><span>每頁都有說明列；金色格子自己填、漏填會亮<b class="due">淡紅色</b>。</span></p></div>
+        <div><p><b>新人到職，提醒加保</b><span>登進人事主檔，提醒勞保當日、健保 3 日內加保。</span></p></div>
+        <div><p><b>申報日快到了，提早提醒</b><span>營業稅、扣繳、營所稅申報前，提醒先把單據準備好。</span></p></div>
+      </div>
+      <a class="btn navy" href="ledger.html" style="margin-top:28px">看「建碩記帳 Excel」互動示範 →</a>
+    </div>
+    <figure class="board" aria-label="建碩記帳示意畫面">
+      <div class="board-h"><b>建碩記帳 Excel</b><span>示範：金好賣網拍有限公司（虛構）・2026 年 11 月</span></div>
+      <div class="board-b">
+        <div class="alerts">
+          <div class="alert"><small>應收催款</small><strong>✓ 無逾期</strong></div>
+          <div class="alert hot"><small>發薪提醒</small><strong>11/10 發薪</strong></div>
+          <div class="alert hot"><small>勞健保加退保</small><strong>加保 1 件</strong><i>新人錢多多・勞保當日</i></div>
+        </div>
+        <div class="charts">
+          <div class="bars" id="bars">
+            <div class="bar"><span>商品銷售</span><span class="t"><i style="--w:100%"></i></span><span class="v">400,000</span></div>
+            <div class="bar"><span>團購訂單</span><span class="t"><i style="--w:12%"></i></span><span class="v">48,000</span></div>
+            <div class="bar"><span>運費收入</span><span class="t"><i style="--w:3%"></i></span><span class="v">12,600</span></div>
+            <div class="bar g"><span>薪資</span><span class="t"><i style="--w:42%"></i></span><span class="v">167,500</span></div>
+            <div class="bar g"><span>進貨成本</span><span class="t"><i style="--w:38%"></i></span><span class="v">152,000</span></div>
           </div>
-          <div class="base"></div>
-        </div>
-        <div class="phone">
-          <div class="ph-h">建碩會計師事務所</div>
-          <div class="ph-b">
-            <div class="ph-d">12/31</div>
-            <div class="bub">老闆好！下個月是報稅月 📮<br>請準備好 11–12 月的發票、收據，<b class="due">1/4 前寄達</b>事務所，謝謝您～</div>
-            <div class="bub me">收到，明天寄出！</div>
-          </div>
+          <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="本年收款進度 82%">
+            <circle cx="60" cy="60" r="44" fill="none" stroke="#F3F0E8" stroke-width="16"/>
+            <circle id="dn" cx="60" cy="60" r="44" fill="none" stroke="#0F2340" stroke-width="16" stroke-dasharray="226.7 276.5" transform="rotate(-90 60 60)"/>
+            <text x="60" y="58" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#0F2340">82%</text>
+            <text x="60" y="76" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="10" fill="#4A5568">本年已收款</text>
+          </svg>
         </div>
       </div>
-      </figure>
-        </div>
-  </section>
+      <figcaption class="board-f">畫面為示意，數字為範例資料</figcaption>
+    </figure>
+  </div>
+</section>
 
-  <section class="stats" aria-label="建碩的經驗">
-    <div class="wrap">
-      <div class="stat rv"><div class="n"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="k">會計師經驗・審計記帳全方位</div></div>
-      <div class="stat rv"><div class="n"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="k">記帳與公司登記實務</div></div>
-      <div class="stat rv"><div class="n"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="k">業界幫老闆管帳經驗</div></div>
-      <div class="stat rv"><div class="n"><span class="count" data-to="10">10</span><sup>年+</sup></div><div class="k">團隊成員皆有專業會計工作經歷</div></div>
+<section class="blk start-b" id="start">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="en">Smart Tool 01</span><h2>開公司<br><em>四個步驟完成設立</em></h2></div>
+      <p>名稱預查、資本額查核簽證、設立與稅籍登記，由專業團隊辦理並回報進度。</p>
     </div>
-  </section>
+    <ol class="steps">
+      <li class="step"><div class="num">01</div><h3>預約諮詢</h3><p>說明營業項目、人數與預計規模。</p></li>
+      <li class="step"><div class="num">02</div><h3>會計師規劃</h3><p>行號或公司、資本額、營業項目，一次規劃清楚。</p></li>
+      <li class="step"><div class="num">03</div><h3>代辦設立</h3><p>名稱預查、資本額簽證、設立與稅籍登記，進度隨時回報。</p></li>
+      <li class="step"><div class="num">04</div><h3>記帳報稅上線</h3><p>記帳、報稅上線，申報期前 LINE 主動提醒寄送單據。</p></li>
+    </ol>
+    <div class="facts">
+      <div class="fact"><h3>大概要多久？</h3><p>一般公司從名稱預查到取得統編、可以開立發票，約 <b>2～3 週</b>。補習班、旅行社、醫療器材、菸酒輸入等特許行業須先取得許可，時間更長。</p></div>
+      <div class="fact"><h3>要準備什麼？</h3><ul><li>負責人、股東的身分證與印章</li><li>3～5 個公司名稱、營業項目</li><li>地址文件：租約或房東同意書、最新一期房屋稅單</li><li>資本額存入籌備帳戶（公司須會計師簽證）</li></ul></div>
+      <div class="fact"><h3>政府規費（線上申請）</h3><ul><li>行號：預查 150＋設立 800 元</li><li>有限公司（資本額 400 萬以內）：預查 150＋設立 700 元</li><li>超過 400 萬：每 4,000 元計 1 元</li></ul><small>依據：<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080002" target="_blank" rel="noopener">公司登記規費收費準則</a>、<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080046" target="_blank" rel="noopener">商業登記規費收費準則</a>。不含代辦服務費與刻印。</small></div>
+    </div>
+    <div class="offs-h"><h3>官方申辦網站</h3><p>公司、行號設立與變更，稅籍與勞健保，皆使用政府官方表單或線上申辦。</p></div>
+    <ul class="offs">
+      <li><a href="https://gcis.nat.gov.tw/" target="_blank" rel="noopener"><b>經濟部商工行政服務入口網</b><span>公司、行號設立與變更登記</span></a></li>
+      <li><a href="https://www.etax.nat.gov.tw/" target="_blank" rel="noopener"><b>財政部稅務入口網</b><span>稅籍登記、營業稅、扣繳</span></a></li>
+      <li><a href="https://www.bli.gov.tw/" target="_blank" rel="noopener"><b>勞動部勞工保險局</b><span>勞保、就保、職保、勞退</span></a></li>
+      <li><a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener"><b>衛生福利部中央健康保險署</b><span>健保加退保</span></a></li>
+    </ul>
+    <div class="why"><h3>為什麼網站上沒有標價？</h3><p>依<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0400067" target="_blank" rel="noopener">《會計師法》第 46 條</a>及會計師公會<a href="https://www.roccpa.org.tw/ReadFileClick/?id=47&amp;p=Books&amp;n=2d5d209f6b5f4c19bdaff71b889d8896.pdf&amp;fn=" target="_blank" rel="noopener">《職業道德規範公報第三號》</a>，會計師事務所的廣告不得標示收費價格。服務費依組織型態、營業額與憑證量而不同，歡迎預約諮詢。</p></div>
+  </div>
+</section>
 
-  <section class="night band" aria-labelledby="q">
-    <canvas id="pix" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <div class="eyebrow">為什麼是建碩</div>
-      <p id="q" class="quote rv" style="margin-top:20px">不只在報稅季出現。<br>從第一張發票，陪你走到<em>碩果</em>的每一年。</p>
-      <p class="rv">建碩的會計師團隊，都出身四大會計師事務所；會計師、記帳士與專業團隊，累積超過 15 年實務經驗。我們深知創業的辛苦：第一次報稅、第一次記帳，每一個疑問，都值得由專業的人耐心地回答。</p>
-      <p class="rv">陪伴各行各業的新手老闆走過這些年，我們發現：第一次面對數字和會計邏輯，新手老闆常常無從下手。所以建碩從設立登記開始陪你，營業稅申報、扣繳、勞健保到營所稅申報，一路都在；另外也為你打造了「老闆看帳 Excel」——<em>只要會打字，就能記帳。</em></p>
-    </div>
-  </section>
 
-  <section class="hz" id="run" aria-labelledby="run-h">
-    <div class="hz-sticky">
-      <div class="wrap">
-        <div class="hz-head">
-          <div><div class="eyebrow">建碩陪跑</div><h2 id="run-h" style="margin-top:14px">建碩陪跑，包含這些事</h2></div>
-          <p class="lede" style="margin:0">開公司，你不孤單。公司長大，同一團隊一條龍為您服務。</p>
-        </div>
-      </div>
-      <div class="wrap" style="overflow:visible">
-        <div class="hz-track" id="track">
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <h3>15 年會計師經驗，開公司前先幫你想清楚</h3>
-            <p>行號還是公司、資本額、營業項目怎麼選，一開始就把會影響稅負的地方規劃好。</p>
-            <a class="tag" href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0400067" target="_blank" rel="noopener">會計師法</a>
-          </article>
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span>
-            <h3>會打字，就會記帳</h3>
-            <p>成為建碩的客戶，就能立即使用「老闆看帳 Excel」，只要會打字就會記帳。你打下的每一筆，圖表都會自動畫好；用下拉選單切換月份或專案，一眼看懂。附使用說明與記帳注意事項，還會遠端連線教你操作，第一天就上手。</p>
-            <a class="more" href="ledger.html">看互動示範 →</a>
-            <a class="tag" href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030001" target="_blank" rel="noopener">薪資清冊・勞基法第 23 條</a>
-          </article>
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-            <h3>單據正本寄到事務所，外縣市也可以</h3>
-            <p>發票、收據正本寄來或送來，由我們核對、整理入帳，不怕照片重複或漏掉。國稅局要查帳時，憑證早已依序整理好。付現金給師傅、沒拿到發票的支出，我們教你怎麼補齊憑證。</p>
-            <span class="tag">勞務報酬單・扣繳教學</span>
-          </article>
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span>
-            <h3>有問題就 LINE，省下通話與往返時間</h3>
-            <p>平常的疑問直接留言，不用打電話、不用跑一趟。由會計專業同仁回覆。</p>
-          </article>
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-            <h3>每兩個月，主動提醒你寄單據</h3>
-            <p>報稅月的前一個月底，LINE 主動提醒你；單據請在報稅當月 <b class="due">4 日前寄達</b>事務所。不只你的帳，稅務、勞健保規定有變動，我們也會主動告訴你。發薪、勞健保加退保，「老闆看帳 Excel」也會提醒你。</p>
-            <a class="tag" href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0050001" target="_blank" rel="noopener">勞工保險條例</a>
-          </article>
-          <article class="card">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>
-            <h3>收到國稅局通知？稅務協談，我們陪你去</h3>
-            <p>補稅、查帳、核定通知或地方稅爭議，由會計師團隊幫你看懂公文、整理憑證資料，陪你與國稅局協談，在合法範圍內爭取合理結果。</p>
-            <a class="more" href="consult.html?need=稅務協談">留下聯絡方式，我們幫你看 →</a>
-            <span class="tag">國稅局協談・補稅・查帳</span>
-          </article>
-          <article class="card wide">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span>
-            <h3>公司長大，同一團隊一條龍為您服務</h3>
-            <p>公司登記與變更、稅務規劃、薪資人事，到企業評價、ESG 溫室氣體查證、海外資產與移民規劃，由事務所與多年相關經驗的財務顧問一起服務。不需重新找人、不需交接帳、不需浪費寶貴時間重新說明一次，<b>建碩一條龍為您服務。</b></p>
-          </article>
-        </div>
-      </div>
+<section class="blk about-b" id="about">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="en">About Us</span><h2>關於建碩<br><em>會計師＋記帳士專業團隊</em></h2></div>
+      <p class="one-dragon">公司成長，不需重新找人、不需交接帳，<b>不需浪費時間重新說明</b>，建碩會計師事務所<em>一條龍</em>為您服務。</p>
     </div>
-  </section>
+    <div class="team">
+      <div class="p"><h3>李芊樂<small>會計師</small></h3><div class="t">四大會計師事務所出身・審計記帳全方位</div><p>國立臺北商業大學研究所畢業。四大會計師事務所出身，多年審計與記帳歷練，能將艱澀難懂的稅務問題，完整讓老闆理解。</p></div>
+      <div class="p"><h3>朱建興<small>記帳士</small></h3><div class="t">15 年以上記帳與公司登記實務</div><p>長期投入記帳與營業登記實務，熟悉各行各業設立時的關鍵環節，從名稱預查、營業項目到稅籍登記，一次辦理到位。</p></div>
+      <div class="p"><h3>Excel 小編</h3><div class="t">會計師事務所 3 年＋業界 15 年・「建碩記帳 Excel」設計者</div><p>具事務所與業界雙重經驗，將管帳實務設計成會打字就會記帳的系統。</p></div>
+    </div>
+    
+  </div>
+</section>
 
-  <section class="band" id="ledger" aria-labelledby="ledger-h">
-    <div class="wrap ledger">
-      <div class="rv">
-        <div class="eyebrow">老闆看帳 Excel</div>
-        <h2 id="ledger-h" style="margin-top:14px"><em>只要會打字，<br>就能記帳</em></h2>
-        <p class="lede" style="margin-top:18px">記帳報稅交給建碩；成為我們的客戶，使用「老闆看帳 Excel」，只要您會打字，就可以記帳。</p>
-        <div class="feat">
-          <div><p style="margin:0"><b>一筆錢，一列搞定</b><span>選收入或支出，分類和客戶自動跳出來選。</span></p></div>
-          <div><p style="margin:0"><b>表格自己教你填</b><span>每頁都有說明列；金色格子自己填、漏填會亮淡紅色。</span></p></div>
-          <div><p style="margin:0"><b>新人到職，提醒你加保</b><span>登進人事主檔，就提醒勞保當日、健保 3 日內加保。</span></p></div>
-          <div><p style="margin:0"><b>報稅日快到了，提早提醒你</b><span>營業稅、扣繳、營所稅申報前，提醒你先把單據準備好。</span></p></div>
-        </div>
-        <a class="btn ghost" href="ledger.html" style="margin-top:28px">看「老闆看帳 Excel」互動示範 →</a>
-      </div>
-      <figure class="board rv" style="margin:0" aria-label="老闆看帳示意畫面">
-        <div class="board-h"><b>老闆看帳 Excel</b><span>示範：金好賣網拍有限公司（虛構）・2026 年 11 月</span></div>
-        <div class="board-b">
-          <div class="alerts">
-            <div class="alert"><small>應收催款</small><strong>✓ 無逾期</strong></div>
-            <div class="alert hot"><small>發薪提醒</small><strong>11/10 發薪</strong></div>
-            <div class="alert hot"><small>勞健保加退保</small><strong>加保 1 件</strong><i>新人錢多多・勞保當日</i></div>
-          </div>
-          <div class="charts">
-            <div class="bars" id="bars">
-              <div class="bar"><span>商品銷售</span><span class="t"><i style="--w:100%"></i></span><span class="v">400,000</span></div>
-              <div class="bar"><span>團購訂單</span><span class="t"><i style="--w:12%"></i></span><span class="v">48,000</span></div>
-              <div class="bar"><span>運費收入</span><span class="t"><i style="--w:3%"></i></span><span class="v">12,600</span></div>
-              <div class="bar g"><span>薪資</span><span class="t"><i style="--w:42%"></i></span><span class="v">167,500</span></div>
-              <div class="bar g"><span>進貨成本</span><span class="t"><i style="--w:38%"></i></span><span class="v">152,000</span></div>
-            </div>
-            <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="本年收款進度 82%">
-              <circle cx="60" cy="60" r="44" fill="none" stroke="#F3F0E8" stroke-width="16"/>
-              <circle id="dn" cx="60" cy="60" r="44" fill="none" stroke="#0F2340" stroke-width="16" stroke-dasharray="226.7 276.5" transform="rotate(-90 60 60)"/>
-              <text x="60" y="58" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#0F2340">82%</text>
-              <text x="60" y="76" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="10" fill="#4A5568">本年已收款</text>
-            </svg>
-          </div>
-        </div>
-        <figcaption class="board-f">畫面為示意，數字為範例資料</figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <section class="band" id="start" style="background:color-mix(in srgb,var(--paper-2) 70%,transparent)" aria-labelledby="start-h">
-    <div class="wrap">
-      <div class="eyebrow">營業登記</div>
-      <h2 id="start-h" style="margin-top:14px">開公司，從一則 LINE 開始</h2>
-      <ol class="steps" style="list-style:none;padding:0">
-        <li class="step rv"><div class="num">01</div><h3>加 LINE 聊聊</h3><p>說說你想做什麼生意、幾個人、大概的規模。</p></li>
-        <li class="step rv"><div class="num">02</div><h3>會計師規劃</h3><p>行號還是公司、資本額、營業項目，一次想清楚。</p></li>
-        <li class="step rv"><div class="num">03</div><h3>代辦設立</h3><p>名稱預查、資本額簽證、設立與稅籍登記，進度隨時回報。</p></li>
-        <li class="step rv"><div class="num">04</div><h3>開始陪跑</h3><p>記帳、報稅上線，報稅季 LINE 提醒你交單據。</p></li>
-      </ol>
-      <div class="facts">
-        <div class="fact rv"><h3>大概要多久？</h3><p>一般公司從名稱預查到拿到統編、可以開發票，約 <b>2～3 週</b>。補習班、旅行社、醫療器材、菸酒輸入等特許行業要先取得許可，時間更長。</p></div>
-        <div class="fact rv"><h3>要準備什麼？</h3><ul><li>負責人、股東的身分證與印章</li><li>3～5 個公司名稱、要做的生意</li><li>地址文件：租約或房東同意書、最新一期房屋稅單</li><li>資本額存入籌備帳戶（公司需會計師簽證）</li></ul></div>
-        <div class="fact rv"><h3>政府規費（線上申請）</h3><ul><li>行號：預查 150＋設立 800 元</li><li>有限公司（資本額 400 萬以內）：預查 150＋設立 700 元</li><li>超過 400 萬：每 4,000 元計 1 元</li></ul><small>依據：<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080002" target="_blank" rel="noopener">公司登記規費收費準則</a>、<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080046" target="_blank" rel="noopener">商業登記規費收費準則</a>。不含代辦服務費與刻印。</small></div>
-      </div>
-      <div class="offs-h rv"><h3>官方申辦網站</h3><p>公司、行號設立與變更，稅籍與勞健保，都用政府的官方表單或線上申辦（官方表單會改版，所以不另外重做）。</p></div>
-      <ul class="offs">
-        <li><a href="https://gcis.nat.gov.tw/" target="_blank" rel="noopener"><b>經濟部商工行政服務入口網</b><span>公司、行號設立與變更登記</span></a></li>
-        <li><a href="https://www.etax.nat.gov.tw/" target="_blank" rel="noopener"><b>財政部稅務入口網</b><span>稅籍登記、營業稅、扣繳</span></a></li>
-        <li><a href="https://www.bli.gov.tw/" target="_blank" rel="noopener"><b>勞動部勞工保險局</b><span>勞保、就保、職保、勞退</span></a></li>
-        <li><a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener"><b>衛生福利部中央健康保險署</b><span>健保加退保</span></a></li>
-      </ul>
-      <div class="why rv">
-        <h3>為什麼網站上沒有標價？</h3>
-        <p>不是不透明，而是會計師的規定和一般行業不同：依<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0400067" target="_blank" rel="noopener">《會計師法》第 46 條</a>及會計師公會<a href="https://www.roccpa.org.tw/ReadFileClick/?id=47&amp;p=Books&amp;n=2d5d209f6b5f4c19bdaff71b889d8896.pdf&amp;fn=" target="_blank" rel="noopener">《職業道德規範公報第三號》</a>，會計師事務所的廣告不得標示收費價格。服務費會依組織型態、營業額與憑證量而不同；加 LINE 說說你的狀況，會計師會直接告訴你費用怎麼算。</p>
-      </div>
-    </div>
-  </section>
+<section class="cta" id="contact">
+  <canvas class="silk" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="en">Contact</span>
+    <h2><em>建</em>業有伴，<em>碩</em>果可期</h2>
+    <p class="ask">預約諮詢，由專業團隊與您聯繫</p>
+    <p>線上留下聯絡方式，或加入官方 LINE。手機請直接點下方按鈕；電腦請用手機掃描 QR Code。</p>
+    <figure class="qr"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><figcaption>掃碼加入 LINE</figcaption></figure>
+    <div class="cta-acts"><a class="btn bk" href="consult.html?from=專業版">預約諮詢</a><a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a><span class="lid">LINE ID：<b>@256ojohr</b></span></div>
+  </div>
+</section>
 
-  <section class="band" id="team" aria-labelledby="team-h">
-    <div class="wrap">
-      <div class="eyebrow">關於我們</div>
-      <h2 id="team-h" style="margin-top:14px">我們也是創業的人，所以我們懂你</h2>
-      <p class="lede" style="margin-top:16px">建碩會計師事務所也是走過創業的人，也陪伴無數客戶走過這條路。所以我們知道，你需要的不只是會算帳的人，而是一個可以放心問、願意陪你走下去的專業夥伴。</p>
-      <div class="team">
-        <div class="p rv"><div><h3>李芊樂<small>會計師</small></h3><div class="t">四大會計師事務所出身・審計記帳全方位</div><p>國立臺北商業大學研究所畢業。四大會計師事務所出身，多年審計與記帳歷練，能將艱澀難懂的稅務問題，完整讓老闆理解。</p></div></div>
-        <div class="p rv"><div><h3>朱建興<small>記帳士</small></h3><div class="t">15 年以上記帳與公司登記實務</div><p>出社會就投入記帳與營業登記，看過各行各業開公司會卡關的地方，從名稱預查、營業項目到稅籍登記，幫你一次走順。</p></div></div>
-        <div class="p rv"><div><h3>Excel 小編</h3><div class="t">會計師事務所 3 年＋業界 15 年・「老闆看帳 Excel」設計者</div><p>從事務所到業界，最懂老闆管帳辛苦的人。精通 Excel，把兩邊的經驗做成一套會打字就會記帳的系統；也會線上連線，一步一步教你怎麼 key in。</p></div></div>
-      </div>
-      <div class="crew rv">
-        <div class="crew-n"><span class="count" data-to="10">10</span><sup>年+</sup></div>
-        <div><b>建碩團隊，人人都有 10 年以上專業會計工作經歷</b><p>除了上面介紹的會計師、記帳士與 Excel 小編，事務所的每一位同仁也都有 10 年以上專業會計工作經歷。你寄來的每一張單據、每一筆帳，都由資深的人親手整理、核對。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-band band" aria-labelledby="cta-h">
-    <canvas id="silk2" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <div class="eyebrow" style="color:var(--gold-bright);justify-content:center">LINE 諮詢</div>
-      <h2 id="cta-h" style="margin-top:14px"><em>建</em>業有伴，<em>碩</em>果可期</h2>
-      <p class="ask">不確定要開行號還是公司？</p>
-      <p>先加 LINE，傳一句「我想開公司」就好。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
-      <figure class="qr" style="margin:32px 0 0"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><small>掃碼加入 LINE</small></figure>
-      <div class="cta-acts">
-        <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
-        <span style="color:#C9C0AE">LINE ID：<b style="color:#EDE6D6;user-select:all">@256ojohr</b></span>
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="ft-n"><b>建碩會計師事務所</b></div>
-    <ul class="ft-i">
-      <li><span>地址：</span>新竹市北區和平路 89 號</li>
-      <li><span>電話：</span><b style="user-select:all;font-family:inherit;letter-spacing:0">03-526-0000</b></li>
-      <li><span>LINE：</span>@256ojohr</li>
-      <li><span>服務時間：</span>每日 09:00–18:00</li>
-    </ul>
-  </div>
-</footer>
-
-
-<a class="lbtn fab" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
-
+<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><footer><div class="wrap in"><span class="fbrand"><span class="fbx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span><ul class="ft-i"><li><span>地址：</span>新竹市北區和平路 89 號</li><li><span>電話：</span><b>03-526-0000</b></li><li><span>LINE：</span>@256ojohr</li><li><span>服務時間：</span>每日 09:00–18:00</li></ul></div></footer>
 <script>
-(() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---- 流動金線（hero / cta） ---- */
-  function silk(id, opts) {
-    const c = document.getElementById(id); if (!c) return;
-    const ctx = c.getContext('2d'); let w, h, t = Math.random() * 100, raf, visible = true;
-    const fit = () => { const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); w = r.width; h = r.height; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < opts.n; i++) {
-        const p = i / opts.n, a = opts.alpha * (0.35 + 0.65 * Math.sin(p * Math.PI));
-        ctx.strokeStyle = `rgba(${opts.rgb},${a})`; ctx.lineWidth = opts.lw;
-        ctx.beginPath();
-        for (let x = -20; x <= w + 20; x += 14) {
-          const y = h * opts.base + Math.sin(x * 0.0042 + t * 0.6 + p * 2.2) * h * opts.amp * (0.6 + p)
-                  + Math.sin(x * 0.0113 - t * 0.9 + p * 5) * h * 0.04 + (p - 0.5) * h * opts.spread;
-          x === -20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-    };
-    const loop = () => { t += 0.004; draw(); if (visible) raf = requestAnimationFrame(loop); };
-    fit(); draw(); addEventListener('resize', () => { fit(); draw(); });
-    if (reduce) return;
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; cancelAnimationFrame(raf); if (visible) loop(); }).observe(c);
-  }
-  silk('silk', { n: 46, rgb: '168,122,30', alpha: 0.30, lw: 1.1, base: 0.5, amp: 0.24, spread: 1.25 });
-  silk('silk2', { n: 22, rgb: '212,170,79', alpha: 0.28, lw: 1, base: 0.55, amp: 0.16, spread: 0.6 });
-
-  /* ---- 上升的金色像素（深藍帶） ---- */
-  (() => {
-    const c = document.getElementById('pix'); if (!c) return;
-    const ctx = c.getContext('2d'); let w, h, ps = [], raf, visible = false;
-    const fit = () => { const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); w = r.width; h = r.height; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-      ps = Array.from({ length: Math.round(w / 18) }, () => ({ x: Math.random() * w, y: Math.random() * h, s: 2 + Math.floor(Math.random() * 3) * 2, v: 0.15 + Math.random() * 0.45, a: 0.15 + Math.random() * 0.5 })); };
-    const draw = () => { ctx.clearRect(0, 0, w, h); for (const p of ps) { ctx.fillStyle = `rgba(212,170,79,${p.a})`; ctx.fillRect(Math.round(p.x), Math.round(p.y), p.s, p.s); } };
-    const loop = () => { for (const p of ps) { p.y -= p.v; if (p.y < -8) { p.y = h + 8; p.x = Math.random() * w; } } draw(); if (visible) raf = requestAnimationFrame(loop); };
-    fit(); draw(); addEventListener('resize', () => { fit(); draw(); });
-    if (reduce) return;
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; cancelAnimationFrame(raf); if (visible) loop(); }).observe(c);
-  })();
-
-  /* ---- 頂部選單：捲動後才加底色 ---- */
-  
-  /* 頁首高度 → 讓錨點與固定區塊不被遮住 */
-  (() => { const hv = document.querySelector('.hv'), st = hv && hv.querySelector('.hv-stage'); if (!st) return; const W = 640, H = 560; const fit = () => { const k = Math.min(1.2, hv.clientWidth / W); st.style.transform = 'scale(' + k + ')'; hv.style.setProperty('--hvh', (H * k) + 'px'); }; fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(hv); else addEventListener('resize', fit); })();
-  (() => { const h = document.querySelector('header.top'); const set = () => document.documentElement.style.setProperty('--hdr', h.offsetHeight + 'px'); set(); addEventListener('resize', set); })();
-
-  
-
-  /* ---- 全頁背景動態：三種可切換 ---- */
-  (() => {
-    const c = document.getElementById('bgfx'), ctx = c.getContext('2d');
-    let w, h, mode = 'coins', items = [], t = 0, raf;
-    const G = '168,122,30';
-    const seed = () => {
-      if (mode === 'coins') items = Array.from({ length: Math.round(w * h / 9000) }, () => ({ x: Math.random() * w, y: Math.random() * h, s: 3 + Math.floor(Math.random() * 4) * 2, v: 0.2 + Math.random() * 0.6, a: 0.10 + Math.random() * 0.32 }));
-      if (mode === 'tri') items = Array.from({ length: 9 }, () => ({ x: Math.random() * w, y: Math.random() * h, r: 60 + Math.random() * 170, rot: Math.random() * 6.28, vr: (Math.random() - .5) * 0.004, vx: (Math.random() - .5) * 0.25, vy: -0.12 - Math.random() * 0.25, a: 0.06 + Math.random() * 0.10 }));
-    };
-    const fit = () => { const d = Math.min(devicePixelRatio || 1, 2); w = innerWidth; h = innerHeight; c.width = w * d; c.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); seed(); };
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      if (mode === 'coins') { for (const p of items) { ctx.fillStyle = `rgba(${G},${p.a})`; ctx.fillRect(Math.round(p.x), Math.round(p.y), p.s, p.s); } }
-      else if (mode === 'lines') {
-        for (let b = 0; b < 3; b++) for (let i = 0; i < 16; i++) {
-          const q = i / 16; ctx.strokeStyle = `rgba(${G},${0.05 + 0.10 * Math.sin(q * Math.PI)})`; ctx.lineWidth = 1; ctx.beginPath();
-          for (let x = -20; x <= w + 20; x += 16) {
-            const y = h * (0.2 + b * 0.3) + Math.sin(x * 0.004 + t * (0.5 + b * 0.15) + q * 2 + b) * h * 0.08 + (q - .5) * h * 0.18;
-            x < 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-          }
-          ctx.stroke();
-        }
-      } else {
-        for (const p of items) {
-          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.beginPath();
-          for (let k = 0; k < 3; k++) { const a = k * 2.094; k ? ctx.lineTo(Math.cos(a) * p.r, Math.sin(a) * p.r) : ctx.moveTo(Math.cos(a) * p.r, Math.sin(a) * p.r); }
-          ctx.closePath(); ctx.fillStyle = `rgba(${G},${p.a * 0.5})`; ctx.fill(); ctx.strokeStyle = `rgba(${G},${p.a * 2.2})`; ctx.lineWidth = 1.2; ctx.stroke(); ctx.restore();
-        }
-      }
-    };
-    const tick = () => {
-      t += 0.004;
-      if (mode === 'coins') for (const p of items) { p.y -= p.v; if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; } }
-      if (mode === 'tri') for (const p of items) { p.x += p.vx; p.y += p.vy; p.rot += p.vr; if (p.y < -p.r) { p.y = h + p.r; p.x = Math.random() * w; } if (p.x < -p.r) p.x = w + p.r; if (p.x > w + p.r) p.x = -p.r; }
-      draw(); raf = requestAnimationFrame(tick);
-    };
-    fit(); draw(); addEventListener('resize', fit);
-    if (!reduce) tick();
-  })();
-
-  /* ---- 數字跳動：先停在 0，幾秒後一格一格跑到終點（越接近越慢） ---- */
-  const cio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return; cio.unobserve(e.target);
-    const el = e.target, to = +el.dataset.to; let v = 0;
-    const tick = () => { v += 1; el.textContent = v; if (v < to) setTimeout(tick, 1500 / to * (0.55 + 1.1 * Math.pow(v / to, 2))); };
-    el.textContent = '0'; setTimeout(tick, 900);
-  }), { threshold: 0.3 });
-  document.querySelectorAll('.count').forEach(el => { el.textContent = '0'; cio.observe(el); });
-
-  /* ---- 選單：捲到首頁的段落時，對應的選單也亮起來 ---- */
-  const navMap = [...document.querySelectorAll('nav.main a[href^="#"]')].map(a => [a, document.querySelector(a.getAttribute('href'))]).filter(x => x[1]);
-  const spy = () => { if (Date.now() < (window.__lockT || 0)) return; const y = innerHeight * 0.35; let cur = null; navMap.forEach(([a, sec]) => { const r = sec.getBoundingClientRect(); if (r.top <= y && r.bottom > y) cur = a; }); navMap.forEach(([a]) => a.toggleAttribute('aria-current', a === cur)); if (cur) cur.setAttribute('aria-current', 'location'); };
-  const mark = a => navMap.forEach(([x]) => { if (x === a) x.setAttribute('aria-current', 'location'); else x.removeAttribute('aria-current'); });
-  let lockT = 0; navMap.forEach(([a]) => a.addEventListener('click', () => { mark(a); window.__lockT = Date.now() + 1600; }));
-  addEventListener('scroll', spy, { passive: true }); document.addEventListener('scroll', spy, { passive: true });
-  addEventListener('hashchange', () => { const a = navMap.find(([x]) => x.getAttribute('href') === location.hash); if (a) mark(a[0]); });
-  navMap.forEach(([, sec]) => new IntersectionObserver(spy, { threshold: [0, .25, .5, .75, 1] }).observe(sec));
-  setInterval(spy, 800); spy();
-
-  if (reduce) return;
-
-  /* ---- 捲動浮現（靜止時仍可讀） ---- */
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.rv').forEach(el => { const r = el.getBoundingClientRect(); if (r.top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
-
-
-
-  /* ---- 長條圖、甜甜圈 ---- */
-  const bars = document.getElementById('bars');
-  const bio = new IntersectionObserver(([e]) => { if (!e.isIntersecting) return; bio.disconnect();
-    bars.querySelectorAll('.t i').forEach((i, k) => { i.style.transform = 'scaleX(0)'; i.getBoundingClientRect(); setTimeout(() => { i.style.transform = 'scaleX(1)'; }, 80 + k * 90); });
-    const dn = document.getElementById('dn'); dn.style.transition = 'stroke-dasharray 1.4s cubic-bezier(.2,.7,.2,1)'; dn.setAttribute('stroke-dasharray', '0 276.5'); dn.getBoundingClientRect(); requestAnimationFrame(() => dn.setAttribute('stroke-dasharray', '226.7 276.5'));
-  }, { threshold: 0.4 });
-  bio.observe(bars);
-
+(()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* 數字：先停在 0，再一格一格跑到終點 */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.to;let v=0;
+ if(reduce){el.textContent=to;return}const tick=()=>{v+=1;el.textContent=v;if(v<to)setTimeout(tick,1400/to*(0.55+1.1*Math.pow(v/to,2)))};el.textContent='0';setTimeout(tick,900)}),{threshold:.3});
+(()=>{const hd=document.querySelector('header');const sh=()=>document.documentElement.style.setProperty('--hh',hd.offsetHeight+'px');sh();addEventListener('resize',sh)})();
+(()=>{const k=document.querySelector('.kband');const set=()=>document.documentElement.style.setProperty('--kb',k.offsetHeight+'px');set();addEventListener('resize',set);if(document.fonts)document.fonts.ready.then(set)})();
+document.querySelectorAll('.count').forEach(el=>{el.textContent='0';cio.observe(el)});
+/* 金色流線：所有深藍區塊 */
+document.querySelectorAll('canvas.silk').forEach((c,ci)=>{const ctx=c.getContext('2d');let w,h,t=Math.random()*100,raf,vis=true;const N=c.closest('.cta')?28:18;
+ const fit=()=>{const r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);w=r.width;h=r.height;c.width=w*d;c.height=h*d;ctx.setTransform(d,0,0,d,0,0)};
+ const draw=()=>{ctx.clearRect(0,0,w,h);for(let i=0;i<N;i++){const p=i/N,a=.32*(.35+.65*Math.sin(p*Math.PI));ctx.strokeStyle=`rgba(212,170,79,${a})`;ctx.lineWidth=1;ctx.beginPath();
+  for(let x=-20;x<=w+20;x+=12){const y=h*.55+Math.sin(x*.0045+t*.6+p*2.2+ci)*h*.18*(.6+p)+Math.sin(x*.012-t*.9+p*5)*h*.05+(p-.5)*h*.7;x===-20?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}};
+ const loop=()=>{t+=.004;draw();if(vis)raf=requestAnimationFrame(loop)};fit();draw();addEventListener('resize',()=>{fit();draw()});
+ if(!reduce)new IntersectionObserver(([e])=>{vis=e.isIntersecting;cancelAnimationFrame(raf);if(vis)loop()}).observe(c)});
+/* 長條圖、甜甜圈 */
+const bars=document.getElementById('bars');if(bars&&!reduce){const bio=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;bio.disconnect();
+ bars.querySelectorAll('.t i').forEach((i,k)=>{i.style.transform='scaleX(0)';i.getBoundingClientRect();setTimeout(()=>{i.style.transform='scaleX(1)'},80+k*90)});
+ const dn=document.getElementById('dn');dn.style.transition='stroke-dasharray 1.4s cubic-bezier(.2,.7,.2,1)';dn.setAttribute('stroke-dasharray','0 276.5');dn.getBoundingClientRect();requestAnimationFrame(()=>dn.setAttribute('stroke-dasharray','226.7 276.5'))},{threshold:.4});bio.observe(bars)}
 })();
 </script>
+<script>
+(()=>{const b=document.getElementById('mt'),m=document.getElementById('mnav'),x=document.getElementById('mnX');if(!b||!m)return;
+const open=()=>{m.hidden=false;b.setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';x.focus()};
+const close=()=>{m.hidden=true;b.setAttribute('aria-expanded','false');document.documentElement.style.overflow=''};
+b.addEventListener('click',open);x.addEventListener('click',close);m.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!m.hidden)close()});})();
+</script>
+<script>
+(()=>{const its=[...document.querySelectorAll('.dd-it')];
+its.forEach(it=>{const t=it.querySelector('.dd-t');t.addEventListener('click',e=>{e.stopPropagation();const o=!it.classList.contains('open');its.forEach(x=>{x.classList.remove('open');x.querySelector('.dd-t').setAttribute('aria-expanded','false')});if(o){it.classList.add('open');t.setAttribute('aria-expanded','true')}});
+ it.querySelectorAll('.dd a').forEach(a=>a.addEventListener('click',()=>{it.classList.remove('open');document.activeElement&&document.activeElement.blur()}))});
+document.addEventListener('click',e=>{if(!e.target.closest('.dd-it'))its.forEach(x=>x.classList.remove('open'))});
+addEventListener('keydown',e=>{if(e.key==='Escape')its.forEach(x=>x.classList.remove('open'))});})();
+</script>
+<a class="fab lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
+
+
+<script>/* 換頁一律從頁首開始 */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+function toTop(){if(location.hash)return;var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
+toTop();window.addEventListener('load',toTop);window.addEventListener('pageshow',toTop);})();</script>

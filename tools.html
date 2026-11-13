@@ -323,19 +323,82 @@ b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;fo
 </head>
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="index.html" aria-label="建碩會計師事務所 首頁"><em>建碩</em>會計師事務所</a>
-    <nav class="main" aria-label="主選單">
-      <a href="index.html#team">關於我們</a>
-      <a href="index.html#run">建碩陪跑</a>
-      <a href="index.html#start">營業登記</a>
-      <a href="tools.html" aria-current="page">試算工具</a>
-      <a href="ledger.html">老闆看帳 Excel</a>
-      <a href="forms.html">表單下載</a>
+<style>
+/* 專業版頁首（與首頁一致） */
+section[id]{scroll-margin-top:var(--hdr,73px)!important}
+header.top.jh{position:sticky;top:0;z-index:60;background:#fff!important;border-bottom:1px solid #E3DED3;box-shadow:none;padding-top:env(safe-area-inset-top,0px)}
+.jh-in{max-width:1160px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.jh-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(22px,2.4vw,28px);color:#0F2340;letter-spacing:.06em;line-height:1.2;white-space:nowrap}
+.jh-brand em{font-style:normal;color:#A87A1E}
+.jh-bx{width:clamp(34px,3vw,40px);height:clamp(34px,3vw,40px);border:1.5px solid #C9A04A;display:inline-flex;align-items:center;justify-content:center;color:#B8924A;flex:0 0 auto}.jh-bx svg{width:62%;height:62%}
+.jh-nav{display:flex;align-items:stretch;gap:6px;align-self:stretch}
+.jh-it{position:relative;display:flex;align-items:center}
+.jh-it>a,.jh-t{display:flex;align-items:center;gap:6px;padding:10px 14px;font:inherit;font-family:"Noto Sans TC",sans-serif;font-size:16px;font-weight:700;color:#1A2230;background:none;border:0;cursor:pointer;text-decoration:none}
+.jh-it:hover>a,.jh-it:hover .jh-t,.jh-it.open .jh-t,.jh-it>a[aria-current]{color:#A87A1E}
+.jh-car{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.jh-dd{position:absolute;left:50%;top:100%;width:420px;transform:translate(-50%,-6px);background:#fff;border:1px solid #E3DED3;border-top:3px solid #D4AA4F;border-radius:0 0 8px 8px;box-shadow:0 24px 48px -20px rgba(15,35,64,.35);padding:10px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transition:.18s;z-index:70}
+.jh-it:hover .jh-dd,.jh-it:focus-within .jh-dd,.jh-it.open .jh-dd{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.jh-dd a{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:6px;color:#0F2340;text-decoration:none}
+.jh-dd a:hover{background:#F3F0E8}
+.jh-mi{width:40px;height:40px;flex:0 0 auto;border-radius:3px;background:#0F2340;color:#D4AA4F;display:inline-flex;align-items:center;justify-content:center}.jh-mi svg{width:20px;height:20px}
+.jh-dt{display:flex;flex-direction:column;gap:2px}.jh-dt b{font-size:18px;font-weight:900;color:#0F2340;line-height:1.3}.jh-dt small{font-size:14px;color:#6B7280}
+header.top.jh .jh-bk,.jh-bk{display:inline-flex;align-items:center;justify-content:center;padding:10px 24px;border-radius:999px;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%)!important;color:#0F2340!important;font-weight:900;font-size:16px;letter-spacing:.06em;text-decoration:none;box-shadow:0 10px 22px -12px rgba(120,80,20,.7);white-space:nowrap}
+.jh-mt,.jh-mnav,.jh-cta{display:none}
+@media (max-width:880px){
+  .jh-nav{display:none}
+  .jh-mt{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:#fff;padding:0 12px;cursor:pointer}
+  .jh-mt span{display:block;height:2px;background:#0F2340;border-radius:2px}
+  .jh-mnav:not([hidden]){display:block;position:fixed;inset:0;z-index:200;overflow:auto;background:#FBFAF7;color:#0F2340;padding:max(12px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+  .jh-mtop{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;border-bottom:1px solid #E3DED3}
+  .jh-mtop .jh-brand{font-size:21px}
+  .jh-x{width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:transparent;color:#0F2340;font-size:22px;cursor:pointer}
+  .jh-about{display:block;margin-top:8px;font-size:18px;font-weight:700;padding:10px 4px;border-bottom:1px solid #E3DED3;color:#0F2340;text-decoration:none}
+  .jh-h{margin:14px 0 6px;font-size:14px;font-weight:700;letter-spacing:.2em;color:#A87A1E}
+  .jh-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .jh-g a{display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 10px;border:1px solid #E3DED3;border-radius:6px;background:#fff;font-size:16px;font-weight:700;color:#0F2340;text-decoration:none;line-height:1.3}
+  .jh-g .jh-mi{width:32px;height:32px}.jh-g .jh-mi svg{width:17px;height:17px}
+  .jh-mcta,.jh-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .jh-mcta{margin-top:16px}
+  .jh-cta{position:fixed;left:0;right:0;bottom:0;z-index:150;gap:8px;padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);border-top:1px solid #E3DED3;box-shadow:0 -10px 24px -16px rgba(15,35,64,.5)}
+  .jh-g2,.jh-l2{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:999px;font-size:18px;font-weight:900;letter-spacing:.04em;text-decoration:none}
+  .jh-g2{background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);color:#0F2340}
+  .jh-l2{background:#06C755;color:#0B2416}.jh-l2 svg{width:21px;height:21px}
+  .fab{display:none!important}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+}
+</style>
+<header class="top jh">
+  <div class="jh-in">
+    <a class="jh-brand" href="index.html" aria-label="建碩會計師事務所 首頁"><span class="jh-bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></a>
+    <button type="button" class="jh-mt" id="jhMt" aria-label="開啟選單" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="jh-nav" aria-label="主選單">
+      <div class="jh-it"><a href="index.html#about">關於建碩</a></div>
+      <div class="jh-it jh-dit"><button type="button" class="jh-t" aria-expanded="false">服務項目<i class="jh-car"></i></button><div class="jh-dd"><a href="index.html#s1"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span><span class="jh-dt"><b>工商登記</b><small>公司・行號設立及變更登記</small></span></a><a href="index.html#s2"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="jh-dt"><b>記帳及稅務申報</b><small>記帳、營業稅及營所稅申報</small></span></a><a href="index.html#s3"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span><span class="jh-dt"><b>審計簽證</b><small>財務報表及營所稅查核簽證</small></span></a><a href="index.html#s4"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><span class="jh-dt"><b>稅務協談</b><small>稅務查核協談及行政救濟</small></span></a><a href="index.html#s5"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span><span class="jh-dt"><b>顧問諮詢</b><small>企業評價、股權規劃及 ESG</small></span></a><a href="index.html#s6"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="jh-dt"><b>財務規劃</b><small>遺贈稅、資產配置及海外移民</small></span></a></div></div>
+      <div class="jh-it jh-dit"><button type="button" class="jh-t" aria-expanded="false" style="color:#A87A1E">智慧工具<i class="jh-car"></i></button><div class="jh-dd"><a href="tools.html#qz"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="jh-dt"><b>開公司小幫手・試算工具</b><small>評估組織型態、試算相關稅費</small></span></a><a href="index.html#line"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span><span class="jh-dt"><b>官方 LINE 單據提醒</b><small>申報期前主動通知寄送單據</small></span></a><a href="ledger.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span><span class="jh-dt"><b>建碩記帳 Excel</b><small>會打字就會記帳的系統</small></span></a><a href="forms.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="jh-dt"><b>表單下載</b><small>到職、薪資、離職常用表單</small></span></a><a href="tools.html#cal"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="jh-dt"><b>法規條文及報稅行事曆</b><small>法規原文與各項申報期限</small></span></a></div></div>
+      <div class="jh-it"><a class="jh-bk" href="consult.html?from=專業版">預約諮詢</a></div>
     </nav>
   </div>
 </header>
+<div class="jh-mnav" id="jhMn" hidden>
+  <div class="jh-mtop"><span class="jh-brand"><span class="jh-bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span><button type="button" class="jh-x" id="jhX" aria-label="關閉選單">✕</button></div>
+  <a class="jh-about" href="index.html">回到首頁</a>
+  <p class="jh-h">服務項目</p><nav class="jh-g"><a href="index.html#s1"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span>工商登記</a><a href="index.html#s2"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>記帳及稅務申報</a><a href="index.html#s3"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span>審計簽證</a><a href="index.html#s4"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span>稅務協談</a><a href="index.html#s5"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span>顧問諮詢</a><a href="index.html#s6"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>財務規劃</a></nav>
+  <p class="jh-h">智慧工具</p><nav class="jh-g"><a href="tools.html#qz"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>開公司小幫手・試算工具</a><a href="index.html#line"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span>官方 LINE 單據提醒</a><a href="ledger.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span>建碩記帳 Excel</a><a href="forms.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>表單下載</a><a href="tools.html#cal"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>法規條文及報稅行事曆</a></nav>
+  <div class="jh-mcta"><a class="jh-g2" href="consult.html?from=專業版">預約諮詢</a><a class="jh-l2" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+</div>
+<div class="jh-cta"><a class="jh-g2" href="consult.html?from=專業版">預約諮詢</a><a class="jh-l2" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+<script>
+(()=>{const its=[...document.querySelectorAll('.jh-dit')];its.forEach(it=>{const t=it.querySelector('.jh-t');t.addEventListener('click',e=>{e.stopPropagation();const o=!it.classList.contains('open');its.forEach(x=>x.classList.remove('open'));if(o)it.classList.add('open')})});
+document.addEventListener('click',e=>{if(!e.target.closest('.jh-dit'))its.forEach(x=>x.classList.remove('open'))});
+const b=document.getElementById('jhMt'),m=document.getElementById('jhMn'),x=document.getElementById('jhX');
+const op=()=>{m.hidden=false;document.documentElement.style.overflow='hidden'},cl=()=>{m.hidden=true;document.documentElement.style.overflow=''};
+b.addEventListener('click',op);x.addEventListener('click',cl);m.querySelectorAll('a').forEach(a=>a.addEventListener('click',cl));
+addEventListener('keydown',e=>{if(e.key==='Escape'){cl();its.forEach(x=>x.classList.remove('open'))}});})();
+(()=>{const hd=document.querySelector('header.top');const go=(id,smooth)=>{const el=document.getElementById(id);if(!el)return;try{el.scrollIntoView({block:'start'})}catch(e){};const y=el.getBoundingClientRect().top+scrollY-hd.offsetHeight;window.scrollTo({top:y,behavior:smooth?'smooth':'auto'})};
+document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.getAttribute('href'),location.href);if(u.pathname===location.pathname&&u.hash){e.preventDefault();const id=decodeURIComponent(u.hash.slice(1));history.replaceState(null,'',u.hash);go(id,true);setTimeout(()=>go(id,false),900)}});
+if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout(()=>go(id,false),300);setTimeout(()=>go(id,false),1200)}})();
+
+</script>
 <main>
   <section class="lhero">
     <canvas id="silkTop" aria-hidden="true"></canvas>
@@ -519,9 +582,9 @@ b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;fo
     </div>
   </section>
 </main>
-<footer>
+<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><footer>
   <div class="wrap">
-    <div class="ft-n"><b>建碩會計師事務所</b></div>
+    <div class="ft-n"><span class="fbrand"><span class="fbx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span></div>
     <ul class="ft-i">
       <li><span>地址：</span>新竹市北區和平路 89 號</li>
       <li><span>電話：</span><b style="user-select:all;font-family:inherit;letter-spacing:0">03-526-0000</b></li>
@@ -862,5 +925,8 @@ b.due,.due{display:inline!important;font-size:inherit!important;color:#7A1F2B;fo
   ['c-kind', 'c-blue', 'c-amt'].forEach(id => $(id).addEventListener('input', calc)); calc();
 })();
 </script>
+<script>/* 換頁一律從頁首開始 */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+function toTop(){if(location.hash)return;var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
+toTop();window.addEventListener('load',toTop);window.addEventListener('pageshow',toTop);})();</script>
 </body>
 </html>

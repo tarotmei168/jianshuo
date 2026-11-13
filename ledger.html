@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>老闆看帳 Excel 互動示範</title>
+<title>建碩記帳 Excel 互動示範</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&family=Space+Grotesk:wght@500;700&display=swap">
 <style>
-/* Layout: 照「老闆看帳 Excel v9」——金色分頁＝自己填（基本資料設定／收付登記／人事主檔），藍色分頁＝自動算（老闆看帳）。
+/* Layout: 照「建碩記帳 Excel v9」——金色分頁＝自己填（基本資料設定／收付登記／人事主檔），藍色分頁＝自動算（老闆看帳）。
    背景與首頁一致：白色區塊有金幣往上，深藍區塊有流動金線。單一淺色樣貌。 */
 :root{
   color-scheme:light;
@@ -135,7 +135,7 @@ select.dd,.entry select{appearance:none;-webkit-appearance:none;padding-right:24
 @keyframes pk{0%{box-shadow:0 0 0 0 rgba(212,170,79,.9)}100%{box-shadow:0 0 0 10px rgba(212,170,79,0)}}
 .btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;min-height:44px}
 .btn.add{background:var(--ink);color:#fff}
-.btn.play{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.play{background:var(--hot);border:1.5px solid var(--hot);color:#fff;box-shadow:0 4px 14px rgba(154,74,58,.28)}.btn.play:hover{background:#7F3A2D;border-color:#7F3A2D}.btn.play::before{content:"▶ "}
 .row-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
 /* 基本資料設定 lists */
@@ -209,26 +209,89 @@ footer .ft-i b{color:#EDE6D6}
 </head>
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="index.html" aria-label="建碩會計師事務所 首頁"><em>建碩</em>會計師事務所</a>
-    <nav class="main" aria-label="主選單">
-      <a href="index.html#team">關於我們</a>
-      <a href="index.html#run">建碩陪跑</a>
-      <a href="index.html#start">營業登記</a>
-      <a href="tools.html">試算工具</a>
-      <a href="ledger.html" aria-current="page">老闆看帳 Excel</a>
-      <a href="forms.html">表單下載</a>
+<style>
+/* 專業版頁首（與首頁一致） */
+section[id]{scroll-margin-top:var(--hdr,73px)!important}
+header.top.jh{position:sticky;top:0;z-index:60;background:#fff!important;border-bottom:1px solid #E3DED3;box-shadow:none;padding-top:env(safe-area-inset-top,0px)}
+.jh-in{max-width:1160px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.jh-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(22px,2.4vw,28px);color:#0F2340;letter-spacing:.06em;line-height:1.2;white-space:nowrap}
+.jh-brand em{font-style:normal;color:#A87A1E}
+.jh-bx{width:clamp(34px,3vw,40px);height:clamp(34px,3vw,40px);border:1.5px solid #C9A04A;display:inline-flex;align-items:center;justify-content:center;color:#B8924A;flex:0 0 auto}.jh-bx svg{width:62%;height:62%}
+.jh-nav{display:flex;align-items:stretch;gap:6px;align-self:stretch}
+.jh-it{position:relative;display:flex;align-items:center}
+.jh-it>a,.jh-t{display:flex;align-items:center;gap:6px;padding:10px 14px;font:inherit;font-family:"Noto Sans TC",sans-serif;font-size:16px;font-weight:700;color:#1A2230;background:none;border:0;cursor:pointer;text-decoration:none}
+.jh-it:hover>a,.jh-it:hover .jh-t,.jh-it.open .jh-t,.jh-it>a[aria-current]{color:#A87A1E}
+.jh-car{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.jh-dd{position:absolute;left:50%;top:100%;width:420px;transform:translate(-50%,-6px);background:#fff;border:1px solid #E3DED3;border-top:3px solid #D4AA4F;border-radius:0 0 8px 8px;box-shadow:0 24px 48px -20px rgba(15,35,64,.35);padding:10px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transition:.18s;z-index:70}
+.jh-it:hover .jh-dd,.jh-it:focus-within .jh-dd,.jh-it.open .jh-dd{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.jh-dd a{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:6px;color:#0F2340;text-decoration:none}
+.jh-dd a:hover{background:#F3F0E8}
+.jh-mi{width:40px;height:40px;flex:0 0 auto;border-radius:3px;background:#0F2340;color:#D4AA4F;display:inline-flex;align-items:center;justify-content:center}.jh-mi svg{width:20px;height:20px}
+.jh-dt{display:flex;flex-direction:column;gap:2px}.jh-dt b{font-size:18px;font-weight:900;color:#0F2340;line-height:1.3}.jh-dt small{font-size:14px;color:#6B7280}
+header.top.jh .jh-bk,.jh-bk{display:inline-flex;align-items:center;justify-content:center;padding:10px 24px;border-radius:999px;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%)!important;color:#0F2340!important;font-weight:900;font-size:16px;letter-spacing:.06em;text-decoration:none;box-shadow:0 10px 22px -12px rgba(120,80,20,.7);white-space:nowrap}
+.jh-mt,.jh-mnav,.jh-cta{display:none}
+@media (max-width:880px){
+  .jh-nav{display:none}
+  .jh-mt{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:#fff;padding:0 12px;cursor:pointer}
+  .jh-mt span{display:block;height:2px;background:#0F2340;border-radius:2px}
+  .jh-mnav:not([hidden]){display:block;position:fixed;inset:0;z-index:200;overflow:auto;background:#FBFAF7;color:#0F2340;padding:max(12px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+  .jh-mtop{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;border-bottom:1px solid #E3DED3}
+  .jh-mtop .jh-brand{font-size:21px}
+  .jh-x{width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:transparent;color:#0F2340;font-size:22px;cursor:pointer}
+  .jh-about{display:block;margin-top:8px;font-size:18px;font-weight:700;padding:10px 4px;border-bottom:1px solid #E3DED3;color:#0F2340;text-decoration:none}
+  .jh-h{margin:14px 0 6px;font-size:14px;font-weight:700;letter-spacing:.2em;color:#A87A1E}
+  .jh-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .jh-g a{display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 10px;border:1px solid #E3DED3;border-radius:6px;background:#fff;font-size:16px;font-weight:700;color:#0F2340;text-decoration:none;line-height:1.3}
+  .jh-g .jh-mi{width:32px;height:32px}.jh-g .jh-mi svg{width:17px;height:17px}
+  .jh-mcta,.jh-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .jh-mcta{margin-top:16px}
+  .jh-cta{position:fixed;left:0;right:0;bottom:0;z-index:150;gap:8px;padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);border-top:1px solid #E3DED3;box-shadow:0 -10px 24px -16px rgba(15,35,64,.5)}
+  .jh-g2,.jh-l2{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:999px;font-size:18px;font-weight:900;letter-spacing:.04em;text-decoration:none}
+  .jh-g2{background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);color:#0F2340}
+  .jh-l2{background:#06C755;color:#0B2416}.jh-l2 svg{width:21px;height:21px}
+  .fab{display:none!important}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+}
+</style>
+<header class="top jh">
+  <div class="jh-in">
+    <a class="jh-brand" href="index.html" aria-label="建碩會計師事務所 首頁"><span class="jh-bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></a>
+    <button type="button" class="jh-mt" id="jhMt" aria-label="開啟選單" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="jh-nav" aria-label="主選單">
+      <div class="jh-it"><a href="index.html#about">關於建碩</a></div>
+      <div class="jh-it jh-dit"><button type="button" class="jh-t" aria-expanded="false">服務項目<i class="jh-car"></i></button><div class="jh-dd"><a href="index.html#s1"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span><span class="jh-dt"><b>工商登記</b><small>公司・行號設立及變更登記</small></span></a><a href="index.html#s2"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="jh-dt"><b>記帳及稅務申報</b><small>記帳、營業稅及營所稅申報</small></span></a><a href="index.html#s3"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span><span class="jh-dt"><b>審計簽證</b><small>財務報表及營所稅查核簽證</small></span></a><a href="index.html#s4"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><span class="jh-dt"><b>稅務協談</b><small>稅務查核協談及行政救濟</small></span></a><a href="index.html#s5"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span><span class="jh-dt"><b>顧問諮詢</b><small>企業評價、股權規劃及 ESG</small></span></a><a href="index.html#s6"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="jh-dt"><b>財務規劃</b><small>遺贈稅、資產配置及海外移民</small></span></a></div></div>
+      <div class="jh-it jh-dit"><button type="button" class="jh-t" aria-expanded="false" style="color:#A87A1E">智慧工具<i class="jh-car"></i></button><div class="jh-dd"><a href="tools.html#qz"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span><span class="jh-dt"><b>開公司小幫手・試算工具</b><small>評估組織型態、試算相關稅費</small></span></a><a href="index.html#line"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span><span class="jh-dt"><b>官方 LINE 單據提醒</b><small>申報期前主動通知寄送單據</small></span></a><a href="ledger.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span><span class="jh-dt"><b>建碩記帳 Excel</b><small>會打字就會記帳的系統</small></span></a><a href="forms.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="jh-dt"><b>表單下載</b><small>到職、薪資、離職常用表單</small></span></a><a href="tools.html#cal"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="jh-dt"><b>法規條文及報稅行事曆</b><small>法規原文與各項申報期限</small></span></a></div></div>
+      <div class="jh-it"><a class="jh-bk" href="consult.html?from=專業版">預約諮詢</a></div>
     </nav>
   </div>
 </header>
+<div class="jh-mnav" id="jhMn" hidden>
+  <div class="jh-mtop"><span class="jh-brand"><span class="jh-bx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span><button type="button" class="jh-x" id="jhX" aria-label="關閉選單">✕</button></div>
+  <a class="jh-about" href="index.html">回到首頁</a>
+  <p class="jh-h">服務項目</p><nav class="jh-g"><a href="index.html#s1"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span>工商登記</a><a href="index.html#s2"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>記帳及稅務申報</a><a href="index.html#s3"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M4.5 9.5h15M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6M4 20h16"/></svg></span>審計簽證</a><a href="index.html#s4"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span>稅務協談</a><a href="index.html#s5"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V10M11 20V6M16 20v-8M21 4l-5 5-4-3-6 6"/></svg></span>顧問諮詢</a><a href="index.html#s6"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>財務規劃</a></nav>
+  <p class="jh-h">智慧工具</p><nav class="jh-g"><a href="tools.html#qz"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg></span>開公司小幫手・試算工具</a><a href="index.html#line"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg></span>官方 LINE 單據提醒</a><a href="ledger.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span>建碩記帳 Excel</a><a href="forms.html"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>表單下載</a><a href="tools.html#cal"><span class="jh-mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>法規條文及報稅行事曆</a></nav>
+  <div class="jh-mcta"><a class="jh-g2" href="consult.html?from=專業版">預約諮詢</a><a class="jh-l2" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+</div>
+<div class="jh-cta"><a class="jh-g2" href="consult.html?from=專業版">預約諮詢</a><a class="jh-l2" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
+<script>
+(()=>{const its=[...document.querySelectorAll('.jh-dit')];its.forEach(it=>{const t=it.querySelector('.jh-t');t.addEventListener('click',e=>{e.stopPropagation();const o=!it.classList.contains('open');its.forEach(x=>x.classList.remove('open'));if(o)it.classList.add('open')})});
+document.addEventListener('click',e=>{if(!e.target.closest('.jh-dit'))its.forEach(x=>x.classList.remove('open'))});
+const b=document.getElementById('jhMt'),m=document.getElementById('jhMn'),x=document.getElementById('jhX');
+const op=()=>{m.hidden=false;document.documentElement.style.overflow='hidden'},cl=()=>{m.hidden=true;document.documentElement.style.overflow=''};
+b.addEventListener('click',op);x.addEventListener('click',cl);m.querySelectorAll('a').forEach(a=>a.addEventListener('click',cl));
+addEventListener('keydown',e=>{if(e.key==='Escape'){cl();its.forEach(x=>x.classList.remove('open'))}});})();
+(()=>{const hd=document.querySelector('header.top');const go=(id,smooth)=>{const el=document.getElementById(id);if(!el)return;try{el.scrollIntoView({block:'start'})}catch(e){};const y=el.getBoundingClientRect().top+scrollY-hd.offsetHeight;window.scrollTo({top:y,behavior:smooth?'smooth':'auto'})};
+document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.getAttribute('href'),location.href);if(u.pathname===location.pathname&&u.hash){e.preventDefault();const id=decodeURIComponent(u.hash.slice(1));history.replaceState(null,'',u.hash);go(id,true);setTimeout(()=>go(id,false),900)}});
+if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout(()=>go(id,false),300);setTimeout(()=>go(id,false),1200)}})();
+
+</script>
 
 <main>
   <section class="lhero">
     <canvas id="silkTop" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="eyebrow">老闆看帳 Excel</div>
-      <h1>「老闆看帳 Excel」<br><em>會打字，就會記帳</em></h1>
+      <div class="eyebrow">建碩記帳 Excel</div>
+      <h1>「建碩記帳 Excel」<br><em>會打字，就會記帳</em></h1>
       <p class="lede">這是 Excel 的網頁示範版，分頁和顏色跟實際檔案一樣：<b>金色分頁自己填、藍色分頁自動算</b>。看到 <span class="dd-mark">▼</span> 的格子都是下拉選單，選項來自「基本資料設定」，設好一次，之後記帳只要點選。</p>
       <div class="steps3" aria-label="使用順序">
         <span><b>1</b>基本資料設定：客戶、廠商、分類設一次</span>
@@ -261,7 +324,7 @@ footer .ft-i b{color:#EDE6D6}
             <div class="demo-say" id="say" aria-live="polite"></div>
             <div class="grid-wrap">
               <table class="xl" aria-label="收付登記">
-                <thead><tr><th>日期</th><th>收支別<span class="v">▼</span></th><th>分類<span class="v">▼</span></th><th>往來對象<span class="v">▼</span></th><th>摘要</th><th>憑證類型<span class="v">▼</span></th><th style="text-align:right">金額</th><th>收付狀態<span class="v">▼</span></th><th><span style="position:absolute;left:-9999px">刪除</span></th></tr></thead>
+                <thead><tr><th>日期</th><th>收支別<span class="v">▼</span></th><th>分類<span class="v">▼</span></th><th>往來對象<span class="v">▼</span></th><th>摘要</th><th style="text-align:right">金額</th><th>收付狀態<span class="v">▼</span></th><th><span style="position:absolute;left:-9999px">刪除</span></th></tr></thead>
                 <tbody id="rows"></tbody>
                 <tbody><tr class="entry">
                   <td><input id="e-date" type="text" aria-label="日期" placeholder="11/20" style="width:70px"></td>
@@ -269,8 +332,7 @@ footer .ft-i b{color:#EDE6D6}
                   <td><select id="e-cat" aria-label="分類"></select></td>
                   <td><select id="e-who" aria-label="往來對象"></select></td>
                   <td><input id="e-memo" type="text" aria-label="摘要" placeholder="例：11 月團購" style="min-width:120px"></td>
-                  <td><select id="e-doc" aria-label="憑證類型"><option>三聯式發票</option><option>二聯式發票</option><option>收據</option><option>無憑證</option></select></td>
-                  <td><input id="e-amt" type="number" inputmode="numeric" min="1" step="1" aria-label="金額" placeholder="金額" style="width:96px"></td>
+                                    <td><input id="e-amt" type="number" inputmode="numeric" min="1" step="1" aria-label="金額" placeholder="金額" style="width:96px"></td>
                   <td><select id="e-st" aria-label="收付狀態"><option>已收付</option><option>未收付</option></select></td>
                   <td></td>
                 </tr></tbody>
@@ -324,28 +386,28 @@ footer .ft-i b{color:#EDE6D6}
       <p class="lede">每一頁上方都有說明列，另外還有一整頁使用說明和「行業記帳須知」。以下摘錄給你先看看。</p>
       <div class="mgrid">
         <div class="mcard"><h3>① 顏色怎麼看</h3><dl>
-          <div><dt><span class="sw" style="background:#FFF6DE"></span>金色分頁／香檳金格子</dt><dd>要自己輸入或下拉選擇的地方：基本資料設定、收付登記、固定收支表、人事主檔、請假考勤、薪資異動登記。</dd></div>
+          <div><dt><span class="sw" style="background:#FFF6DE"></span>金色分頁／香檳金格子</dt><dd>要自己輸入或下拉選擇的地方：基本資料設定、收付登記、固定收支表、人事主檔、本月薪資異動。</dd></div>
           <div><dt><span class="sw" style="background:#E9EEF4"></span>藍色分頁／灰藍格子</dt><dd>系統自動計算的報表與列印頁，不用輸入：老闆看帳、應收應付總覽、對帳單、交事務所清單、薪資清冊、薪資單、簽收表。</dd></div>
           <div><dt><span class="sw" style="background:#FBE3DE"></span>淡紅色格子</dt><dd>代表「漏填」，例如有金額卻沒選收支別、選了未收付卻沒填預計日。</dd></div>
           <div><dt>▼ 下拉選單</dt><dd>大多數下拉只是「快速選」，也可以直接打字；收支別、帳戶、收付狀態、員工、假別這些會影響計算的欄位，要從清單選。</dd></div>
         </dl></div>
         <div class="mcard"><h3>② 每天怎麼用</h3><dl>
-          <div><dt>收付登記</dt><dd>每筆錢進出登一列：先選收支別，再選分類和往來對象，內容寫在摘要；金額一律正數。還沒收到錢，就把收付狀態選「未收付」並填預計日。</dd></div>
+          <div><dt>收付登記</dt><dd>每筆錢進出登一列：先選收支別，再選分類和往來對象，內容寫在摘要；金額一律正數。還沒收到或還沒付出去的錢，就把收付狀態選「未收付」並填預計日。</dd></div>
           <div><dt>幫客戶代墊、會請款</dt><dd>收支別選「暫付」、類別選「代墊費用」；對方還錢時登「暫收」同一對象，系統自動沖銷。</dd></div>
           <div><dt>買設備</dt><dd>付款時記一筆支出；可用多年的設備再到「固定資產折舊」登記一次，系統會算出折舊與帳面價值。</dd></div>
         </dl></div>
-        <div class="mcard"><h3>③ 報稅提醒（v9 新增）</h3><dl>
+        <div class="mcard"><h3>③ 報稅提醒</h3><dl>
           <div><dt>在基本資料設定選「營業稅身分 ▼」</dt><dd>系統就知道要提醒哪些申報，並依「報稅提前提醒（天）」提早通知。</dd></div>
           <div><dt>1 月、5 月一起寄</dt><dd>1 月那次連同全年薪資、租金、勞務費資料一起寄（建碩申報扣繳憑單）；5 月那次連同營所稅結算資料一起寄（建碩辦理營所稅結算申報）。</dd></div>
-          <div><dt>寄單據倒數</dt><dd>營業稅申報月的 1 日要寄出上兩個月的發票、收據，4 日前寄達建碩。寄出日前 4 天開始倒數提醒，例如 10/28 起倒數，11/1 寄出 9–10 月發票、收據。</dd></div>
+          <div><dt>寄單據倒數</dt><dd>營業稅申報月的 1 日要寄出上兩個月的發票、收據，4 日前寄達建碩。寄達前 7 天開始提醒，以 11–12 月為例，官方 LINE 會在 12/28 開始傳訊息提醒；寄出後，請在 LINE 按一下【✅ 已寄出】。</dd></div>
         </dl></div>
         <div class="mcard"><h3>④ 每月與每年</h3><dl>
-          <div><dt>薪資異動登記</dt><dd>只有獎金、加班費、所得稅扣繳、其他扣款、本月不發才需要登記；月薪、津貼、勞健保會自動算。</dd></div>
+          <div><dt>本月薪資異動</dt><dd>請假、獎金、加班費、其他扣款、本月不發都登在這一頁，一筆一列；請假填時數就會自動扣款。月薪、津貼、勞健保會自動算。</dd></div>
           <div><dt>薪資清冊與列印</dt><dd>一張 A4 印 4 人薪資單，附員工簽收表。</dd></div>
           <div><dt>開新年度</dt><dd>另存新檔、改會計年度、清空香檳金格子；勞健保級距貼上當年度分級表，看到 ✓ 就完成。</dd></div>
         </dl></div>
       </div>
-      <p class="copy">「老闆看帳 Excel」為建碩會計師事務所設計，內容與版面受著作權保護。</p>
+      <p class="copy">「建碩記帳 Excel」為建碩會計師事務所設計，內容與版面受著作權保護。</p>
     </div>
   </section>
 
@@ -355,7 +417,7 @@ footer .ft-i b{color:#EDE6D6}
       <div class="eyebrow" style="color:var(--gold-bright);justify-content:center">LINE 諮詢</div>
       <h2 id="cta-h" style="margin-top:14px"><em>建</em>業有伴，<em>碩</em>果可期</h2>
       <p class="ask">想用在你的公司？</p>
-      <p>成為建碩的客戶就能使用，還會遠端連線教你操作。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
+      <p>成為建碩的客戶就能使用。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
       <figure class="qr" style="margin:32px 0 0"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><small>掃碼加入 LINE</small></figure>
       <div class="cta-acts">
         <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
@@ -364,9 +426,9 @@ footer .ft-i b{color:#EDE6D6}
     </div>
   </section>
 </main>
-<footer>
+<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><footer>
   <div class="wrap">
-    <div class="ft-n"><b>建碩會計師事務所</b></div>
+    <div class="ft-n"><span class="fbrand"><span class="fbx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span></div>
     <ul class="ft-i">
       <li><span>地址：</span>新竹市北區和平路 89 號</li>
       <li><span>電話：</span><b style="user-select:all;font-family:inherit;letter-spacing:0">03-526-0000</b></li>
@@ -464,7 +526,7 @@ footer .ft-i b{color:#EDE6D6}
   kindSel.addEventListener('change', syncEntry);
   const renderRows = () => {
     const list = rows.map((r, i) => ({ ...r, i })).filter(r => r.m === month);
-    $('rows').innerHTML = list.map(r => `<tr class="${r.i === flashRow ? 'flash' : ''}"><td>${r.d}</td><td class="${r.k === '收入' ? 'k-in' : r.k === '支出' ? 'k-out' : 'k-tmp'}">${r.k}</td><td>${r.c}</td><td>${r.w}</td><td>${r.memo}</td><td>${r.doc}</td><td class="num">${fmt(r.a)}</td><td>${r.st}</td><td><button type="button" data-del="${r.i}" aria-label="刪除這一列">×</button></td></tr>`).join('') || `<tr><td colspan="9" class="empty">${month} 月還沒有資料，從下面那一列開始打。</td></tr>`;
+    $('rows').innerHTML = list.map(r => `<tr class="${r.i === flashRow ? 'flash' : ''}"><td>${r.d}</td><td class="${r.k === '收入' ? 'k-in' : r.k === '支出' ? 'k-out' : 'k-tmp'}">${r.k}</td><td>${r.c}</td><td>${r.w}</td><td>${r.memo}</td><td class="num">${fmt(r.a)}</td><td>${r.st}</td><td><button type="button" data-del="${r.i}" aria-label="刪除這一列">×</button></td></tr>`).join('') || `<tr><td colspan="8" class="empty">${month} 月還沒有資料，從下面那一列開始打。</td></tr>`;
   };
   $('rows').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b) return; rows.splice(+b.dataset.del, 1); flashRow = -1; renderAll(); });
   const addRow = () => {
@@ -474,7 +536,7 @@ footer .ft-i b{color:#EDE6D6}
     const dm = ($('e-date').value.trim() || `${month}/1`).match(/^(\d{1,2})\/(\d{1,2})$/);
     if (!dm || +dm[1] < 1 || +dm[1] > 12) { $('e-date').classList.add('miss'); ok = false; }
     if (!ok) return false;
-    rows.push(R(+dm[1], +dm[2], kindSel.value, catSel.value, whoSel.value === '（留白）' ? '' : whoSel.value, memo || '（未填摘要）', $('e-doc').value, a, $('e-st').value));
+    rows.push(R(+dm[1], +dm[2], kindSel.value, catSel.value, whoSel.value === '（留白）' ? '' : whoSel.value, memo || '（未填摘要）', '', a, $('e-st').value));
     flashRow = rows.length - 1; month = +dm[1];
     ['e-amt', 'e-memo', 'e-date'].forEach(id => $(id).value = ''); renderAll(); return true;
   };
@@ -574,9 +636,8 @@ footer .ft-i b{color:#EDE6D6}
     await pick(catSel, '團購訂單', '▼ 分類：團購訂單（只列出收入分類）');
     await pick(whoSel, '好朋友選物店', '▼ 往來對象：剛剛在基本資料新增的「好朋友選物店」');
     say('打摘要'); await type($('e-memo'), '鳳梨酥團購');
-    await pick($('e-doc'), '三聯式發票', '▼ 憑證類型：三聯式發票');
     say('打金額'); await type($('e-amt'), 26000);
-    await pick($('e-st'), '未收付', '▼ 收付狀態：未收付 → 老闆看帳的「應收催款」會跳出來');
+    await pick($('e-st'), '未收付', '▼ 收付狀態：未收付 → 右邊的「應收催款」會跳出來');
     await sleep(300); addRow(); await sleep(1400);
     showTab('hr'); say('');
     await type($('h-name'), '錢多多'); await pick($('h-dept'), '出貨部', ''); await type($('h-date'), '11/18'); await type($('h-pay'), 29500);
@@ -590,5 +651,8 @@ footer .ft-i b{color:#EDE6D6}
   if (!reduce) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); setTimeout(play, 700); } }, { threshold: .35 }).observe(document.querySelector('.book'));
 })();
 </script>
+<script>/* 換頁一律從頁首開始 */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+function toTop(){if(location.hash)return;var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
+toTop();window.addEventListener('load',toTop);window.addEventListener('pageshow',toTop);})();</script>
 </body>
 </html>
