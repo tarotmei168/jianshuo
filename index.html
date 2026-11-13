@@ -406,7 +406,7 @@ canvas.silk{position:absolute!important;inset:0;z-index:0!important;width:100%;h
   nav.main{display:none!important}
   .mt{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;border:1px solid #E3DED3;border-radius:6px;background:#fff;padding:0 12px;cursor:pointer}
   .mt span{display:block;height:2px;background:#0F2340;border-radius:2px}
-  .mnav:not([hidden]){display:block;position:fixed;inset:0;z-index:120;overflow:auto;background:var(--ng);color:#F4EEDF;padding:max(12px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+  .mnav:not([hidden]){display:block;position:fixed;inset:0;z-index:120;overflow:auto;overscroll-behavior:contain;background:var(--ng);color:#F4EEDF;padding:max(12px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
   .mn-top{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;border-bottom:1px solid rgba(212,170,79,.35)}
   .mn-top .brand{color:#F4EEDF;font-size:21px}.mn-top .brand em{color:#D4AA4F}.mn-top .bx{border-color:#D4AA4F;color:#D4AA4F}
   .mn-x{width:48px;height:48px;border:1px solid rgba(212,170,79,.6);border-radius:6px;background:transparent;color:#F4EEDF;font-size:22px;cursor:pointer}
@@ -465,7 +465,7 @@ nav.main>.it>a.btn.bk{padding:10px 24px}
 
 /* 下拉選單：白色、直向清單（11/13 13:36） */
 .dd-it{position:relative!important}
-.dd-it .dd{left:50%!important;right:auto!important;width:420px;transform:translate(-50%,-6px)!important;height:auto!important;max-height:none!important;overflow:visible!important;background:#fff!important;border:1px solid #E3DED3!important;border-top:3px solid #D4AA4F!important;border-radius:0 0 8px 8px;box-shadow:0 24px 48px -20px rgba(15,35,64,.35)!important}
+.dd-it .dd{left:50%!important;right:auto!important;width:420px;transform:translate(-50%,-6px)!important;height:auto!important;max-height:calc(100vh - var(--hh,80px) - 16px)!important;overflow-y:auto!important;overscroll-behavior:contain;background:#fff!important;border:1px solid #E3DED3!important;border-top:3px solid #D4AA4F!important;border-radius:0 0 8px 8px;box-shadow:0 24px 48px -20px rgba(15,35,64,.35)!important}
 .dd-it:hover .dd,.dd-it:focus-within .dd,.dd-it.open .dd{transform:translate(-50%,0)!important}
 .dd-in{display:block!important;max-width:none!important;padding:10px!important;height:auto!important}
 .dd-h{display:none!important}
