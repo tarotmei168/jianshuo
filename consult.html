@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>建碩開業諮詢</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,6 +155,12 @@ footer .ft-i b{color:#EDE6D6}
 .need:hover{border-color:var(--gold);transform:translateY(-2px)}
 .need[aria-pressed="true"]{border-color:var(--gold);background:#FFF6DE}
 .need.hot{border-color:var(--gold-soft)}
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sv{font:inherit;font-size:clamp(14px,4.3vw,17px);white-space:nowrap;letter-spacing:0;font-weight:700;cursor:pointer;background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:12px 8px;color:var(--ink);line-height:1.35;min-height:52px}
+.sv[aria-pressed="true"]{border-color:var(--gold);background:#FFF6DE;color:var(--gold)}
+.chipHint{font-size:14px;font-weight:500;color:var(--ink-2);margin-left:4px}
+.svc.bad .sv{border-color:var(--hot)}
+
 .fld2{display:grid;gap:6px;margin-top:16px}
 .fld2 label{font-weight:700;font-size:17px;color:var(--ink)}
 .fld2 label small{font-weight:500;color:var(--ink-2);font-size:14px;margin-left:6px}
@@ -183,6 +190,17 @@ footer .ft-i b{color:#EDE6D6}
 .done h2{margin-bottom:8px}.done p{color:var(--ink-2);margin:0 auto 18px;max-width:28em}
 .done .lbtn{font-size:21px;padding:14px 30px}
 .done .tel{margin-top:14px;font-size:16px;color:var(--ink-2)}.done .tel b{color:var(--ink);user-select:all}
+</style>
+<style>/* 各種手機／平板防跑版（11/13） */
+:root{color-scheme:only light}
+body{overflow-x:clip}
+img,canvas,video{max-width:100%}
+@media (max-width:440px){.btn{white-space:normal!important;max-width:100%;text-align:center;line-height:1.4}}
+@media (max-width:340px){.mcta a,.mcta .btn,.jh-cta a{font-size:15px!important;padding-left:8px!important;padding-right:8px!important;min-width:0!important}.jh-brand,.brand{font-size:16px!important;letter-spacing:.02em!important}}
+</style><style>/* 平板：右邊的下拉選單靠右對齊，不超出螢幕 */
+.jh-dit~.jh-dit .jh-dd{left:auto!important;right:0!important;transform:translateY(-6px)!important}
+.jh-dit~.jh-dit:hover .jh-dd,.jh-dit~.jh-dit:focus-within .jh-dd,.jh-dit~.jh-dit.open .jh-dd{transform:none!important}
+.jh-dd{max-width:calc(100vw - 24px)}
 </style>
 </head>
 <body>
@@ -291,11 +309,23 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
         <div id="s2" hidden>
           <div class="cq-step">第 2 步，共 2 步<span class="cq-bar"><i style="width:100%"></i></span></div>
           <div class="picked">想處理：<b id="pickedV"></b><span id="pickedX"></span><button type="button" id="back">改選</button></div>
+          <div id="chipBox" hidden>
+            <h2 style="margin:0 0 12px">想處理哪件事？<small class="chipHint">（點一下）</small></h2>
+            <div class="svc" role="group" aria-label="諮詢項目">
+              <button type="button" class="sv" data-v="開公司／行號">開公司／行號</button>
+              <button type="button" class="sv" data-v="記帳報稅">記帳報稅</button>
+              <button type="button" class="sv" data-v="公司變更登記">公司變更登記</button>
+              <button type="button" class="sv" data-v="審計簽證">審計簽證</button>
+              <button type="button" class="sv" data-v="稅務協談">稅務協談</button>
+              <button type="button" class="sv" data-v="財務規劃">財務規劃</button>
+              <button type="button" class="sv" data-v="企業評價／ESG">企業評價／ESG</button>
+            </div>
+          </div>
           <h2 style="margin-top:18px">怎麼聯絡你比較方便？</h2>
           <div class="fld2"><label for="nm">怎麼稱呼您？</label><input id="nm" name="姓名" autocomplete="name" placeholder="例：王先生"></div>
           <div class="two">
-            <div class="fld2"><label for="ph">手機<small>（手機、LINE 擇一）</small></label><input id="ph" name="手機" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx"></div>
-            <div class="fld2"><label for="ln">LINE ID</label><input id="ln" name="LINE_ID" autocomplete="off" placeholder="例：boss888"></div>
+            <div class="fld2"><label for="ph">手機<small>（必填）</small></label><input id="ph" name="手機" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx" required></div>
+            <div class="fld2"><label for="ln">LINE ID<small>（選填）</small></label><input id="ln" name="LINE_ID" autocomplete="off" placeholder="例：boss888"></div>
           </div>
           <div class="fld2"><label>方便聯絡的時段</label>
             <div class="chips" role="group" aria-label="方便聯絡的時段">
@@ -331,7 +361,8 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
     </div>
   </div></section>
 </main>
-<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><footer>
+<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><style>/* 頁尾金線＋金粒往上飛（11/13 試用） */footer{position:relative;overflow:hidden}footer>.wrap{position:relative;z-index:1}footer canvas.ftfx{position:absolute!important;inset:0;width:100%;height:100%;pointer-events:none;z-index:0!important}</style>
+<footer><canvas class="ftfx" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="ft-n"><span class="fbrand"><span class="fbx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span></div>
     <ul class="ft-i">
@@ -391,7 +422,16 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
     $('s1').hidden = true; $('s2').hidden = false; $('nm').focus({ preventScroll: true }); $('cq').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   document.querySelectorAll('.need').forEach(b => b.addEventListener('click', () => go2(b.dataset.v)));
   $('back').addEventListener('click', () => { $('s2').hidden = true; $('s1').hidden = false; });
-  const pre = P.get('need'); if (pre) { const b = [...document.querySelectorAll('.need')].find(x => x.dataset.v.startsWith(pre)); if (b) go2(b.dataset.v); }
+  const pre = P.get('need'); let preB = null; if (pre) { preB = [...document.querySelectorAll('.need')].find(x => x.dataset.v.startsWith(pre)); if (preB) go2(preB.dataset.v); }
+  /* 從 LINE 圖文選單直接點「預約諮詢」（沒帶服務）：一頁搞定，上面點選想處理的事、下面直接留聯絡方式 */
+  const chipMode = !preB && /^line$/i.test(from);
+  if (chipMode) {
+    $('s1').hidden = true; $('s2').hidden = false; document.querySelector('.picked').hidden = true; $('chipBox').hidden = false;
+    document.querySelectorAll('.sv').forEach(c => c.addEventListener('click', () => {
+      need = c.dataset.v; document.querySelectorAll('.sv').forEach(x => x.setAttribute('aria-pressed', x === c));
+      document.querySelector('.svc').classList.remove('bad'); if ($('err').textContent.startsWith('請點選')) $('err').textContent = '';
+    }));
+  }
 
   /* 送出時判斷是不是上班時間（每日 09:00–18:00，台北時間），下班時間就告訴客人第二天上班後會儘速服務 */
   const replyNote = () => {
@@ -403,8 +443,9 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
     e.preventDefault(); const f = e.target, err = $('err');
     const nm = $('nm').value.trim(), ph = $('ph').value.trim(), ln = $('ln').value.trim();
     const slots = [...f.querySelectorAll('input[name="時段"]:checked')].map(x => x.value).join('、');
+    if (chipMode && !need) { err.textContent = '請點選想處理哪件事。'; document.querySelector('.svc').classList.add('bad'); $('chipBox').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     if (!nm) { err.textContent = '請留下怎麼稱呼您。'; $('nm').focus(); return; }
-    if (!ph && !ln) { err.textContent = '手機或 LINE ID 請至少填一個，我們才聯絡得到您。'; $('ph').focus(); return; }
+    if (!ph) { err.textContent = '請留下手機號碼，我們才聯絡得到您。'; $('ph').focus(); return; }
     if (ph && !/^[0-9+\-\s()#]{8,}$/.test(ph)) { err.textContent = '手機號碼格式好像不太對，再確認一下。'; $('ph').focus(); return; }
     if (!$('ok').checked) { err.textContent = '請勾選同意個人資料蒐集告知。'; return; }
     err.textContent = '';
@@ -421,8 +462,15 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
   });
 })();
 </script>
-<script>/* 換頁一律從頁首開始 */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
-function toTop(){if(location.hash)return;var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
+<script>/* 換頁一律從頁首開始；從 LINE 進來則直接捲到黃色填寫卡片（上方藍色標題保留，往上滑看得到） */(function(){function toCard(){var c=document.querySelector('.cq-card'),h=document.querySelector('header.top');if(!c)return;var y=c.getBoundingClientRect().top+scrollY-(h?h.offsetHeight:0)-12;window.scrollTo(0,Math.max(0,y))}try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+function toTop(){if(location.hash)return;if(/[?&]from=LINE(&|$)/i.test(location.search)){toCard();setTimeout(toCard,400);return}var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
 toTop();window.addEventListener('load',toTop);window.addEventListener('pageshow',toTop);})();</script>
+<script>/* 頁尾金線＋金粒往上飛 */(function(){var c=document.querySelector('canvas.ftfx');if(!c)return;var ctx=c.getContext('2d'),w,h,t=Math.random()*50,on=false,raf,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fit(){var r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);w=r.width;h=r.height;c.width=w*d;c.height=h*d;ctx.setTransform(d,0,0,d,0,0)}
+function draw(){ctx.clearRect(0,0,w,h);var N=18;for(var i=0;i<N;i++){var p=i/N;ctx.strokeStyle='rgba(212,170,79,'+(.06+.24*Math.sin(p*Math.PI))+')';ctx.lineWidth=1;ctx.beginPath();for(var x=-20;x<=w+20;x+=12){var y=h*.6+Math.sin(x*.0045+t*.6+p*2.2)*h*.18*(.6+p)+Math.sin(x*.012-t*.9+p*5)*h*.05+(p-.5)*h*.8;x===-20?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}
+var K=Math.max(14,Math.round(w/22));for(var k=0;k<K;k++){var s=2+(k%3)*2,yy=h-((t*60*(.4+(k%5)/5)+k*53)%(h+20));ctx.fillStyle='rgba(212,170,79,'+(.22+(k%4)/9)+')';ctx.fillRect(Math.round((k*131+(k%7)*17)%Math.max(1,w)),Math.round(yy),s,s)}}
+function loop(){t+=.004;draw();if(on)raf=requestAnimationFrame(loop)}
+fit();draw();addEventListener('resize',function(){fit();draw()});
+if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;cancelAnimationFrame(raf);if(on)loop()}).observe(c)})();</script>
 </body>
 </html>

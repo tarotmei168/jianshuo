@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>建碩記帳 Excel 互動示範</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,6 +206,17 @@ footer .ft-i span{color:#C9C0AE}
 footer .ft-i b{color:#EDE6D6}
 
 
+</style>
+<style>/* 各種手機／平板防跑版（11/13） */
+:root{color-scheme:only light}
+body{overflow-x:clip}
+img,canvas,video{max-width:100%}
+@media (max-width:440px){.btn{white-space:normal!important;max-width:100%;text-align:center;line-height:1.4}}
+@media (max-width:340px){.mcta a,.mcta .btn,.jh-cta a{font-size:15px!important;padding-left:8px!important;padding-right:8px!important;min-width:0!important}.jh-brand,.brand{font-size:16px!important;letter-spacing:.02em!important}}
+</style><style>/* 平板：右邊的下拉選單靠右對齊，不超出螢幕 */
+.jh-dit~.jh-dit .jh-dd{left:auto!important;right:0!important;transform:translateY(-6px)!important}
+.jh-dit~.jh-dit:hover .jh-dd,.jh-dit~.jh-dit:focus-within .jh-dd,.jh-dit~.jh-dit.open .jh-dd{transform:none!important}
+.jh-dd{max-width:calc(100vw - 24px)}
 </style>
 </head>
 <body>
@@ -426,7 +438,8 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
     </div>
   </section>
 </main>
-<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><footer>
+<style>.fbrand{display:inline-flex;align-items:center;gap:12px;font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;font-size:clamp(19px,2vw,23px);color:#EDE6D6;letter-spacing:.08em;line-height:1.2;white-space:nowrap}.fbrand em{font-style:normal;background:linear-gradient(135deg,#F7E4AE 0%,#D4AA4F 48%,#A87A1E 100%);-webkit-background-clip:text;background-clip:text;color:#D4AA4F;-webkit-text-fill-color:transparent}.fbx{width:40px;height:40px;border:1.5px solid #D4AA4F;display:inline-flex;align-items:center;justify-content:center;color:#D4AA4F;flex:0 0 auto}.fbx svg{width:62%;height:62%}</style><style>/* 頁尾金線＋金粒往上飛（11/13 試用） */footer{position:relative;overflow:hidden}footer>.wrap{position:relative;z-index:1}footer canvas.ftfx{position:absolute!important;inset:0;width:100%;height:100%;pointer-events:none;z-index:0!important}</style>
+<footer><canvas class="ftfx" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="ft-n"><span class="fbrand"><span class="fbx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15"/><path d="M6.5 12v6M10.5 12v6M13.5 12v6M17.5 12v6"/><path d="M4 20h16"/></svg></span><span><em>建碩</em>會計師事務所</span></span></div>
     <ul class="ft-i">
@@ -654,5 +667,12 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
 <script>/* 換頁一律從頁首開始 */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
 function toTop(){if(location.hash)return;var t=document.documentElement;try{if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'})}catch(e){}window.scrollTo(0,0)}
 toTop();window.addEventListener('load',toTop);window.addEventListener('pageshow',toTop);})();</script>
+<script>/* 頁尾金線＋金粒往上飛 */(function(){var c=document.querySelector('canvas.ftfx');if(!c)return;var ctx=c.getContext('2d'),w,h,t=Math.random()*50,on=false,raf,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fit(){var r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);w=r.width;h=r.height;c.width=w*d;c.height=h*d;ctx.setTransform(d,0,0,d,0,0)}
+function draw(){ctx.clearRect(0,0,w,h);var N=18;for(var i=0;i<N;i++){var p=i/N;ctx.strokeStyle='rgba(212,170,79,'+(.06+.24*Math.sin(p*Math.PI))+')';ctx.lineWidth=1;ctx.beginPath();for(var x=-20;x<=w+20;x+=12){var y=h*.6+Math.sin(x*.0045+t*.6+p*2.2)*h*.18*(.6+p)+Math.sin(x*.012-t*.9+p*5)*h*.05+(p-.5)*h*.8;x===-20?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}
+var K=Math.max(14,Math.round(w/22));for(var k=0;k<K;k++){var s=2+(k%3)*2,yy=h-((t*60*(.4+(k%5)/5)+k*53)%(h+20));ctx.fillStyle='rgba(212,170,79,'+(.22+(k%4)/9)+')';ctx.fillRect(Math.round((k*131+(k%7)*17)%Math.max(1,w)),Math.round(yy),s,s)}}
+function loop(){t+=.004;draw();if(on)raf=requestAnimationFrame(loop)}
+fit();draw();addEventListener('resize',function(){fit();draw()});
+if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;cancelAnimationFrame(raf);if(on)loop()}).observe(c)})();</script>
 </body>
 </html>
