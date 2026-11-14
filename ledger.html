@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&family=Space+Grotesk:wght@500;700&display=swap">
 <style>
-/* Layout: 照「建碩記帳 Excel v9」——金色分頁＝自己填（基本資料設定／收付登記／人事主檔），藍色分頁＝自動算（老闆看帳）。
+/* Layout: 照「建碩記帳 Excel」——金色分頁＝自己填（基本資料設定／收付登記／人事主檔），藍色分頁＝自動算（老闆看帳）。
    背景與首頁一致：白色區塊有金幣往上，深藍區塊有流動金線。單一淺色樣貌。 */
 :root{
   color-scheme:light;
@@ -312,6 +312,180 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
       </div>
     </div>
   </section>
+<!--FMAP-START-->
+<style>
+/* 建碩記帳 Excel 操作地圖：n8n 式節點畫布（點陣底、曲線連線）＋右側說明抽屜；手機改直式清單＋底部抽屜 */
+.nmap{
+  --nm-bg:#F4F2EC; --nm-dot:#D8D2C2; --nm-panel:#FFFFFF; --nm-ink:#1B2333; --nm-muted:#5E6677;
+  --nm-navy:#1F2A44; --nm-gold:#B8901E; --nm-gold-soft:#F3E7C3; --nm-line:#C9BE9C;
+  --nm-in:#C9A227; --nm-out:#1F2A44; --nm-js:#06C755;
+  --nm-shadow:0 1px 0 rgba(31,42,68,.06),0 6px 18px rgba(31,42,68,.08);
+  --nm-display:"Noto Serif TC","Songti TC",serif; --nm-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:var(--nm-bg);color:var(--nm-ink);font-family:var(--nm-body);font-size:15px;line-height:1.65;
+  padding-block:clamp(28px,4vw,52px)}
+.nmap *{box-sizing:border-box}
+.nmap .nm-in{max-width:1300px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.nmap .nm-top{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.nmap h2{font-family:var(--nm-display);font-weight:800;font-size:clamp(24px,3vw,32px);margin:0;letter-spacing:.02em;text-wrap:balance;color:var(--nm-ink)}
+.nmap .nm-own{display:inline-block;font-family:var(--nm-body);font-size:13px;font-weight:700;letter-spacing:.06em;padding:2px 10px;border-radius:999px;background:var(--nm-navy);color:#F3E7C3;border:1px solid var(--nm-gold);vertical-align:middle;margin-left:10px}
+.nmap .nm-sub{color:var(--nm-muted);margin:4px 0 0;font-size:14.5px}
+.nmap .nm-btn{border:1px solid var(--nm-gold);background:var(--nm-gold);color:#1B2333;font:inherit;font-weight:700;font-size:14px;padding:8px 16px;border-radius:8px;cursor:pointer}
+.nmap .nm-btn.ghost{background:transparent;color:#F3E7C3;border-color:rgba(243,231,195,.4);font-weight:500}
+.nmap .nm-btn:focus-visible,.nmap .nm-node:focus-visible,.nm-drawer .nm-x:focus-visible{outline:3px solid var(--nm-gold);outline-offset:2px}
+.nmap .nm-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--nm-muted);margin:2px 0 10px}
+.nmap .nm-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.nmap .nm-board{position:relative;background-color:var(--nm-bg);background-image:radial-gradient(var(--nm-dot) 1.2px,transparent 1.2px);background-size:22px 22px;border:1px solid var(--nm-line);border-radius:12px;overflow:hidden}
+.nmap .nm-stage{position:relative;width:1240px;height:660px;transform-origin:0 0}
+.nmap svg.nm-edges{position:absolute;inset:0;width:1240px;height:660px;pointer-events:none}
+.nmap svg.nm-edges path{fill:none;stroke:var(--nm-line);stroke-width:2.2;transition:stroke .2s}
+.nmap svg.nm-edges path.hot{stroke:var(--nm-gold);stroke-width:3}
+.nmap .nm-node{position:absolute;width:200px;background:var(--nm-panel);border:1px solid var(--nm-line);border-top:4px solid var(--nm-in);border-radius:10px;box-shadow:var(--nm-shadow);padding:10px 12px 12px;cursor:pointer;text-align:left;font:inherit;color:var(--nm-ink);transition:transform .18s ease,border-color .18s ease}
+.nmap .nm-node:hover{transform:translateY(-2px)}
+.nmap .nm-node.out{border-top-color:var(--nm-out)}
+.nmap .nm-node.hub{width:220px;background:var(--nm-navy);color:#F3E7C3;border-color:var(--nm-navy);border-top-color:var(--nm-gold)}
+.nmap .nm-node.hub p,.nmap .nm-node.hub .k{color:#CFC6B3}
+.nmap .nm-node.js{border-top-color:var(--nm-js)}
+.nmap .nm-node.on{border-color:var(--nm-gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--nm-gold) 35%,transparent),var(--nm-shadow)}
+.nmap .nm-node .k{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.08em;color:var(--nm-muted)}
+.nmap .nm-chip{font-size:11px;padding:1px 7px;border-radius:999px;letter-spacing:.04em;font-weight:700;background:var(--nm-gold-soft);color:var(--nm-gold)}
+.nmap .nm-node.out .nm-chip{background:color-mix(in srgb,var(--nm-out) 14%,transparent);color:var(--nm-out)}
+.nmap .nm-node.hub .nm-chip{background:var(--nm-gold);color:#1B2333}
+.nmap .nm-node.js .nm-chip{background:var(--nm-js);color:#fff}
+.nmap .nm-node h3{margin:4px 0 2px;font-size:16px;font-family:var(--nm-display);font-weight:800;color:inherit}
+.nmap .nm-node p{margin:0;font-size:12.5px;color:var(--nm-muted);line-height:1.5}
+.nmap .nm-port{position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:var(--nm-panel);border:2px solid var(--nm-line);transform:translateY(-50%)}
+.nmap .nm-port.l{left:-6px} .nmap .nm-port.r{right:-6px}
+.nmap .nm-cap{position:relative;margin-top:10px;background:var(--nm-navy);color:#F3E7C3;border-radius:10px;padding:12px 16px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--nm-shadow)}
+.nmap .nm-cap b{color:#fff;white-space:nowrap}
+.nmap .nm-prog{height:3px;background:rgba(243,231,195,.25);border-radius:3px;margin-top:8px;overflow:hidden}
+.nmap .nm-prog span{display:block;height:100%;width:0;background:var(--nm-gold)}
+.nmap .nm-foot{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;margin-top:12px;font-size:13.5px;color:var(--nm-muted)}
+.nmap .nm-foot a{color:var(--nm-ink);font-weight:700}
+.nmap .nm-list{display:none}
+.nm-drawer{--nm-panel:#FFFFFF;--nm-ink:#1B2333;--nm-muted:#5E6677;--nm-line:#C9BE9C;--nm-gold:#B8901E;--nm-gold-soft:#F3E7C3;--nm-navy:#1F2A44;
+  position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--nm-panel);color:var(--nm-ink);border-left:1px solid var(--nm-line);box-shadow:-10px 0 30px rgba(0,0,0,.12);transform:translateX(102%);transition:transform .25s ease;z-index:1000;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7}
+.nm-drawer.open{transform:none}
+.nm-drawer .nm-dh{padding:18px 22px 12px;border-bottom:1px solid var(--nm-line)}
+.nm-drawer .nm-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.nm-drawer .nm-kind{font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:999px;background:var(--nm-gold-soft);color:var(--nm-gold)}
+.nm-drawer h3{font-family:"Noto Serif TC","Songti TC",serif;margin:6px 0 0;font-size:23px;font-weight:800}
+.nm-drawer .nm-ds{color:var(--nm-muted);font-size:14.5px;margin-top:2px}
+.nm-drawer .nm-x{border:0;background:transparent;color:var(--nm-muted);font-size:26px;cursor:pointer;line-height:1;padding:4px 8px}
+.nm-drawer .nm-db{padding:16px 22px 26px;overflow-y:auto;flex:1;min-width:0;font-size:15.5px}
+.nm-drawer .nm-db ul{padding-left:1.2em;margin:0}
+.nm-drawer .nm-db li{margin:.45em 0}
+.nm-drawer .nm-dn{margin-top:18px;padding-top:12px;border-top:1px solid var(--nm-line);font-size:13px;color:var(--nm-muted)}
+.nm-drawer .nm-dn b{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--nm-navy);color:#F3E7C3;margin-right:6px}
+@media (max-width:820px){
+  .nmap .nm-board{display:none}
+  .nmap .nm-list{display:flex;flex-direction:column}
+  .nmap .nm-list .nm-node{position:relative;width:100%}
+  .nmap .nm-list .nm-conn{width:2px;height:16px;background:var(--nm-line);margin-left:24px}
+  .nmap .nm-cap{position:sticky;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:5}
+  .nmap .nm-cap[hidden]{display:none}
+  .nm-drawer{top:auto;height:auto;max-height:75%;width:100%;border-left:0;border-top:1px solid var(--nm-line);border-radius:14px 14px 0 0;transform:translateY(102%);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px)}
+  .nm-drawer.open{transform:none}
+}
+@media (prefers-reduced-motion:reduce){.nmap .nm-node,.nm-drawer,.nmap svg.nm-edges path{transition:none}}
+</style>
+<section class="nmap" id="map" aria-labelledby="nm-h">
+  <div class="nm-in">
+    <div class="nm-top">
+      <div style="min-width:0">
+        <h2 id="nm-h">建碩記帳 Excel 操作地圖<span class="nm-own">建碩客戶專用</span></h2>
+        <p class="nm-sub">每天記、每月勾，資料自動匯到「老闆看帳」。點任一格看它做什麼。</p>
+      </div>
+      <button class="nm-btn" id="nmPlay" type="button">▶ 播放動畫導覽</button>
+    </div>
+    <div class="nm-legend">
+      <span><i style="background:var(--nm-in)"></i>金色＝自己填</span>
+      <span><i style="background:var(--nm-out)"></i>深藍＝自動算、自動印</span>
+      <span><i style="background:var(--nm-js)"></i>綠色＝交給建碩</span>
+    </div>
+    <div class="nm-board" id="nmBoard">
+      <div class="nm-stage" id="nmStage"><svg class="nm-edges" id="nmEdges" viewBox="0 0 1240 660" aria-hidden="true"></svg></div>
+    </div>
+    <div class="nm-list" id="nmList"></div>
+    <div class="nm-cap" id="nmCap" hidden>
+      <div style="flex:1;min-width:0"><div><b id="nmCapT"></b>　<span id="nmCapX"></span></div><div class="nm-prog"><span id="nmProg"></span></div></div>
+      <button class="nm-btn ghost" id="nmStop" type="button">停止</button>
+    </div>
+    <div class="nm-foot"><span>地圖為功能示意；檔案提供建碩客戶使用，不開放下載。</span><a href="#cta-h" id="nmCta">想用在你的公司？LINE 諮詢 →</a></div>
+  </div>
+</section>
+<aside class="nm-drawer" id="nmDrawer" aria-hidden="true" aria-labelledby="nmDT">
+  <div class="nm-dh">
+    <div class="nm-row"><span class="nm-kind" id="nmDK"></span><button class="nm-x" id="nmX" type="button" aria-label="關閉說明">×</button></div>
+    <h3 id="nmDT"></h3>
+    <div class="nm-ds" id="nmDS"></div>
+  </div>
+  <div class="nm-db"><ul id="nmDL"></ul><div class="nm-dn"><b>建碩客戶專用</b>成為建碩客戶即可使用這份 Excel。</div></div>
+</aside>
+<script>
+(()=>{
+const NODES=[
+ {id:"home",x:30,y:40,k:"out",kind:"打開檔案",t:"主畫面",d:"全部功能一頁點進去",s:"所有功能一格一格排好，點一下就到。",b:["本月收入、支出、資金一眼看到","各頁右上角都能點回來"]},
+ {id:"base",x:30,y:250,k:"in",kind:"設一次",t:"基本資料設定",d:"公司、帳戶、客戶、分類",s:"第一次設好，之後記帳多半只要點選。",b:["公司、銀行帳戶、客戶、廠商","收入與支出分類，可依行業調整","設好後各頁都有下拉選單"]},
+ {id:"ins",x:30,y:470,k:"in",kind:"每年一次",t:"勞健保級距",d:"貼上官方分級表",s:"每年貼上官方分級表，勞健保自動算。",b:["員工勞保、健保、勞退自動帶出","不用自己查級距"]},
+ {id:"tx",x:300,y:28,k:"in",kind:"每天",t:"收付登記",d:"每筆錢一列，多用點選",s:"每天的收錢、付錢都記在這裡。",b:["收入、支出、帳戶互轉","還沒收到的錢會一直追蹤","漏填的格子會變色提醒"]},
+ {id:"tmp",x:300,y:160,k:"in",kind:"自動沖銷",t:"暫收・暫付・代墊",d:"幫客戶墊的錢不漏收",s:"代墊款另外追蹤，對方還錢自動沖銷。",b:["代墊、預支、押金分開記","月底請款不會漏"]},
+ {id:"fixed",x:300,y:292,k:"in",kind:"每月一勾",t:"固定收支表",d:"房租、月費登記一次",s:"固定的錢登記一次，每月勾一下就好。",b:["房租、月費、固定收入","過了約定日還沒勾會提醒"]},
+ {id:"hr",x:300,y:424,k:"in",kind:"到職／離職",t:"人事主檔",d:"員工資料與投保",s:"員工資料、年資、特休、投保集中管理。",b:["到職、離職會提醒加退保","年資、特休自動算"]},
+ {id:"chg",x:300,y:556,k:"in",kind:"每月",t:"本月薪資異動",d:"請假、獎金、加班",s:"只有例外才登記，其餘薪資自動算。",b:["請假填時數就自動扣","獎金、加班一筆一列"]},
+ {id:"contract",x:570,y:70,k:"in",kind:"往來",t:"客戶合約",d:"月費、到期提醒",s:"每家客戶的合約與月費，快到期會提醒。",b:["簽約中／已解約一目了然","合約期間收入自動加總"]},
+ {id:"labor",x:570,y:480,k:"in",kind:"非員工",t:"勞務報酬",d:"外包、講師、單次案件",s:"付給外包、講師的錢，扣繳自動算。",b:["勞務報酬單一張印兩聯","年底自動彙總"]},
+ {id:"boss",x:560,y:262,k:"hub",kind:"全部匯總",t:"老闆看帳",d:"收支、欠款、資金、提醒",s:"所有資料自動匯到這一頁，老闆一眼看完。",b:["收支比較、帳戶餘額、圖表","該催款、該付款、該發薪自動提醒","不用輸入，打開就看"]},
+ {id:"arap",x:815,y:110,k:"out",kind:"誰欠誰",t:"應收應付・對帳單",d:"帳齡、每家客戶賺多少",s:"誰欠多久、每家客戶賺多少，自動整理。",b:["依逾期天數分好","對帳單整張印出就能寄"]},
+ {id:"pay",x:815,y:420,k:"out",kind:"發薪",t:"薪資清冊・薪資單",d:"核對、列印、簽收",s:"發薪前核對，薪資單直接列印。",b:["一張紙印四人薪資單","附員工簽收表"]},
+ {id:"send",x:1036,y:220,k:"out",kind:"寄單據",t:"交事務所清單",d:"寄出前逐張核對",s:"當月單據自動列出，寄件日前倒數提醒。",b:["照清單整理發票、收據","快到寄件日會提醒"]},
+ {id:"line",x:1036,y:420,k:"js",kind:"交給建碩",t:"建碩官方 LINE",d:"寄出說一聲，報稅交給建碩",s:"單據寄出後 LINE 說一聲，記帳報稅交給建碩。",b:["寄出後在 LINE 告知","有問題直接問"]}
+];
+const EDGES=[["home","base"],["base","tx"],["base","hr"],["ins","hr"],["tx","boss"],["tmp","boss"],["fixed","boss"],["hr","boss"],["chg","boss"],["contract","boss"],["labor","boss"],["tx","contract"],["chg","labor"],["boss","arap"],["boss","pay"],["labor","pay"],["arap","send"],["pay","send"],["send","line"]];
+const ORDER=["home","base","tx","tmp","fixed","contract","hr","chg","labor","boss","arap","pay","send","line"];
+const KIND={in:"自己填",out:"自動",hub:"匯總",js:"建碩"};
+const $=id=>document.getElementById(id);
+const stage=$("nmStage"),svg=$("nmEdges"),board=$("nmBoard"),list=$("nmList"),drawer=$("nmDrawer"),cap=$("nmCap");
+document.body.appendChild(drawer);const E={},L={};
+function html(n){return `<div class="k"><span>${n.kind}</span><span class="nm-chip">${KIND[n.k]}</span></div><h3>${n.t}</h3><p>${n.d}</p>`}
+const cls=n=>"nm-node"+(n.k==="out"?" out":n.k==="hub"?" hub":n.k==="js"?" js":"");
+NODES.forEach((n,i)=>{
+  const b=document.createElement("button");b.type="button";b.className=cls(n);b.style.left=n.x+"px";b.style.top=n.y+"px";
+  b.innerHTML=html(n)+'<span class="nm-port l"></span><span class="nm-port r"></span>';b.addEventListener("click",()=>{stop();open(n.id)});stage.appendChild(b);E[n.id]=b;
+  if(i){const c=document.createElement("div");c.className="nm-conn";list.appendChild(c)}
+  const c=document.createElement("button");c.type="button";c.className=cls(n);c.innerHTML=html(n);c.addEventListener("click",()=>{stop();open(n.id)});list.appendChild(c);L[n.id]=c});
+function draw(){svg.innerHTML="";
+  EDGES.forEach(([a,b])=>{const A=NODES.find(n=>n.id===a),B=NODES.find(n=>n.id===b);
+    const wa=E[a].offsetWidth,ha=E[a].offsetHeight,wb=E[b].offsetWidth,hb=E[b].offsetHeight;let x1,y1,x2,y2,d;
+    if(B.x>A.x+50){x1=A.x+wa;y1=A.y+ha/2;x2=B.x;y2=B.y+hb/2;const m=(x1+x2)/2;d=`M${x1},${y1} C${m},${y1} ${m},${y2} ${x2},${y2}`}
+    else if(B.y>A.y){x1=A.x+wa/2;y1=A.y+ha;x2=B.x+wb/2;y2=B.y;const m=(y1+y2)/2;d=`M${x1},${y1} C${x1},${m} ${x2},${m} ${x2},${y2}`}
+    else{x1=A.x+wa/2;y1=A.y;x2=B.x+wb/2;y2=B.y+hb;const m=(y1+y2)/2;d=`M${x1},${y1} C${x1},${m} ${x2},${m} ${x2},${y2}`}
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d",d);p.dataset.a=a;p.dataset.b=b;svg.appendChild(p)})}
+function fit(){const w=board.clientWidth;if(!w)return;const s=Math.min(1,w/1240);stage.style.transform=`scale(${s})`;board.style.height=(660*s)+"px"}
+addEventListener("resize",fit);requestAnimationFrame(()=>{draw();fit()});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{draw();fit()});
+function open(id){const n=NODES.find(x=>x.id===id);
+  Object.entries(E).forEach(([k,e])=>e.classList.toggle("on",k===id));Object.entries(L).forEach(([k,e])=>e.classList.toggle("on",k===id));
+  svg.querySelectorAll("path").forEach(p=>p.classList.toggle("hot",p.dataset.a===id||p.dataset.b===id));
+  $("nmDK").textContent=n.kind;$("nmDT").textContent=n.t;$("nmDS").textContent=n.s;$("nmDL").innerHTML=n.b.map(x=>`<li>${x}</li>`).join("");
+  drawer.classList.add("open");drawer.setAttribute("aria-hidden","false")}
+function close(){drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
+$("nmX").addEventListener("click",()=>{stop();close()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){stop();close()}});
+let i=-1,t=null,t0=0;const DUR=6000;
+function step(){i++;if(i>=ORDER.length){stop();return}const n=NODES.find(x=>x.id===ORDER[i]);open(n.id);
+  cap.hidden=false;$("nmCapT").textContent=`${i+1}／${ORDER.length}　${n.t}`;$("nmCapX").textContent=n.s;
+  if(getComputedStyle(list).display!=="none")L[n.id].scrollIntoView({block:"center",behavior:"smooth"});
+  t0=performance.now();clearTimeout(t);t=setTimeout(step,DUR);anim()}
+function anim(){if(i<0)return;const p=Math.min(1,(performance.now()-t0)/DUR);$("nmProg").style.width=p*100+"%";if(p<1)requestAnimationFrame(anim)}
+function stop(){clearTimeout(t);i=-1;cap.hidden=true;$("nmPlay").textContent="▶ 播放動畫導覽"}
+$("nmPlay").addEventListener("click",()=>{if(i>=0){stop();return}$("nmPlay").textContent="■ 停止導覽";step()});
+$("nmStop").addEventListener("click",stop);
+$("nmCta").addEventListener("click",()=>{stop();close()});
+})();
+</script>
+<!--FMAP-END-->
+
+
   <section class="bk">
     <div class="wrap">
 
