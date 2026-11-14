@@ -206,6 +206,7 @@ footer .ft-i span{color:#C9C0AE}
 footer .ft-i b{color:#EDE6D6}
 
 
+.book.solo{grid-template-columns:minmax(0,1fr);max-width:920px;margin-top:16px}.bk-lede{color:var(--ink-2);font-size:16.5px;margin:10px 0 0;max-width:44em}
 </style>
 <style>/* 各種手機／平板防跑版（11/13） */
 :root{color-scheme:only light}
@@ -424,7 +425,7 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
 <script>
 (()=>{
 const NODES=[
- {id:"home",x:30,y:40,k:"out",kind:"打開檔案",t:"主畫面",d:"全部功能一頁點進去",s:"所有功能一格一格排好，點一下就到。",b:["本月收入、支出、資金一眼看到","各頁右上角都能點回來"]},
+ {id:"home",x:30,y:40,k:"out",kind:"打開檔案",t:"主畫面",d:"全部功能一頁點進去",s:"所有功能一格一格排好，點一下就到。",b:["本月收入、支出、資金一眼看到","最上面就有寄單據倒數提醒","各頁右上角都能點回來"]},
  {id:"base",x:30,y:250,k:"in",kind:"設一次",t:"基本資料設定",d:"公司、帳戶、客戶、分類",s:"第一次設好，之後記帳多半只要點選。",b:["公司、銀行帳戶、客戶、廠商","收入與支出分類，可依行業調整","設好後各頁都有下拉選單"]},
  {id:"ins",x:30,y:470,k:"in",kind:"每年一次",t:"勞健保級距",d:"貼上官方分級表",s:"每年貼上官方分級表，勞健保自動算。",b:["員工勞保、健保、勞退自動帶出","不用自己查級距"]},
  {id:"tx",x:300,y:28,k:"in",kind:"每天",t:"收付登記",d:"每筆錢一列，多用點選",s:"每天的收錢、付錢都記在這裡。",b:["收入、支出、帳戶互轉","還沒收到的錢會一直追蹤","漏填的格子會變色提醒"]},
@@ -434,10 +435,10 @@ const NODES=[
  {id:"chg",x:300,y:556,k:"in",kind:"每月",t:"本月薪資異動",d:"請假、獎金、加班",s:"只有例外才登記，其餘薪資自動算。",b:["請假填時數就自動扣","獎金、加班一筆一列"]},
  {id:"contract",x:570,y:70,k:"in",kind:"往來",t:"客戶合約",d:"月費、到期提醒",s:"每家客戶的合約與月費，快到期會提醒。",b:["簽約中／已解約一目了然","合約期間收入自動加總"]},
  {id:"labor",x:570,y:480,k:"in",kind:"非員工",t:"勞務報酬",d:"外包、講師、單次案件",s:"付給外包、講師的錢，扣繳自動算。",b:["勞務報酬單一張印兩聯","年底自動彙總"]},
- {id:"boss",x:560,y:262,k:"hub",kind:"全部匯總",t:"老闆看帳",d:"收支、欠款、資金、提醒",s:"所有資料自動匯到這一頁，老闆一眼看完。",b:["收支比較、帳戶餘額、圖表","該催款、該付款、該發薪自動提醒","不用輸入，打開就看"]},
+ {id:"boss",x:560,y:262,k:"hub",kind:"全部匯總",t:"老闆看帳",d:"收支、欠款、提醒、寄單據倒數",s:"所有資料自動匯到這一頁，老闆一眼看完。",b:["收支比較、帳戶餘額、圖表","該催款、該付款、該發薪自動提醒","寄單據前自動倒數提醒","不用輸入，打開就看"]},
  {id:"arap",x:815,y:110,k:"out",kind:"誰欠誰",t:"應收應付・對帳單",d:"帳齡、每家客戶賺多少",s:"誰欠多久、每家客戶賺多少，自動整理。",b:["依逾期天數分好","對帳單整張印出就能寄"]},
  {id:"pay",x:815,y:420,k:"out",kind:"發薪",t:"薪資清冊・薪資單",d:"核對、列印、簽收",s:"發薪前核對，薪資單直接列印。",b:["一張紙印四人薪資單","附員工簽收表"]},
- {id:"send",x:1036,y:220,k:"out",kind:"寄單據",t:"交事務所清單",d:"寄出前逐張核對",s:"當月單據自動列出，寄件日前倒數提醒。",b:["照清單整理發票、收據","快到寄件日會提醒"]},
+ {id:"send",x:1036,y:220,k:"out",kind:"寄單據",t:"交事務所清單",d:"逐張核對，寄件日倒數提醒",s:"當月單據自動列出，寄件日前倒數提醒。",b:["照清單整理發票、收據","寄件日前，主畫面和老闆看帳會倒數提醒","單數月 1 日寄出、4 日前寄達建碩"]},
  {id:"line",x:1036,y:420,k:"js",kind:"交給建碩",t:"建碩官方 LINE",d:"寄出說一聲，報稅交給建碩",s:"單據寄出後 LINE 說一聲，記帳報稅交給建碩。",b:["寄出後在 LINE 告知","有問題直接問"]}
 ];
 const EDGES=[["home","base"],["base","tx"],["base","hr"],["ins","hr"],["tx","boss"],["tmp","boss"],["fixed","boss"],["hr","boss"],["chg","boss"],["contract","boss"],["labor","boss"],["tx","contract"],["chg","labor"],["boss","arap"],["boss","pay"],["labor","pay"],["arap","send"],["pay","send"],["send","line"]];
@@ -489,8 +490,10 @@ $("nmCta").addEventListener("click",()=>{stop();close()});
   <section class="bk">
     <div class="wrap">
 
-      <div class="book">
-        <div class="sheet" aria-label="輸入分頁">
+      <div class="eyebrow">老闆看帳示範</div>
+      <p class="bk-lede">選查詢月份，收支、提醒和圖表會跟著變；Excel 裡的老闆看帳就是這個樣子。</p>
+      <div class="book solo">
+        <div class="sheet" aria-label="輸入分頁" hidden>
           <div class="tabs" role="tablist" aria-label="Excel 分頁">
             <button class="tab gold" role="tab" id="t-set" aria-controls="p-set" aria-selected="false">基本資料設定</button>
             <button class="tab gold" role="tab" id="t-ent" aria-controls="p-ent" aria-selected="true">收付登記</button>
