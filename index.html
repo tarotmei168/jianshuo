@@ -549,6 +549,16 @@ img,canvas,video{max-width:100%}
   </div>
 </section>
 
+<style>/* 手機首屏：標語跟著螢幕寬度放大縮小、置中（大字體設定也不會被切掉） */
+@media (max-width:640px){.hero .tx{align-items:center;text-align:center;min-width:0;max-width:100%;width:100%}.hero .nm,.hero h1.slg .l{width:max-content;max-width:none;white-space:nowrap}.hero h1.slg{display:flex;flex-direction:column;align-items:center}.hero .acts{width:100%}}
+</style>
+<script>(function(){
+function fit(){var tx=document.querySelector('.hero .tx');if(!tx)return;var h1=tx.querySelector('h1.slg'),nm=tx.querySelector('.nm');
+ if(innerWidth>640){h1.style.fontSize='';nm.style.fontSize='';return}
+ var pa=tx.parentElement,cs=getComputedStyle(pa),W=pa.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);if(!W)return;
+ for(var k=0;k<2;k++){var f=parseFloat(getComputedStyle(h1).fontSize),w=0;h1.querySelectorAll('.l').forEach(function(l){w=Math.max(w,l.getBoundingClientRect().width)});if(w)h1.style.fontSize=(f*W*0.98/w).toFixed(2)+'px'}
+ nm.style.fontSize='';for(var j=0;j<2;j++){var g=parseFloat(getComputedStyle(nm).fontSize),v=nm.getBoundingClientRect().width;if(v>W)nm.style.fontSize=(g*W*0.98/v).toFixed(2)+'px'}}
+addEventListener('resize',fit);addEventListener('load',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit();})();</script>
 <section class="kband" aria-label="建碩的經驗"><canvas class="silk" aria-hidden="true"></canvas>
   <div class="wrap kgrid">
     <div class="kp"><div class="kn"><span class="count" data-to="15">15</span><sup>年+</sup></div><div class="kk">會計師經驗・審計記帳全方位</div></div>
