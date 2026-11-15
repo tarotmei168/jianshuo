@@ -377,6 +377,16 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
 .nm-drawer .nm-db li{margin:.45em 0}
 .nm-drawer .nm-dn{margin-top:18px;padding-top:12px;border-top:1px solid var(--nm-line);font-size:13px;color:var(--nm-muted)}
 .nm-drawer .nm-dn b{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--nm-navy);color:#F3E7C3;margin-right:6px}
+.nmap .nm-node.nm-spot{transform:translateY(-4px);border-color:var(--nm-gold);animation:nmPulse 1.6s ease-in-out infinite;z-index:3}
+@keyframes nmPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,170,79,0),0 6px 18px rgba(31,42,68,.12)}50%{box-shadow:0 0 0 9px rgba(212,170,79,.42),0 12px 26px rgba(31,42,68,.25)}}
+.nmap .nm-tip{position:absolute;left:50%;top:-38px;transform:translateX(-50%);white-space:nowrap;background:var(--nm-gold);color:#1B2333;font-size:13px;font-weight:700;padding:5px 12px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.2);pointer-events:none}
+.nmap .nm-tip::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-bottom:0;border-top-color:var(--nm-gold)}
+.nmap .nm-list .nm-node.nm-spot{margin-top:40px}
+.nm-drawer .nm-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.nm-drawer .nm-acts a{flex:1 1 140px;text-align:center;text-decoration:none;font-weight:700;font-size:15px;padding:11px 14px;border-radius:10px}
+.nm-drawer .nm-acts .ln{background:#06C755;color:#fff}
+.nm-drawer .nm-acts .cs{background:var(--nm-navy);color:#F3E7C3}
+@media (prefers-reduced-motion:reduce){.nmap .nm-node.nm-spot{animation:none;box-shadow:0 0 0 4px rgba(212,170,79,.6)}}
 @media (max-width:820px){
   .nmap .nm-board{display:none}
   .nmap .nm-list{display:flex;flex-direction:column}
@@ -420,7 +430,7 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
     <h3 id="nmDT"></h3>
     <div class="nm-ds" id="nmDS"></div>
   </div>
-  <div class="nm-db"><ul id="nmDL"></ul><div class="nm-dn"><b>建碩客戶專用</b>成為建碩客戶即可使用這份 Excel。</div></div>
+  <div class="nm-db"><ul id="nmDL"></ul><div class="nm-dn"><b>建碩客戶專用</b>成為建碩客戶即可使用這份 Excel。</div><div class="nm-acts"><a class="ln" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener">LINE 問我們</a><a class="cs" href="consult.html">預約諮詢</a></div></div>
 </aside>
 <script>
 (()=>{
@@ -464,7 +474,7 @@ function draw(){svg.innerHTML="";
 function fit(){const w=board.clientWidth;if(!w)return;const s=Math.min(1,w/1240);stage.style.transform=`scale(${s})`;board.style.height=(660*s)+"px"}
 addEventListener("resize",fit);requestAnimationFrame(()=>{draw();fit()});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{draw();fit()});
-function open(id){const n=NODES.find(x=>x.id===id);
+function open(id){unspot();const n=NODES.find(x=>x.id===id);
   Object.entries(E).forEach(([k,e])=>e.classList.toggle("on",k===id));Object.entries(L).forEach(([k,e])=>e.classList.toggle("on",k===id));
   svg.querySelectorAll("path").forEach(p=>p.classList.toggle("hot",p.dataset.a===id||p.dataset.b===id));
   $("nmDK").textContent=n.kind;$("nmDT").textContent=n.t;$("nmDS").textContent=n.s;$("nmDL").innerHTML=n.b.map(x=>`<li>${x}</li>`).join("");
@@ -482,6 +492,14 @@ function stop(){clearTimeout(t);i=-1;cap.hidden=true;$("nmPlay").textContent="�
 $("nmPlay").addEventListener("click",()=>{if(i>=0){stop();return}$("nmPlay").textContent="■ 停止導覽";step()});
 $("nmStop").addEventListener("click",stop);
 $("nmCta").addEventListener("click",()=>{stop();close()});
+function spot(id){if(!E[id])return;document.querySelectorAll('.nm-spot').forEach(e=>e.classList.remove('nm-spot'));document.querySelectorAll('.nm-tip').forEach(e=>e.remove());
+ [E[id],L[id]].forEach(e=>{e.classList.add('nm-spot');const t=document.createElement('span');t.className='nm-tip';t.textContent='點這格看說明';e.appendChild(t)});
+ svg.querySelectorAll("path").forEach(p=>p.classList.toggle("hot",p.dataset.a===id||p.dataset.b===id));
+ const tgt=getComputedStyle(list).display!=="none"?L[id]:document.getElementById('map');setTimeout(()=>tgt.scrollIntoView({block:"center",behavior:"smooth"}),300)}
+function unspot(){document.querySelectorAll('.nm-spot').forEach(e=>e.classList.remove('nm-spot'));document.querySelectorAll('.nm-tip').forEach(e=>e.remove())}
+function fromHash(){const m=location.hash.match(/^#map-([a-z]+)/);if(m)spot(m[1])}
+addEventListener('hashchange',fromHash);setTimeout(fromHash,500);
+
 })();
 </script>
 <!--FMAP-END-->
