@@ -635,6 +635,7 @@ addEventListener('hashchange',fromHash);setTimeout(fromHash,500);
       <p>成為建碩的客戶就能使用。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
       <figure class="qr qrbig" style="margin-top:32px"><span class="qt">建碩會計師事務所</span><img src="qr.png" width="300" height="300" alt="建碩會計師事務所 LINE 官方帳號 QR Code，LINE ID @256ojohr"><span class="qid">LINE ID：@256ojohr</span></figure>
       <div class="cta-acts">
+        <a class="jh-bk" href="consult.html?from=專業版">預約諮詢</a>
         <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
       </div>
     </div>
@@ -878,3 +879,11 @@ fit();draw();addEventListener('resize',function(){fit();draw()});
 if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;cancelAnimationFrame(raf);if(on)loop()}).observe(c)})();</script>
 </body>
 </html>
+
+<style>
+/* 底座：QR 下方兩顆按鈕（左金＝預約諮詢、右綠＝LINE 諮詢），同大小、拉開距離 11/17 */
+.cta-acts{gap:16px 32px!important;margin-top:32px!important}
+.cta-acts>a{font-size:22px!important;font-weight:900!important;padding:17px 40px!important;min-height:64px!important;min-width:220px;box-sizing:border-box;border-radius:999px!important;justify-content:center}
+.cta-acts>a.lbtn svg{width:26px;height:26px}
+@media (max-width:520px){.cta-acts{gap:14px!important}.cta-acts>a{min-width:0;flex:1 1 100%;max-width:320px;font-size:20px!important;padding:15px 22px!important;min-height:58px!important}}
+</style>
