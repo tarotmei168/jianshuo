@@ -805,8 +805,8 @@ addEventListener('resize',fit);addEventListener('load',fit);if(document.fonts&&d
     <h2><em>建</em>業有伴，<em>碩</em>果可期</h2>
     <p class="ask">預約諮詢，由專業團隊與您聯繫</p>
     <p>線上留下聯絡方式，或加入官方 LINE。手機請直接點下方按鈕；電腦請用手機掃描 QR Code。</p>
-    <figure class="qr"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><figcaption>掃碼加入 LINE</figcaption></figure>
-    <div class="cta-acts"><a class="btn bk" href="consult.html?from=專業版">預約諮詢</a><a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a><span class="lid">LINE ID：<b>@256ojohr</b></span></div>
+    <figure class="qr qrbig" style="margin-top:32px"><span class="qt">建碩會計師事務所</span><img src="qr.png" width="300" height="300" alt="建碩會計師事務所 LINE 官方帳號 QR Code，LINE ID @256ojohr"><span class="qid">LINE ID：@256ojohr</span></figure>
+    <div class="cta-acts"><a class="btn bk" href="consult.html?from=專業版">預約諮詢</a><a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a></div>
   </div>
 </section>
 
@@ -862,3 +862,11 @@ var K=Math.max(14,Math.round(w/22));for(var k=0;k<K;k++){var s=2+(k%3)*2,yy=h-((
 function loop(){t+=.004;draw();if(on)raf=requestAnimationFrame(loop)}
 fit();draw();addEventListener('resize',function(){fit();draw()});
 if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;cancelAnimationFrame(raf);if(on)loop()}).observe(c)})();</script>
+<style>/* 金獅 QR 名片框（11/16） */
+.qr.qrbig{position:relative;box-sizing:border-box;width:min(300px,84vw)!important;max-width:100%;margin-left:auto;margin-right:auto;padding:24px 20px 20px!important;border-radius:14px!important;text-align:center;container-type:inline-size;
+background:linear-gradient(#0F2340,#0F2340) left 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/3px 22px no-repeat,#FFFBEF!important;
+box-shadow:0 0 0 3px rgba(212,170,79,.8),0 0 0 8px rgba(212,170,79,.14),0 30px 60px -22px rgba(0,0,0,.7)!important}
+.qr.qrbig .qt{display:block;font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC",serif;font-weight:900;color:#0F2340;font-size:26px;font-size:10cqi;line-height:1.15;white-space:nowrap;margin:2px 0 12px}
+.qr.qrbig img{display:block;width:100%;height:auto;margin:0}
+.qr.qrbig .qid{display:block;color:#0F2340;font-weight:700;font-size:21px;font-size:8.2cqi;margin-top:12px;letter-spacing:.02em}
+</style>

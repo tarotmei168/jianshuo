@@ -219,7 +219,14 @@ img,canvas,video{max-width:100%}
 .jh-dit~.jh-dit:hover .jh-dd,.jh-dit~.jh-dit:focus-within .jh-dd,.jh-dit~.jh-dit.open .jh-dd{transform:none!important}
 .jh-dd{max-width:calc(100vw - 24px)}
 /* 手機大字體保護：選單鈕固定大小、三條線一定看得到；底部按鈕文字不折行 */.mt,.jh-mt{flex:0 0 48px!important;min-width:48px!important;width:48px!important;align-items:center!important;padding:0!important}.mt span,.jh-mt span{width:22px!important;height:2.5px!important;flex:0 0 auto;background:#0F2340!important}.hd>a:first-child,.hd .brand,.jh-brand{min-width:0;overflow:hidden}.mcta a,.jh-cta a{white-space:nowrap!important;min-width:0!important;overflow:hidden;justify-content:center}.mcta a svg,.jh-cta a svg{flex:0 0 auto}</style>
-</head>
+<style>/* 金獅 QR 名片框（11/16） */
+.qr.qrbig{position:relative;box-sizing:border-box;width:min(300px,84vw)!important;max-width:100%;margin-left:auto;margin-right:auto;padding:24px 20px 20px!important;border-radius:14px!important;text-align:center;container-type:inline-size;
+background:linear-gradient(#0F2340,#0F2340) left 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/3px 22px no-repeat,#FFFBEF!important;
+box-shadow:0 0 0 3px rgba(212,170,79,.8),0 0 0 8px rgba(212,170,79,.14),0 30px 60px -22px rgba(0,0,0,.7)!important}
+.qr.qrbig .qt{display:block;font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC",serif;font-weight:900;color:#0F2340;font-size:26px;font-size:10cqi;line-height:1.15;white-space:nowrap;margin:2px 0 12px}
+.qr.qrbig img{display:block;width:100%;height:auto;margin:0}
+.qr.qrbig .qid{display:block;color:#0F2340;font-weight:700;font-size:21px;font-size:8.2cqi;margin-top:12px;letter-spacing:.02em}
+</style></head>
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <style>
@@ -366,7 +373,7 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
 .nm-drawer{--nm-panel:#FFFFFF;--nm-ink:#1B2333;--nm-muted:#5E6677;--nm-line:#C9BE9C;--nm-gold:#B8901E;--nm-gold-soft:#F3E7C3;--nm-navy:#1F2A44;
   position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--nm-panel);color:var(--nm-ink);border-left:1px solid var(--nm-line);box-shadow:-10px 0 30px rgba(0,0,0,.12);transform:translateX(102%);transition:transform .25s ease;z-index:1000;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7}
 .nm-drawer.open{transform:none}
-.nm-drawer .nm-dh{padding:18px 22px 12px;border-bottom:1px solid var(--nm-line)}
+.nm-drawer .nm-law{margin-top:12px;font-size:13.5px;color:var(--nm-muted)}.nm-law a{color:var(--nm-navy);text-decoration:underline;text-underline-offset:2px}.nm-dh{padding:18px 22px 12px;border-bottom:1px solid var(--nm-line)}
 .nm-drawer .nm-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .nm-drawer .nm-kind{font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:999px;background:var(--nm-gold-soft);color:var(--nm-gold)}
 .nm-drawer h3{font-family:"Noto Serif TC","Songti TC",serif;margin:6px 0 0;font-size:23px;font-weight:800}
@@ -447,10 +454,11 @@ const NODES=[
  {id:"labor",x:570,y:480,k:"in",kind:"非員工",t:"勞務報酬",d:"外包、講師、單次案件",s:"付給外包、講師的錢，扣繳自動算。",b:["勞務報酬單一張印兩聯","年底自動彙總"]},
  {id:"boss",x:560,y:262,k:"hub",kind:"全部匯總",t:"老闆看帳",d:"收支、欠款、提醒、寄單據倒數",s:"所有資料自動匯到這一頁，老闆一眼看完。",b:["收支比較、帳戶餘額、圖表","該催款、該付款、該發薪自動提醒","寄單據前自動倒數提醒","不用輸入，打開就看"]},
  {id:"arap",x:815,y:110,k:"out",kind:"誰欠誰",t:"應收應付・對帳單",d:"帳齡、每家客戶賺多少",s:"誰欠多久、每家客戶賺多少，自動整理。",b:["依逾期天數分好","對帳單整張印出就能寄"]},
- {id:"pay",x:815,y:420,k:"out",kind:"發薪",t:"薪資清冊・薪資單",d:"核對、列印、簽收",s:"發薪前核對，薪資單直接列印。",b:["一張紙印四人薪資單","附員工簽收表"]},
- {id:"send",x:1036,y:220,k:"out",kind:"寄單據",t:"交事務所清單",d:"逐張核對，寄件日倒數提醒",s:"當月單據自動列出，寄件日前倒數提醒。",b:["照清單整理發票、收據","寄件日前，主畫面和老闆看帳會倒數提醒","單數月 1 日寄出、4 日前寄達建碩"]},
+ {id:"pay",x:815,y:420,k:"out",kind:"發薪",t:"薪資清冊・薪資單",d:"核對、列印、簽收",s:"發薪前核對，薪資單直接列印。",b:["一張紙印四人薪資單","特休未休工資也一併列出","附員工簽收表"]},
+ {id:"send",x:1036,y:220,k:"out",kind:"寄單據",t:"寄單據提醒",d:"主畫面紅字提醒何時寄",s:"打開主畫面，最上方紅字就是下次寄單據的日期與期別。",b:["主畫面最上方紅字：下次寄出日與要寄的期別","寄件日前，主畫面和老闆看帳會倒數提醒","單數月 1 日寄出、4 日前寄達建碩"]},
  {id:"line",x:1036,y:420,k:"js",kind:"交給建碩",t:"建碩官方 LINE",d:"寄出說一聲，報稅交給建碩",s:"單據寄出後 LINE 說一聲，記帳報稅交給建碩。",b:["寄出後在 LINE 告知","有問題直接問"]}
 ];
+const LAW={"ins": [["勞保局", "https://www.bli.gov.tw/"], ["健保署", "https://www.nhi.gov.tw/"]], "hr": [["勞基法第 7 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=7"], ["勞保條例第 11 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0050001&flno=11"]], "chg": [["勞工請假規則", "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030006"]], "labor": [["所得稅法第 88 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340003&flno=88"]], "pay": [["勞基法第 23 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=23"], ["勞基法第 38 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38"]], "send": [["營業稅法第 35 條", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340080&flno=35"]]};
 const EDGES=[["home","base"],["base","tx"],["base","hr"],["ins","hr"],["tx","boss"],["tmp","boss"],["fixed","boss"],["hr","boss"],["chg","boss"],["contract","boss"],["labor","boss"],["tx","contract"],["chg","labor"],["boss","arap"],["boss","pay"],["labor","pay"],["arap","send"],["pay","send"],["send","line"]];
 const ORDER=["home","base","tx","tmp","fixed","contract","hr","chg","labor","boss","arap","pay","send","line"];
 const KIND={in:"自己填",out:"自動",hub:"匯總",js:"建碩"};
@@ -477,7 +485,7 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{draw();fi
 function open(id){unspot();const n=NODES.find(x=>x.id===id);
   Object.entries(E).forEach(([k,e])=>e.classList.toggle("on",k===id));Object.entries(L).forEach(([k,e])=>e.classList.toggle("on",k===id));
   svg.querySelectorAll("path").forEach(p=>p.classList.toggle("hot",p.dataset.a===id||p.dataset.b===id));
-  $("nmDK").textContent=n.kind;$("nmDT").textContent=n.t;$("nmDS").textContent=n.s;$("nmDL").innerHTML=n.b.map(x=>`<li>${x}</li>`).join("");
+  $("nmDK").textContent=n.kind;$("nmDT").textContent=n.t;$("nmDS").textContent=n.s;$("nmDL").innerHTML=n.b.map(x=>`<li>${x}</li>`).join("");let lw=$("nmLaw");if(!lw){lw=document.createElement("div");lw.id="nmLaw";lw.className="nm-law";$("nmDL").after(lw)}lw.innerHTML=LAW[id]?"依據："+LAW[id].map(([a,u])=>`<a href="${u}" target="_blank" rel="noopener">${a} ↗</a>`).join("、"):"";lw.hidden=!LAW[id];
   drawer.classList.add("open");drawer.setAttribute("aria-hidden","false")}
 function close(){drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
 $("nmX").addEventListener("click",()=>{stop();close()});
@@ -594,7 +602,7 @@ addEventListener('hashchange',fromHash);setTimeout(fromHash,500);
       <div class="mgrid">
         <div class="mcard"><h3>① 顏色怎麼看</h3><dl>
           <div><dt><span class="sw" style="background:#FFF6DE"></span>金色分頁／香檳金格子</dt><dd>要自己輸入或下拉選擇的地方：基本資料設定、收付登記、固定收支表、人事主檔、本月薪資異動。</dd></div>
-          <div><dt><span class="sw" style="background:#E9EEF4"></span>藍色分頁／灰藍格子</dt><dd>系統自動計算的報表與列印頁，不用輸入：老闆看帳、應收應付總覽、對帳單、交事務所清單、薪資清冊、薪資單、簽收表。</dd></div>
+          <div><dt><span class="sw" style="background:#E9EEF4"></span>藍色分頁／灰藍格子</dt><dd>系統自動計算的報表與列印頁，不用輸入：老闆看帳、應收應付總覽、對帳單、薪資清冊、薪資單、簽收表。</dd></div>
           <div><dt><span class="sw" style="background:#FBE3DE"></span>淡紅色格子</dt><dd>代表「漏填」，例如有金額卻沒選收支別、選了未收付卻沒填預計日。</dd></div>
           <div><dt>▼ 下拉選單</dt><dd>大多數下拉只是「快速選」，也可以直接打字；收支別、帳戶、收付狀態、員工、假別這些會影響計算的欄位，要從清單選。</dd></div>
         </dl></div>
@@ -625,10 +633,9 @@ addEventListener('hashchange',fromHash);setTimeout(fromHash,500);
       <h2 id="cta-h" style="margin-top:14px"><em>建</em>業有伴，<em>碩</em>果可期</h2>
       <p class="ask">想用在你的公司？</p>
       <p>成為建碩的客戶就能使用。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
-      <figure class="qr" style="margin:32px 0 0"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><small>掃碼加入 LINE</small></figure>
+      <figure class="qr qrbig" style="margin-top:32px"><span class="qt">建碩會計師事務所</span><img src="qr.png" width="300" height="300" alt="建碩會計師事務所 LINE 官方帳號 QR Code，LINE ID @256ojohr"><span class="qid">LINE ID：@256ojohr</span></figure>
       <div class="cta-acts">
         <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
-        <span style="color:#C9C0AE">LINE ID：<b style="color:#EDE6D6;user-select:all">@256ojohr</b></span>
       </div>
     </div>
   </section>

@@ -332,7 +332,14 @@ img,canvas,video{max-width:100%}
 .jh-dit~.jh-dit:hover .jh-dd,.jh-dit~.jh-dit:focus-within .jh-dd,.jh-dit~.jh-dit.open .jh-dd{transform:none!important}
 .jh-dd{max-width:calc(100vw - 24px)}
 /* 手機大字體保護：選單鈕固定大小、三條線一定看得到；底部按鈕文字不折行 */.mt,.jh-mt{flex:0 0 48px!important;min-width:48px!important;width:48px!important;align-items:center!important;padding:0!important}.mt span,.jh-mt span{width:22px!important;height:2.5px!important;flex:0 0 auto;background:#0F2340!important}.hd>a:first-child,.hd .brand,.jh-brand{min-width:0;overflow:hidden}.mcta a,.jh-cta a{white-space:nowrap!important;min-width:0!important;overflow:hidden;justify-content:center}.mcta a svg,.jh-cta a svg{flex:0 0 auto}</style>
-</head>
+<style>/* 金獅 QR 名片框（11/16） */
+.qr.qrbig{position:relative;box-sizing:border-box;width:min(300px,84vw)!important;max-width:100%;margin-left:auto;margin-right:auto;padding:24px 20px 20px!important;border-radius:14px!important;text-align:center;container-type:inline-size;
+background:linear-gradient(#0F2340,#0F2340) left 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px top 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) left 10px bottom 10px/3px 22px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/22px 3px no-repeat,linear-gradient(#0F2340,#0F2340) right 10px bottom 10px/3px 22px no-repeat,#FFFBEF!important;
+box-shadow:0 0 0 3px rgba(212,170,79,.8),0 0 0 8px rgba(212,170,79,.14),0 30px 60px -22px rgba(0,0,0,.7)!important}
+.qr.qrbig .qt{display:block;font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC",serif;font-weight:900;color:#0F2340;font-size:26px;font-size:10cqi;line-height:1.15;white-space:nowrap;margin:2px 0 12px}
+.qr.qrbig img{display:block;width:100%;height:auto;margin:0}
+.qr.qrbig .qid{display:block;color:#0F2340;font-weight:700;font-size:21px;font-size:8.2cqi;margin-top:12px;letter-spacing:.02em}
+</style></head>
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <style>
@@ -586,10 +593,9 @@ if(location.hash){const id=decodeURIComponent(location.hash.slice(1));setTimeout
       <h2 id="cta-h" style="margin-top:14px"><em>建</em>業有伴，<em>碩</em>果可期</h2>
       <p class="ask">算完想再確認？</p>
       <p>你的狀況比較特別？加 LINE 問我們，幫你看一次。<br>手機請直接點下方按鈕加好友；電腦請用手機掃描下面的 QR Code。</p>
-      <figure class="qr" style="margin:32px 0 0"><img src="qr.png" width="220" height="220" alt="建碩會計師事務所 LINE 官方帳號 QR Code"><small>掃碼加入 LINE</small></figure>
+      <figure class="qr qrbig" style="margin-top:32px"><span class="qt">建碩會計師事務所</span><img src="qr.png" width="300" height="300" alt="建碩會計師事務所 LINE 官方帳號 QR Code，LINE ID @256ojohr"><span class="qid">LINE ID：@256ojohr</span></figure>
       <div class="cta-acts">
         <a class="lbtn" href="https://line.me/R/ti/p/%40256ojohr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8 9.6 9.6 0 0 1-3.6-.7L3 21l1.6-4.4A7.6 7.6 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.5a8.4 8.4 0 0 1 9 8z"/></svg>LINE 諮詢</a>
-        <span style="color:#C9C0AE">LINE ID：<b style="color:#EDE6D6;user-select:all">@256ojohr</b></span>
       </div>
     </div>
   </section>
